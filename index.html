@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Corner | Gameplay Journey</title>
+    
+    <!-- Menambahkan FontAwesome untuk Icon Discord, TikTok, dan YouTube -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==================== RESET & BASE ==================== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy-dark: #0a0a20;
+            --black: #000000;
+            --text-primary: #f0f0f0;
+            --text-secondary: #ffffff;
+            --accent-neon: #a8a800;
+            --navbar-height: 70px;
+            --transition-speed: 0.3s;
+            --font-body: 'TT Carvist', 'Garamond', 'Times New Roman', serif;
+            --font-heading: 'TT Carvist', 'Garamond', 'Times New Roman', serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, rgba(10, 10, 32, 0.3) 0%, rgba(0, 0, 0, 0.4) 100%),
+                url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')
+                no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ==================== GLOBAL NAVIGATION ==================== */
+        .global-navbar {
+            position: fixed;
+            top: 15px; 
+            left: 0;
+            width: 100%;
+            height: var(--navbar-height);
+            z-index: 9999;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 clamp(20px, 5vw, 60px);
+            transition: background var(--transition-speed) ease;
+        }
+
+        .global-navbar.scrolled {
+            background: rgba(5, 5, 12, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 0 0 15px 15px;
+        }
+
+        .navbar-brand {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: transform var(--transition-speed) ease;
+            cursor: pointer;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.03);
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: clamp(15px, 1.5vw, 30px);
+            list-style: none;
+            font-family: var(--font-body);
+        }
+
+        .navbar-nav > li {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            padding: 20px 4px;
+            display: inline-block;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+            font-family: var(--font-body);
+            cursor: pointer;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 70%;
+            height: 2px;
+            background: var(--accent-neon);
+            border-radius: 2px;
+            transition: transform var(--transition-speed) ease;
+            transform-origin: center;
+        }
+
+        .nav-link:hover, .nav-link.active, .navbar-nav > li:hover > .nav-link {
+            color: #ffffff;
+        }
+        .nav-link:hover::after, .nav-link.active::after, .navbar-nav > li:hover > .nav-link::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        /* ==================== DROPDOWN SYSTEM ==================== */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            list-style: none;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            padding: 8px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .dropdown-menu li { position: relative; }
+
+        .dropdown-item {
+            display: flex;
+            flex-direction: column;
+            padding: 8px 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .dropdown-item .sub-date {
+            font-size: 0.75rem;
+            color: var(--accent-neon);
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            padding-left: 24px;
+        }
+
+        .nested-dropdown-menu {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            background: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            list-style: none;
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+            padding: 8px 0;
+        }
+
+        .navbar-nav > li:hover > .dropdown-menu {
+            opacity: 1; visibility: visible; transform: translateY(0);
+        }
+        .dropdown-menu li:hover > .nested-dropdown-menu {
+            opacity: 1; visibility: visible; transform: translateX(0);
+        }
+
+        .has-submenu::after { content: ' ▾'; font-size: 0.75rem; opacity: 0.7; }
+        .has-nested::after { content: ' ▸'; float: right; font-size: 0.75rem; opacity: 0.7; }
+
+        /* ==================== MOBILE TOGGLE ==================== */
+        .hamburger-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            z-index: 10000;
+        }
+        .hamburger-toggle .bar {
+            width: 28px; height: 3px; background: var(--text-primary);
+            border-radius: 3px; transition: all var(--transition-speed) ease;
+        }
+        .hamburger-toggle.active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .hamburger-toggle.active .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger-toggle.active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+        /* ==================== PAGE VIEWS & SCROLL ==================== */
+        .page-view {
+            display: none; width: 100vw; height: 100vh; animation: fadeIn 0.4s ease-in-out;
+        }
+        .page-view.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #home-page, #support-page, #exclusive-page {
+            overflow-y: auto; scroll-behavior: smooth;
+            scrollbar-width: thin; scrollbar-color: transparent transparent;
+        }
+        #home-page { scroll-snap-type: y mandatory; }
+        #home-page::-webkit-scrollbar, #support-page::-webkit-scrollbar, #exclusive-page::-webkit-scrollbar { width: 8px; background: transparent; }
+        #home-page::-webkit-scrollbar-thumb, #support-page::-webkit-scrollbar-thumb, #exclusive-page::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
+
+        .snap-section {
+            scroll-snap-align: start; height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; padding: 0 clamp(20px, 5vw, 60px); position: relative;
+        }
+        .standalone-section {
+            min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; text-align: center; padding: 100px clamp(20px, 5vw, 60px) 40px clamp(20px, 5vw, 60px);
+        }
+
+        /* ==================== CONTENT STYLES ==================== */
+        .cover-section { align-items: flex-start; text-align: left; }
+        .cover-content { max-width: 600px; margin-top: -5vh; }
+        
+        .cover-title {
+            font-family: var(--font-heading); font-size: clamp(3rem, 8vw, 5rem); font-weight: 800;
+            background: linear-gradient(135deg, #fff, #c0c0d0); -webkit-background-clip: text;
+            background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; line-height: 1.1;
+        }
+        .cover-subtitle {
+            font-family: var(--font-body); font-size: 1.2rem; color: var(--text-secondary);
+            margin-bottom: 24px; max-width: 400px; opacity: 0.9; line-height: 1.4;
+        }
+        .start-btn {
+            display: inline-block; padding: 10px 24px; background: linear-gradient(135deg, #0a0a20 0%, #000000 100%);
+            color: #ffffff; border-radius: 30px; font-size: 0.9rem; font-weight: 700; text-decoration: none;
+            letter-spacing: 0.5px; border: 1px solid rgba(255, 255, 255, 0.4); transition: all 0.3s ease;
+        }
+        .start-btn:hover { background: #ffffff; color: #0a0a0f; border-color: #ffffff; }
+
+        .game-section { align-items: center; }
+        .game-content { max-width: 600px; width: 100%; display: flex; flex-direction: column; gap: 16px; }
+        
+        .video-box, .image-box { 
+            width: 100%; 
+            border-radius: 16px; 
+            overflow: hidden; 
+            background: #000; 
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .video-box { aspect-ratio: 16 / 9; }
+        .video-box video, .image-box img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            display: block; 
+        }
+
+        .game-title {
+            font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800;
+            background: linear-gradient(135deg, #fff, #ddd); -webkit-background-clip: text;
+            background-clip: text; -webkit-text-fill-color: transparent; margin: 0;
+        }
+        .game-desc { font-family: var(--font-body); font-size: 1rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+        
+        /* Flex Alignment Utility */
+        .align-left { align-items: flex-start; text-align: left; }
+        .align-right { align-items: flex-end; text-align: right; }
+
+        .page-content { max-width: 700px; width: 100%; }
+        .page-heading {
+            font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800;
+            background: linear-gradient(135deg, #fff, #ddd); -webkit-background-clip: text;
+            background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 16px;
+        }
+        .page-text { font-family: var(--font-body); font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; }
+
+        /* ==================== E-COMMERCE CATALOG (EXCLUSIVE ITEMS) ==================== */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .catalog-item {
+            background: rgba(20, 20, 35, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .catalog-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.15);
+            border-color: rgb(0, 229, 255);
+        }
+
+        .catalog-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .catalog-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-family: var(--font-body);
+        }
+
+        .catalog-btn {
+            margin-top: auto;
+            background: var(--accent-neon);
+            color: var(--black);
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s ease;
+        }
+
+        .catalog-item:hover .catalog-btn {
+            background: #ffffff;
+        }
+
+        /* ==================== SUPPORT SIDE-BY-SIDE LAYOUT ==================== */
+        .support-container {
+            display: flex;
+            gap: 40px;
+            width: 100%;
+            max-width: 1150px;
+            margin: 0 auto;
+            align-items: stretch;
+            justify-content: center;
+        }
+
+        .support-side {
+            flex: 1;
+            width: 100%;
+        }
+
+        .support-box {
+            background: rgba(10, 10, 25, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 45px 35px;
+            height: 100%;
+            text-align: left;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .donor-list {
+            list-style: none;
+            margin-top: 25px;
+            padding: 0;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .donor-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .donor-list .top-donor {
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            font-weight: 700;
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+        }
+
+        .top-donor .donor-name { color: #FFD700; }
+        .donor-amount { color: var(--accent-neon); font-family: monospace; font-size: 1.05rem;}
+
+        /* ==================== FLOATING SOCIAL BOX ==================== */
+        .floating-social {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: rgba(10, 10, 26, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 10px 18px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 10000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        
+        .floating-social:hover {
+            transform: translateY(-3px);
+            background: rgba(20, 20, 35, 0.95);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .social-link {
+            color: var(--text-secondary);
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: scale(1.15);
+        }
+
+        .social-link.discord:hover { color: #5865F2; }
+        .social-link.tiktok:hover { color: #ff0050; }
+        .social-link.youtube:hover { color: #FF0000; }
+
+        .join-text {
+            font-family: var(--font-body);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+            padding-left: 15px;
+            text-transform: uppercase;
+        }
+
+        /* ==================== RESPONSIVE STYLE ==================== */
+        @media (max-width: 900px) {
+            .support-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger-toggle { display: flex; }
+            .navbar-nav {
+                position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+                flex-direction: column; justify-content: flex-start;
+                padding-top: calc(var(--navbar-height) + 50px); gap: 10px;
+                background: rgba(10, 10, 20, 0.98); backdrop-filter: blur(30px);
+                border-left: 1px solid rgba(255, 255, 255, 0.08);
+                transition: right var(--transition-speed) ease; z-index: 9998; overflow-y: auto;
+            }
+            .navbar-nav.open { right: 0; }
+            .navbar-nav li { width: 100%; text-align: left; }
+            .nav-link { font-size: 1.1rem; padding: 12px 30px; width: 100%; display: flex; justify-content: space-between; }
+            .nav-link::after { display: none; }
+
+            .dropdown-menu, .nested-dropdown-menu {
+                position: static; opacity: 1; visibility: visible; transform: none;
+                background: rgba(255, 255, 255, 0.03); border: none; box-shadow: none;
+                padding: 0; border-radius: 0; display: none;
+            }
+            .dropdown-menu.show-mobile, .nested-dropdown-menu.show-mobile { display: block; }
+            .dropdown-item { padding: 10px 45px; font-size: 0.95rem; }
+            .nested-dropdown-menu .dropdown-item { padding-left: 60px; }
+            .has-nested::after { content: ' ▾'; }
+            .cover-content, .game-content, .page-content { max-width: 100%; }
+            .align-left, .align-right { align-items: flex-start; text-align: left; }
+            .support-box { padding: 40px 20px 25px 20px; }
+            
+            .floating-social {
+                bottom: 15px;
+                left: 15px;
+                padding: 8px 14px;
+            }
+            .join-text {
+                font-size: 0.85rem;
+                padding-left: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <header class="global-navbar" id="navbar" role="navigation" aria-label="Global Navigation">
+        <a onclick="switchPage('home')" class="navbar-brand">Gaming Corner</a>
+        <button class="hamburger-toggle" id="hamburgerBtn" aria-label="Toggle Navigation" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav>
+            <ul class="navbar-nav" id="navbarNav">
+                <li><a onclick="switchPage('about')" class="nav-link" id="nav-about">About</a></li>
+                
+                <!-- SHOP TAB -->
+                <li>
+                    <a class="nav-link has-submenu" id="nav-shop" onclick="handleMainTabClick(event, 'shop')">Shop</a>
+                    <ul class="dropdown-menu">
+                        <li><a onclick="switchPage('exclusive')" class="dropdown-item">Exclusive Items</a></li>
+                        <li>
+                            <a class="dropdown-item has-nested" onclick="handleNestedClick(event)">Merchandise</a>
+                            <ul class="nested-dropdown-menu">
+                                <li><a onclick="switchPage('clothing')" class="dropdown-item">Apparel</a></li>
+                                <li><a onclick="switchPage('accessories')" class="dropdown-item">Accessories</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- TOURNAMENT TAB -->
+                <li>
+                    <a class="nav-link has-submenu" id="nav-tournament" onclick="handleMainTabClick(event, 'tournament')">Tournament</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a onclick="switchPage('tour1')" class="dropdown-item">
+                                <span>VD Tournament</span>
+                                <span class="sub-date">March, 2027</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="switchPage('tour2')" class="dropdown-item">
+                                <span>Next Tournament</span>
+                                <span class="sub-date">Coming Soon</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- PARTNERSHIP TAB -->
+                <li><a onclick="switchPage('partnership')" class="nav-link" id="nav-partnership">Partnership</a></li>
+
+                <!-- SUPPORT US TAB -->
+                <li><a onclick="switchPage('support')" class="nav-link" id="nav-support">Support Us</a></li>
+
+                <!-- CONTACT TAB -->
+                <li><a onclick="switchPage('contact')" class="nav-link" id="nav-contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ==================== HOME PAGE ==================== -->
+    <div id="home-page" class="page-view active">
+        <section class="snap-section cover-section" id="cover">
+            <div class="cover-content">
+                <h1 class="cover-title">Gaming Corner</h1>
+                <p class="cover-subtitle">Experience epic gameplay moments. Scroll or click to begin.</p>
+                <a href="#game1" class="start-btn">Start Journey</a>
+            </div>
+        </section>
+
+        <section class="snap-section game-section align-left" id="game1">
+            <div class="game-content">
+                <div class="video-box">
+                    <video loop muted playsinline preload="metadata">
+                        <source src="roblox.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <h2 class="game-title">Roblox</h2>
+                <p class="game-desc">Roblox is the ultimate virtual universe that lets you create, share experiences with friends, and be anything you can imagine.</p>
+            </div>
+        </section>
+
+        <section class="snap-section game-section align-right" id="game2">
+            <div class="game-content">
+                <div class="video-box">
+                    <video loop muted playsinline preload="metadata">
+                        <source src="cs2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <h2 class="game-title">Counter Strike 2</h2>
+                <p class="game-desc">Counter-Strike 2 is the largest technical leap forward in Counter-Strike’s history, featuring new volumetric smoke, upgraded maps, and refined gameplay.</p>
+            </div>
+        </section>
+
+        <section class="snap-section game-section align-left" id="game3">
+            <div class="game-content">
+                <div class="video-box">
+                    <video loop muted playsinline preload="metadata">
+                        <source src="csgo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <h2 class="game-title">Counter Strike Go</h2>
+                <p class="game-desc">Counter-Strike: Global Offensive (CS:GO) expands upon the team-based action gameplay that it pioneered when it was launched, featuring classic maps, characters, and weapons.</p>
+            </div>
+        </section>
+
+        <section class="snap-section game-section align-right" id="game4">
+            <div class="game-content">
+                <div class="video-box">
+                    <video loop muted playsinline preload="metadata">
+                        <source src="peak.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <h2 class="game-title">Peak</h2>
+                <p class="game-desc">Peak is a personalized training program designed to help you track and improve your cognitive skills with fun, challenging, and rewarding games.</p>
+            </div>
+        </section>
+
+        <section class="snap-section game-section align-left" id="game5">
+            <div class="game-content">
+                <div class="video-box">
+                    <video loop muted playsinline preload="metadata">
+                        <source src="meccha.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <h2 class="game-title">Meccha Chameleon</h2>
+                <p class="game-desc">Adapt to survive in Meccha Chameleon. Utilize advanced camouflage technology and tactical mecha combat to outsmart your enemies in a highly dynamic battlefield.</p>
+            </div>
+        </section>
+
+        <section class="snap-section game-section align-right" id="game6">
+            <div class="game-content">
+                <div class="video-box">
+                    <video loop muted playsinline preload="metadata">
+                        <source src="repo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <h2 class="game-title">Repo</h2>
+                <p class="game-desc">Step into the shoes of a repo man. Navigate challenging environments, manage resources, and survive the unpredictable elements of the repossession business.</p>
+            </div>
+        </section>
+
+        <section class="snap-section game-section align-left" id="game7">
+            <div class="game-content">
+                <div class="video-box">
+                    <video loop muted playsinline preload="metadata">
+                        <source src="mobilelegend.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <h2 class="game-title">Mobile Legend</h2>
+                <p class="game-desc">Join your friends in a brand new 5v5 MOBA showdown against real human opponents, Mobile Legends: Bang Bang! Choose your favorite heroes and build the perfect team.</p>
+            </div>
+        </section>
+
+        <section class="snap-section game-section align-right" id="game8">
+            <div class="game-content">
+                <div class="video-box">
+                    <video loop muted playsinline preload="metadata">
+                        <source src="honorofking.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <h2 class="game-title">Honor of King</h2>
+                <p class="game-desc">Honor of Kings is the world's most-played mobile MOBA. Immerse yourself in the classic 5v5 tactical competitive experience, form a team, and carry to victory!</p>
+            </div>
+        </section>
+
+        <section class="snap-section game-section align-left" id="game9">
+            <div class="game-content">
+                <div class="video-box">
+                    <video loop muted playsinline preload="metadata">
+                        <source src="touch4games.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <h2 class="game-title">Touch 4games</h2>
+                <p class="game-desc">Touch is a casual 3D web-based dancing game. Featuring trendy K-pop music, stunning fashion, and rich social interactions for a romantic dance experience.</p>
+            </div>
+        </section>
+
+        <section class="snap-section game-section align-right" id="game10">
+            <div class="game-content">
+                <div class="video-box">
+                    <video loop muted playsinline preload="metadata">
+                        <source src="sky.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <h2 class="game-title">Sky</h2>
+                <p class="game-desc">From the award-winning creators behind Journey comes a peaceful social adventure. Soar across enchanting realms and connect with players across the globe in Sky.</p>
+            </div>
+        </section>
+
+        <!-- PENAMBAHAN VALORANT DI SINI -->
+        <section class="snap-section game-section align-left" id="game11">
+            <div class="game-content">
+                <div class="video-box">
+                    <video loop muted playsinline preload="metadata">
+                        <source src="valorant.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <h2 class="game-title">Valorant</h2>
+                <p class="game-desc">Valorant is a 5v5 character-based tactical shooter. Outwit, outplay, and outshine your competition with tactical abilities, precise gunplay, and adaptive teamwork.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== ABOUT PAGE ==================== -->
+    <div id="about-page" class="page-view">
+        <section class="standalone-section">
+            <div class="page-content">
+                <h2 class="page-heading">About Us</h2>
+                <p class="page-text" style="margin-bottom: 15px;">
+                    Gaming Corner was founded on July 27, 2025, specifically on a Discord server. The formation of Gaming Corner started from a gathering of gamer friends who loved playing games together, chatting, having fun, and discussing, which eventually led to the creation of the Gaming Corner Community.
+                </p>
+                <p class="page-text">
+                    Gaming Corner is your ultimate hangout spot to play any game with friends! Chill, make new friends, join fun events, meet awesome gamers, and win real MONEY in giveaways. Join us now!
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== PARTNERSHIP PAGE ==================== -->
+    <div id="partnership-page" class="page-view">
+        <section class="standalone-section align-left">
+            <div class="game-content">
+                <div class="image-box" style="max-height: 280px; aspect-ratio: 16 / 9;">
+                    <img src="partnership.png" alt="Touch Gang Indo">
+                </div>
+                <h2 class="game-title">Touch Gang Indo</h2>
+                <p class="game-desc">An online gaming community, specifically for "Touch 4games", along with other sub-games such as Mobile Legends: Bang Bang. This community is based on a Discord server platform.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== TOURNAMENT PAGES ==================== -->
+    <div id="tour1-page" class="page-view">
+        <section class="standalone-section">
+            <div class="page-content">
+                <h2 class="page-heading">VD Tournament</h2>
+                <p class="page-text">Competition Schedule: <strong>March, 2027</strong></p>
+                <p class="page-text" style="margin-top: 10px;">The fun match tournament of the new season. Get ready to fight for millions of rupiah in total prizes!</p>
+            </div>
+        </section>
+    </div>
+
+    <div id="tour2-page" class="page-view">
+        <section class="standalone-section">
+            <div class="page-content">
+                <h2 class="page-heading">Next Tournament</h2>
+                <p class="page-text">Competition Schedule: <strong>Cooming Soon</strong></p>
+                <p class="page-text" style="margin-top: 10px;">Prepare to be amazed. Coming soon, something you don’t want to miss!.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== SHOP PAGES ==================== -->
+    <div id="exclusive-page" class="page-view">
+        <section class="standalone-section">
+            <div class="page-content" style="max-width: 1000px;">
+                <h2 class="page-heading">Item Roblox</h2>
+                <p class="page-text">A collection of limited in-game items, rare cosmetic skins, and special limited edition digital bundle offers available this week only.</p>
+                
+                <div class="catalog-grid">
+                    <a href="https://www.roblox.com/catalog/131463115379573" target="_blank" class="catalog-item">
+                        <img src="atasanputih.jpg" alt="Set Atasan Putih" class="catalog-img">
+                        <h3 class="catalog-title">Set Atasan Putih</h3>
+                        <span class="catalog-btn">View Item</span>
+                    </a>
+                    <a href="https://www.roblox.com/catalog/126080799741537" target="_blank" class="catalog-item">
+                        <img src="bawahanputih.jpg" alt="Set Bawahan Putih" class="catalog-img">
+                        <h3 class="catalog-title">Set Bawahan Putih</h3>
+                        <span class="catalog-btn">View Item</span>
+                    </a>
+                    <a href="https://www.roblox.com/catalog/96698375665425" target="_blank" class="catalog-item">
+                        <img src="atasanabu.jpg" alt="Set Atasan Abu" class="catalog-img">
+                        <h3 class="catalog-title">Set Atasan Abu</h3>
+                        <span class="catalog-btn">View Item</span>
+                    </a>
+                    <a href="https://www.roblox.com/catalog/99181159593894" target="_blank" class="catalog-item">
+                        <img src="bawahanabu.jpg" alt="Set Bawahan Abu" class="catalog-img">
+                        <h3 class="catalog-title">Set Bawahan Abu</h3>
+                        <span class="catalog-btn">View Item</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="clothing-page" class="page-view">
+        <section class="standalone-section">
+            <div class="page-content">
+                <h2 class="page-heading">Merchandise - Apparel</h2>
+                <p class="page-text">Look cool with official esports Team Jerseys, Hoodies, and premium Cotton T-shirts featuring illustrations of your favorite games.</p>
+            </div>
+        </section>
+    </div>
+
+    <div id="accessories-page" class="page-view">
+        <section class="standalone-section">
+            <div class="page-content">
+                <h2 class="page-heading">Merchandise - Accessories</h2>
+                <p class="page-text">Complete your gaming setup with full-size RGB Mousepads, custom Keychains, Tumblers, and waterproof vinyl stickers.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== SUPPORT US ==================== -->
+    <div id="support-page" class="page-view">
+        <section class="standalone-section">
+            <div class="support-container">
+                <div class="support-side">
+                    <div class="support-box">
+                        <h2 class="page-heading" style="font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 1px; margin-bottom: 8px;">Our Donors</h2>
+                        <p class="page-text" style="margin-bottom: 15px; font-size: 0.95rem;">Thank you to everyone who has supported our journey. Your generous donations help us keep the server running and events alive!</p>
+                        
+                        <ul class="donor-list">
+                            <li class="top-donor">
+                                <span class="donor-name">👑 Excel</span>
+                                <span class="donor-amount">Rp 5.000.000</span>
+                            </li>
+                            <li>
+                                <span class="donor-name">Mubaz</span>
+                                <span class="donor-amount">Rp 500.000</span>
+                            </li>
+                            <li>
+                                <span class="donor-name">Dopen skuy</span>
+                                <span class="donor-amount">Rp 1.000.000</span>
+                            </li>
+                            <li>
+                                <span class="donor-name">soon</span>
+                                <span class="donor-amount">soon</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="support-side">
+                    <div class="support-box">
+                        <h2 style="font-weight: bold; margin-bottom: 16px; font-family: var(--font-heading); color: #fff; font-size: clamp(2rem, 5vw, 3.5rem);">Donate Here</h2>
+                        <p style="margin-bottom: 25px; font-family: var(--font-body); color: var(--text-secondary); line-height: 1.6; font-size: 1.05rem;">
+                            Please scan the QRIS barcode below using your e-wallet or banking app to make a donation:
+                        </p>
+                        <div style="background: #fff; padding: 12px; border-radius: 12px; display: inline-block; align-self: flex-start; box-shadow: 0 10px 25px rgba(0,0,0,0.4);">
+                            <img src="qris-barcode.png" alt="QRIS Barcode" style="width: 100%; max-width: 220px; display: block;">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== CONTACT PAGE ==================== -->
+    <div id="contact-page" class="page-view">
+        <section class="standalone-section">
+            <div class="page-content" style="display: flex; flex-direction: column; align-items: center;">
+                <h2 class="page-heading">Contact Us</h2>
+                <p class="page-text" style="margin-bottom: 25px;"> For tournament registration and inquiries, establishing partnerships, or making a donation, please contact us by scanning the QR code below:</p>
+                <img src="contact-qr.png" alt="Contact Us QR Code" style="width: 100%; max-width: 220px; border-radius: 12px; border: 2px solid var(--text-secondary); padding: 5px; background: #fff;">
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== FLOATING SOCIAL BOX ==================== -->
+    <div class="floating-social">
+        <div class="social-icons">
+            <a href="https://discord.gg/dUuStQt33Z" target="_blank" class="social-link discord" aria-label="Discord">
+                <i class="fa-brands fa-discord"></i>
+            </a>
+            <a href="https://www.tiktok.com/@gaming_corner_discord" target="_blank" class="social-link tiktok" aria-label="TikTok">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://www.youtube.com/@GamingCornerCommunity" target="_blank" class="social-link youtube" aria-label="YouTube">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+        </div>
+        <span class="join-text">Join us</span>
+    </div>
+
+    <!-- ==================== SCRIPTS LOGIC ==================== -->
+    <script>
+        const navbar = document.getElementById('navbar');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navbarNav = document.getElementById('navbarNav');
+        const homePageScroll = document.getElementById('home-page');
+
+        function updateNavbarOnScroll() {
+            if (homePageScroll.scrollTop > 30) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+        homePageScroll.addEventListener('scroll', updateNavbarOnScroll, { passive: true });
+
+        function toggleMobileMenu() {
+            const isOpen = navbarNav.classList.toggle('open');
+            hamburgerBtn.classList.toggle('active');
+            hamburgerBtn.setAttribute('aria-expanded', isOpen);
+            
+            if(!isOpen) {
+                document.querySelectorAll('.dropdown-menu, .nested-dropdown-menu').forEach(el => {
+                    el.classList.remove('show-mobile');
+                });
+            }
+        }
+        hamburgerBtn.addEventListener('click', toggleMobileMenu);
+
+        function handleMainTabClick(e, fallbackPageId) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation();
+                const currentDropdown = e.currentTarget.nextElementSibling;
+                if (currentDropdown) {
+                    currentDropdown.classList.toggle('show-mobile');
+                }
+            } else {
+                if(fallbackPageId === 'tournament') switchPage('tour1');
+                if(fallbackPageId === 'shop') switchPage('exclusive');
+            }
+        }
+
+        function handleNestedClick(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation();
+                const nestedMenu = e.currentTarget.nextElementSibling;
+                if (nestedMenu) {
+                    nestedMenu.classList.toggle('show-mobile');
+                }
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            if (navbarNav.classList.contains('open') && !navbar.contains(e.target)) {
+                toggleMobileMenu();
+            }
+        });
+
+        function switchPage(pageId) {
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => page.classList.remove('active'));
+
+            const targetPage = document.getElementById(pageId + '-page');
+            if (targetPage) {
+                targetPage.classList.add('active');
+                targetPage.scrollTop = 0; 
+            }
+
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            
+            if (['about', 'contact', 'partnership', 'support'].includes(pageId)) {
+                document.getElementById('nav-' + pageId).classList.add('active');
+            } else if (['tour1', 'tour2'].includes(pageId)) {
+                document.getElementById('nav-tournament').classList.add('active');
+            } else if (['exclusive', 'clothing', 'accessories'].includes(pageId)) {
+                document.getElementById('nav-shop').classList.add('active');
+            }
+
+            if (pageId !== 'home') {
+                navbar.classList.add('scrolled');
+            } else {
+                updateNavbarOnScroll();
+            }
+
+            if (navbarNav.classList.contains('open')) {
+                toggleMobileMenu();
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const videos = document.querySelectorAll('.video-box video');
+            
+            if ('IntersectionObserver' in window) {
+                const videoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.play();
+                        } else {
+                            entry.target.pause();
+                        }
+                    });
+                }, { threshold: 0.5 }); 
+
+                videos.forEach(video => {
+                    videoObserver.observe(video);
+                });
+            } else {
+                videos.forEach(video => {
+                    video.play();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
