@@ -234,7 +234,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        #home-page, #support-page, #exclusive-page {
+        #home-page, #support-page, #exclusive-page, #clothing-page, #accessories-page, #contact-page, #tour1-page, #tour2-page, #tour3-page {
             overflow-y: auto; scroll-behavior: smooth;
             scrollbar-width: thin; scrollbar-color: transparent transparent;
         }
@@ -328,7 +328,7 @@
         }
         .page-text { font-family: var(--font-body); font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; }
 
-        /* ==================== E-COMMERCE CATALOG (EXCLUSIVE ITEMS) ==================== */
+        /* ==================== E-COMMERCE CATALOG (EXCLUSIVE ITEMS & MERCHANDISE) ==================== */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -348,6 +348,10 @@
             color: var(--text-primary);
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            height: 350px; /* Menyeragamkan tinggi seluruh box katalog */
+            aspect-ratio: 1 / 1.2; /* Menjaga rasio proporsional 1:1.2 skala halaman */
+            box-sizing: border-box;
         }
 
         .catalog-item:hover {
@@ -358,7 +362,7 @@
 
         .catalog-img {
             width: 100%;
-            aspect-ratio: 1 / 1;
+            height: 170px; /* Ukuran gambar seragam untuk semua box */
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 15px;
@@ -427,7 +431,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            max-height: 220px;
+            max-height: 320px;
             overflow-y: auto;
             padding-right: 6px;
         }
@@ -550,17 +554,57 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: color 0.3s ease;
-        }
-
-        .music-control button:hover {
-            color: var(--accent-neon);
         }
 
         .music-control input[type="range"] {
-            width: 80px;
             accent-color: var(--accent-neon);
             cursor: pointer;
+            width: 80px;
+        }
+
+        /* ==================== PORTRAIT VIDEO GRID ==================== */
+        .portrait-video-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 20px auto 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .portrait-video-card {
+            flex: 1;
+            min-width: 180px;
+            max-width: 280px;
+            background: rgba(10, 10, 25, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .portrait-video-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-neon);
+        }
+
+        .portrait-video-card video {
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            object-fit: cover;
+            display: block;
+            background: #000;
+        }
+
+        .portrait-video-title {
+            padding: 12px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: var(--font-body);
         }
 
         /* ==================== RESPONSIVE STYLE ==================== */
@@ -609,14 +653,6 @@
                 padding-left: 12px;
             }
 
-            .music-control {
-                bottom: 15px;
-                right: 15px;
-                padding: 6px 12px;
-            }
-            .music-control input[type="range"] {
-                width: 60px;
-            }
         }
     </style>
 </head>
@@ -656,13 +692,19 @@
                         <li>
                             <a onclick="switchPage('tour1')" class="dropdown-item">
                                 <span>VD Tournament</span>
-                                <span class="sub-date">March, 2027</span>
+                                <span class="sub-date">April, 2026</span>
                             </a>
                         </li>
                         <li>
                             <a onclick="switchPage('tour2')" class="dropdown-item">
-                                <span>Next Tournament</span>
-                                <span class="sub-date">Coming Soon</span>
+                                <span>Next VD Tournament</span>
+                                <span class="sub-date">April, 2027</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="switchPage('tour3')" class="dropdown-item">
+                                <span>Valorant Quiz Event</span>
+                                <span class="sub-date">April, 2027</span>
                             </a>
                         </li>
                     </ul>
@@ -820,7 +862,6 @@
             </div>
         </section>
 
-        <!-- PENAMBAHAN VALORANT DI SINI -->
         <section class="snap-section game-section align-left" id="game11">
             <div class="game-content">
                 <div class="video-box">
@@ -852,7 +893,7 @@
 
     <!-- ==================== PARTNERSHIP PAGE ==================== -->
     <div id="partnership-page" class="page-view">
-        <section class="standalone-section align-left">
+        <section class="standalone-section align-right">
             <div class="game-content">
                 <div class="image-box" style="max-height: 280px; aspect-ratio: 16 / 9;">
                     <img src="partnership.png" alt="Touch Gang Indo">
@@ -866,10 +907,36 @@
     <!-- ==================== TOURNAMENT PAGES ==================== -->
     <div id="tour1-page" class="page-view">
         <section class="standalone-section">
-            <div class="page-content">
+            <div class="page-content" style="max-width: 1000px;">
                 <h2 class="page-heading">VD Tournament</h2>
-                <p class="page-text">Competition Schedule: <strong>March, 2027</strong></p>
-                <p class="page-text" style="margin-top: 10px;">The fun match tournament of the new season. Get ready to fight for millions of rupiah in total prizes!</p>
+                <p class="page-text">Competition Schedule: <strong>April, 2026</strong></p>
+                <p class="page-text" style="margin-top: 10px;">Violence District Fun Match Tournament Final Round</p>  
+                
+                <div class="portrait-video-grid">
+                    <div class="portrait-video-card">
+                        <video controls preload="metadata">
+                            <source src="clip1.mp4" type="video/mp4">
+                            Browser Anda tidak mendukung tag video.
+                        </video>
+                        <div class="portrait-video-title">Gameplay Clip 1</div>
+                    </div>
+
+                    <div class="portrait-video-card">
+                        <video controls preload="metadata">
+                            <source src="clip2.mp4" type="video/mp4">
+                            Browser Anda tidak mendukung tag video.
+                        </video>
+                        <div class="portrait-video-title">Gameplay Clip 2</div>
+                    </div>
+
+                    <div class="portrait-video-card">
+                        <video controls preload="metadata">
+                            <source src="clip3.mp4" type="video/mp4">
+                            Browser Anda tidak mendukung tag video.
+                        </video>
+                        <div class="portrait-video-title">Gameplay Clip 3</div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -877,8 +944,18 @@
     <div id="tour2-page" class="page-view">
         <section class="standalone-section">
             <div class="page-content">
-                <h2 class="page-heading">Next Tournament</h2>
-                <p class="page-text">Competition Schedule: <strong>Cooming Soon</strong></p>
+                <h2 class="page-heading">Next VD Tournament</h2>
+                <p class="page-text">Competition Schedule: <strong>April, 2027</strong></p>
+                <p class="page-text" style="margin-top: 10px;">Prepare to be amazed. Coming soon, something you don’t want to miss!.</p>
+            </div>
+        </section>
+    </div>
+
+    <div id="tour3-page" class="page-view">
+        <section class="standalone-section">
+            <div class="page-content">
+                <h2 class="page-heading">Valorant Quiz Event</h2>
+                <p class="page-text">Competition Schedule: <strong>April, 2027</strong></p>
                 <p class="page-text" style="margin-top: 10px;">Prepare to be amazed. Coming soon, something you don’t want to miss!.</p>
             </div>
         </section>
@@ -893,22 +970,22 @@
                 
                 <div class="catalog-grid">
                     <a href="https://www.roblox.com/catalog/131463115379573" target="_blank" class="catalog-item">
-                        <img src="atasanputih.jpg" alt="Black and White Shirt" class="catalog-img">
+                        <img src="atasanputih.png" alt="Black and White Shirt" class="catalog-img">
                         <h3 class="catalog-title">Black and White Shirt</h3>
                         <span class="catalog-btn">View Item</span>
                     </a>
                     <a href="https://www.roblox.com/catalog/126080799741537" target="_blank" class="catalog-item">
-                        <img src="bawahanputih.jpg" alt="Black and White Pants" class="catalog-img">
+                        <img src="bawahanputih.png" alt="Black and White Pants" class="catalog-img">
                         <h3 class="catalog-title">Black and White Pants</h3>
                         <span class="catalog-btn">View Item</span>
                     </a>
                     <a href="https://www.roblox.com/catalog/96698375665425" target="_blank" class="catalog-item">
-                        <img src="atasanabu.jpg" alt="Gray and White Shirt" class="catalog-img">
+                        <img src="atasanabu.png" alt="Gray and White Shirt" class="catalog-img">
                         <h3 class="catalog-title">Gray and White Shirt</h3>
                         <span class="catalog-btn">View Item</span>
                     </a>
                     <a href="https://www.roblox.com/catalog/99181159593894" target="_blank" class="catalog-item">
-                        <img src="bawahanabu.jpg" alt="Gray and White Pants" class="catalog-img">
+                        <img src="bawahanabu.png" alt="Gray and White Pants" class="catalog-img">
                         <h3 class="catalog-title">Gray and White Pants</h3>
                         <span class="catalog-btn">View Item</span>
                     </a>
@@ -919,18 +996,34 @@
 
     <div id="clothing-page" class="page-view">
         <section class="standalone-section">
-            <div class="page-content">
+            <div class="page-content" style="max-width: 1000px;">
                 <h2 class="page-heading">Merchandise - Apparel</h2>
-                <p class="page-text">Look cool with official esports Team Jerseys, Hoodies, and premium Cotton T-shirts featuring illustrations of your favorite games.</p>
+                <p class="page-text">Look cool with official Community premium Cotton T-shirts featuring illustrations of your favorite games.</p>
+
+                <div class="catalog-grid">
+                    <a href="LINK_ITEM_1" target="_blank" class="catalog-item">
+                        <img src="kaos.jpg" alt="Official Community T-shirts" class="catalog-img">
+                        <h3 class="catalog-title">Official Community T-shirts</h3>
+                        <span class="catalog-btn">View Item</span>
+                    </a>
+                </div>
             </div>
         </section>
     </div>
 
     <div id="accessories-page" class="page-view">
         <section class="standalone-section">
-            <div class="page-content">
+            <div class="page-content" style="max-width: 1000px;">
                 <h2 class="page-heading">Merchandise - Accessories</h2>
-                <p class="page-text">Complete your gaming setup with full-size RGB Mousepads, custom Keychains, Tumblers, and waterproof vinyl stickers.</p>
+                <p class="page-text">Complete your gaming setup with Official Community Mousepad, custom Keychains, Tumblers, and waterproof vinyl stickers.</p>
+            
+                <div class="catalog-grid">
+                    <a href="LINK_ITEM_1" target="_blank" class="catalog-item">
+                        <img src="mousepad.jpg" alt="Official Mousepad" class="catalog-img">
+                        <h3 class="catalog-title">Official Mousepad</h3>
+                        <span class="catalog-btn">View Item</span>
+                    </a>
+                </div>
             </div>
         </section>
     </div>
@@ -975,7 +1068,7 @@
                         <p style="margin-bottom: 25px; font-family: var(--font-body); color: var(--text-secondary); line-height: 1.6; font-size: 1.05rem;">
                             Please scan the QRIS barcode below using your e-wallet or banking app to make a donation:
                         </p>
-                        <div style="background: #fff; padding: 12px; border-radius: 12px; display: inline-block; align-self: flex-start; box-shadow: 0 10px 25px rgba(0,0,0,0.4);">
+                        <div style="background: #fff; padding: 12px; border-radius: 12px; display: inline-block; align-self: center; margin: 0 auto; box-shadow: 0 10px 25px rgba(0,0,0,0.4);">
                             <img src="qris-barcode.png" alt="QRIS Barcode" style="width: 100%; max-width: 220px; display: block;">
                         </div>
                     </div>
@@ -991,7 +1084,7 @@
             <div class="page-content" style="display: flex; flex-direction: column; align-items: center;">
                 <h2 class="page-heading">Contact Us</h2>
                 <p class="page-text" style="margin-bottom: 25px;"> For tournament registration and inquiries, establishing partnerships, or making a donation, please contact us by scanning the QR code below:</p>
-                <img src="contact-qr.png" alt="Contact Us QR Code" style="width: 100%; max-width: 220px; border-radius: 12px; border: 2px solid var(--text-secondary); padding: 5px; background: #fff;">
+                <img src="contact-qr.png" alt="Contact Us QR Code" style="width: 100%; max-width: 320px; border-radius: 12px; border: 2px solid var(--text-secondary); padding: 5px; background: #fff;">
             </div>
         </section>
     </div>
@@ -1010,13 +1103,6 @@
             </a>
         </div>
         <span class="join-text">Join us</span>
-    </div>
-
-    <!-- ==================== FLOATING MUSIC CONTROL ==================== -->
-    <div class="music-control">
-        <button id="musicToggleBtn" aria-label="Toggle Music"><i class="fa-solid fa-music"></i></button>
-        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" aria-label="Music Volume">
-        <audio id="bgMusic" loop autoplay src="bg-music.mp3"></audio>
     </div>
 
     <!-- ==================== SCRIPTS LOGIC ==================== -->
@@ -1093,7 +1179,7 @@
             
             if (['about', 'contact', 'partnership', 'support'].includes(pageId)) {
                 document.getElementById('nav-' + pageId).classList.add('active');
-            } else if (['tour1', 'tour2'].includes(pageId)) {
+            } else if (['tour1', 'tour2', 'tour3'].includes(pageId)) {
                 document.getElementById('nav-tournament').classList.add('active');
             } else if (['exclusive', 'clothing', 'accessories'].includes(pageId)) {
                 document.getElementById('nav-shop').classList.add('active');
@@ -1132,47 +1218,19 @@
                     video.play().catch(() => {});
                 });
             }
+        });
 
-            // BACKGROUND MUSIC LOGIC
-            const bgMusic = document.getElementById('bgMusic');
-            const musicToggleBtn = document.getElementById('musicToggleBtn');
-            const volumeSlider = document.getElementById('volumeSlider');
+        // FITUR: Hentikan video lain jika salah satu video diputar (Single Play)
+        const portraitVideos = document.querySelectorAll('.portrait-video-card video');
 
-            if (bgMusic && musicToggleBtn && volumeSlider) {
-                bgMusic.volume = volumeSlider.value;
-
-                const playPromise = bgMusic.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(() => {
-                        const enableAudio = () => {
-                            bgMusic.play().catch(() => {});
-                            document.removeEventListener('click', enableAudio);
-                            document.removeEventListener('keydown', enableAudio);
-                        };
-                        document.addEventListener('click', enableAudio);
-                        document.addEventListener('keydown', enableAudio);
-                    });
-                }
-
-                musicToggleBtn.addEventListener('click', () => {
-                    if (bgMusic.paused) {
-                        bgMusic.play().catch(() => {});
-                        musicToggleBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
-                    } else {
-                        bgMusic.pause();
-                        musicToggleBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+        portraitVideos.forEach(video => {
+            video.addEventListener('play', () => {
+                portraitVideos.forEach(otherVideo => {
+                    if (otherVideo !== video) {
+                        otherVideo.pause();
                     }
                 });
-
-                volumeSlider.addEventListener('input', (e) => {
-                    bgMusic.volume = e.target.value;
-                    if (bgMusic.volume == 0) {
-                        musicToggleBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
-                    } else if (bgMusic.paused) {
-                        musicToggleBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
-                    }
-                });
-            }
+            });
         });
     </script>
 </body>
