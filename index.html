@@ -682,7 +682,14 @@
         }
 
         @media (max-width: 768px) {
-            .hamburger-toggle { display: flex; }
+            .global-navbar {
+                justify-content: flex-start;
+                gap: 15px;
+            }
+            .hamburger-toggle { 
+                display: flex; 
+                order: -1;
+            }
             .navbar-nav {
                 position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
                 flex-direction: column; justify-content: flex-start;
@@ -782,17 +789,43 @@
                 line-height: 1.5;
             }
 
+            /* FUNGSI SCROLL MENYAMPING KATALOG SHOP & MERCHANDISE */
             .catalog-grid {
-                grid-template-columns: repeat(2, 1fr);
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
                 gap: 12px;
                 margin-top: 18px;
+                width: 100%;
+                padding-bottom: 8px;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
             }
 
             .catalog-item {
+                flex: 0 0 75%;
+                max-width: 220px;
                 height: auto;
                 min-height: 240px;
                 padding: 10px;
                 border-radius: 8px;
+                scroll-snap-align: start;
+            }
+
+            .catalog-item:only-child {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .catalog-grid::-webkit-scrollbar,
+            .portrait-video-grid::-webkit-scrollbar {
+                height: 4px;
+            }
+
+            .catalog-grid::-webkit-scrollbar-thumb,
+            .portrait-video-grid::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 4px;
             }
 
             .catalog-img {
@@ -810,14 +843,30 @@
                 font-size: 0.75rem;
             }
 
+            /* FUNGSI SCROLL MENYAMPING VIDEO KLIP TOUR1 */
             .portrait-video-grid {
-                flex-direction: column;
-                gap: 15px;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                gap: 12px;
+                width: 100%;
+                padding-bottom: 8px;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                justify-content: flex-start;
             }
 
             .portrait-video-card {
+                flex: 0 0 75%;
                 max-width: 220px;
                 width: 100%;
+                scroll-snap-align: start;
+            }
+
+            .portrait-video-card:only-child {
+                flex: 0 0 100%;
+                max-width: 100%;
             }
 
             .portrait-video-title {
