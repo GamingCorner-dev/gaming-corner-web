@@ -47,6 +47,72 @@
             padding: 0;
         }
 
+        /* ==================== LOADING SCREEN ==================== */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(10, 10, 26, 0.98);
+            backdrop-filter: blur(15px);
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #loading-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+            width: 80%;
+            max-width: 360px;
+        }
+
+        .loader-title {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #c0c0d0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(168, 168, 0, 0.2);
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--accent-neon);
+            box-shadow: 0 0 12px var(--accent-neon);
+            transition: width 0.15s ease-out;
+        }
+
+        .progress-text {
+            font-family: var(--font-body);
+            margin-top: 12px;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
         /* ==================== GLOBAL NAVIGATION ==================== */
         .global-navbar {
             position: fixed;
@@ -349,8 +415,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 350px; /* Menyeragamkan tinggi seluruh box katalog */
-            aspect-ratio: 1 / 1.2; /* Menjaga rasio proporsional 1:1.2 skala halaman */
+            height: 350px;
+            aspect-ratio: 1 / 1.2;
             box-sizing: border-box;
         }
 
@@ -362,7 +428,7 @@
 
         .catalog-img {
             width: 100%;
-            height: 170px; /* Ukuran gambar seragam untuk semua box */
+            height: 170px;
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 15px;
@@ -652,11 +718,161 @@
                 font-size: 0.85rem;
                 padding-left: 12px;
             }
+        }
 
+        /* ==================== SMARTPHONE PORTRAIT RESPONSIVE ==================== */
+        @media (max-width: 480px) and (orientation: portrait) {
+            :root {
+                --navbar-height: 60px;
+            }
+
+            .global-navbar {
+                top: 5px;
+                padding: 0 15px;
+            }
+
+            .navbar-brand {
+                font-size: 1rem;
+            }
+
+            .cover-content {
+                margin-top: 0;
+            }
+
+            .cover-title {
+                font-size: 2.2rem;
+            }
+
+            .cover-subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 18px;
+            }
+
+            .start-btn {
+                padding: 8px 18px;
+                font-size: 0.8rem;
+            }
+
+            .snap-section {
+                padding: 0 15px;
+            }
+
+            .standalone-section {
+                padding: 85px 15px 30px 15px;
+            }
+
+            .page-content, 
+            .standalone-section .game-content, 
+            .support-box {
+                padding: 22px 16px;
+                border-radius: 14px;
+            }
+
+            .page-heading {
+                font-size: 1.8rem !important;
+                margin-bottom: 12px;
+            }
+
+            .game-title {
+                font-size: 1.5rem;
+            }
+
+            .game-desc, .page-text {
+                font-size: 0.88rem;
+                line-height: 1.5;
+            }
+
+            .catalog-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                margin-top: 18px;
+            }
+
+            .catalog-item {
+                height: auto;
+                min-height: 240px;
+                padding: 10px;
+                border-radius: 8px;
+            }
+
+            .catalog-img {
+                height: 110px;
+                margin-bottom: 8px;
+            }
+
+            .catalog-title {
+                font-size: 0.85rem;
+                margin-bottom: 10px;
+            }
+
+            .catalog-btn {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+
+            .portrait-video-grid {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .portrait-video-card {
+                max-width: 220px;
+                width: 100%;
+            }
+
+            .portrait-video-title {
+                font-size: 0.85rem;
+                padding: 8px;
+            }
+
+            .donor-list {
+                max-height: 240px;
+                gap: 8px;
+            }
+
+            .donor-list li {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+
+            .donor-amount {
+                font-size: 0.85rem;
+            }
+
+            .floating-social {
+                bottom: 12px;
+                left: 12px;
+                padding: 6px 12px;
+                gap: 10px;
+            }
+
+            .social-icons {
+                gap: 8px;
+            }
+
+            .social-link {
+                font-size: 1.1rem;
+            }
+
+            .join-text {
+                font-size: 0.75rem;
+                padding-left: 10px;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- ==================== LOADING SCREEN ==================== -->
+    <div id="loading-screen">
+        <div class="loader-content">
+            <h2 class="loader-title">Gaming Corner</h2>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-text" id="progressText">0%</div>
+        </div>
+    </div>
 
     <!-- ==================== NAVBAR ==================== -->
     <header class="global-navbar" id="navbar" role="navigation" aria-label="Global Navigation">
@@ -1107,6 +1323,69 @@
 
     <!-- ==================== SCRIPTS LOGIC ==================== -->
     <script>
+        // ==================== REAL-TIME LOADING SCREEN LOGIC ====================
+        document.addEventListener("DOMContentLoaded", function() {
+            const loaderScreen = document.getElementById('loading-screen');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+
+            const images = Array.from(document.querySelectorAll('img'));
+            const videos = Array.from(document.querySelectorAll('video'));
+            const totalResources = images.length + videos.length;
+            let loadedResources = 0;
+
+            function updateProgress() {
+                loadedResources++;
+                let percentage = Math.floor((loadedResources / (totalResources || 1)) * 100);
+                percentage = Math.min(percentage, 100);
+                if (progressBar && progressText) {
+                    progressBar.style.width = percentage + '%';
+                    progressText.textContent = percentage + '%';
+                }
+                if (loadedResources >= totalResources) {
+                    hideLoader();
+                }
+            }
+
+            function hideLoader() {
+                if (loaderScreen && !loaderScreen.classList.contains('fade-out')) {
+                    if (progressBar && progressText) {
+                        progressBar.style.width = '100%';
+                        progressText.textContent = '100%';
+                    }
+                    setTimeout(() => {
+                        loaderScreen.classList.add('fade-out');
+                    }, 350);
+                }
+            }
+
+            if (totalResources === 0) {
+                hideLoader();
+            } else {
+                images.forEach(img => {
+                    if (img.complete) {
+                        updateProgress();
+                    } else {
+                        img.addEventListener('load', updateProgress);
+                        img.addEventListener('error', updateProgress);
+                    }
+                });
+
+                videos.forEach(video => {
+                    if (video.readyState >= 2) {
+                        updateProgress();
+                    } else {
+                        video.addEventListener('loadeddata', updateProgress);
+                        video.addEventListener('error', updateProgress);
+                    }
+                });
+            }
+
+            window.addEventListener('load', hideLoader);
+            setTimeout(hideLoader, 8000); // Fallback maksimal agar tidak stuck jika koneksi lambat
+        });
+
+        // ==================== NAVBAR & PAGE NAVIGATION ====================
         const navbar = document.getElementById('navbar');
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const navbarNav = document.getElementById('navbarNav');
