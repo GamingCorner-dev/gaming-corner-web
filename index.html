@@ -679,8 +679,8 @@
             gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 15px;
-            margin-bottom: 25px;
+            margin-top: 20px;    /* Jarak (gap) dari paragraf deskripsi di atasnya */
+            margin-bottom: 25px; /* Jarak (gap) ke katalog di bawahnya */
         }
 
         .shortcut-btn {
@@ -1319,6 +1319,9 @@
             <div class="page-content" style="max-width: 1000px;">
                 <h2 class="page-heading">Merchandise - Apparel</h2>
                 <p class="page-text">Look cool with official Community premium Cotton T-shirts featuring illustrations of your favorite games.</p>
+
+                <!-- BUNGKUS TOMBOL PINTASAN UNTUK MEMBUAT GAP TERATUR -->
+                <div class="shop-shortcuts">
                     <button onclick="switchPage('exclusive')" class="shortcut-btn">
                         <i class="fa-solid fa-shirt"></i> Exclusive
                     </button>
@@ -1326,6 +1329,8 @@
                         <i class="fa-solid fa-gem"></i> Accessories
                     </button>
                 </div>
+
+                <!-- KATALOG TETAP DI DALAM BOX PAGE-CONTENT -->
                 <div class="catalog-grid">
                     <a href="LINK_ITEM_1" target="_blank" class="catalog-item" onclick="event.preventDefault(); alert('Currently in production, coming soon!');">
                         <img src="kaos.png" alt="Official Community T-shirts" class="catalog-img">
@@ -1337,18 +1342,23 @@
         </section>
     </div>
 
-    <div id="accessories-page" class="page-view">
+<div id="accessories-page" class="page-view">
         <section class="standalone-section">
             <div class="page-content" style="max-width: 1000px;">
                 <h2 class="page-heading">Merchandise - Accessories</h2>
                 <p class="page-text">Complete your gaming setup with Official Community Mousepad, custom Keychains, Tumblers, and waterproof vinyl stickers.</p>
+                
+                <!-- BUNGKUS TOMBOL PINTASAN UNTUK MEMBUAT GAP TERATUR -->
+                <div class="shop-shortcuts">
                     <button onclick="switchPage('exclusive')" class="shortcut-btn">
-                        <i class="fa-solid fa-shirt"></i> Exclusive
+                        <i class="fa-solid fa-gamepad"></i> Exclusive
                     </button>
                     <button onclick="switchPage('clothing')" class="shortcut-btn">
-                        <i class="fa-solid fa-gem"></i> Apparel
+                        <i class="fa-solid fa-shirt"></i> Apparel
                     </button>
                 </div>
+
+                <!-- KATALOG TETAP DI DALAM BOX PAGE-CONTENT -->
                 <div class="catalog-grid">
                     <a href="LINK_ITEM_1" target="_blank" class="catalog-item" onclick="event.preventDefault(); alert('Currently in production, coming soon!');">
                         <img src="mousepad.jpg" alt="Official Mousepad" class="catalog-img">
