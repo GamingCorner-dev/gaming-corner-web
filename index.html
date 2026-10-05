@@ -1604,21 +1604,21 @@
         document.addEventListener("DOMContentLoaded", function() {
             const videos = document.querySelectorAll('.video-box video');
             
-            const videoObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Mencegah error penundaan pada Safari
-                        const playPromise = entry.target.play();
-                        if (playPromise !== undefined) {
-                            playPromise.catch(error => {
-                                console.log("Autoplay ditunda oleh Safari:", error);
-                            });
+            if ('IntersectionObserver' in window) {
+                const videoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const playPromise = entry.target.play();
+                            if (playPromise !== undefined) {
+                                playPromise.catch(error => {
+                                    console.log("Autoplay ditunda oleh Safari:", error);
+                                });
+                            }
+                        } else {
+                            entry.target.pause();
                         }
-                    } else {
-                        entry.target.pause();
-                    }
-                });
-            }, { threshold: 0.5 });
+                    });
+                }, { threshold: 0.5 });
 
                 videos.forEach(video => {
                     videoObserver.observe(video);
