@@ -672,6 +672,40 @@
             color: var(--text-primary);
             font-family: var(--font-body);
         }
+        
+        /* ==================== SHOP SHORTCUT BUTTONS ==================== */
+        .shop-shortcuts {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+
+        .shortcut-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .shortcut-btn:hover {
+            background: var(--accent-neon);
+            color: var(--black);
+            border-color: var(--accent-neon);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(168, 168, 0, 0.3);
+        }
 
         /* ==================== RESPONSIVE STYLE ==================== */
         @media (max-width: 900px) {
@@ -1245,7 +1279,15 @@
             <div class="page-content" style="max-width: 1000px;">
                 <h2 class="page-heading">Item Roblox</h2>
                 <p class="page-text">A collection of limited in-game items, rare cosmetic skins, and special limited edition digital bundle offers available this week only.</p>
-                
+                <!-- PINTASAN KE LAMAN MERCHANDISE -->
+                <div class="shop-shortcuts">
+                    <button onclick="switchPage('clothing')" class="shortcut-btn">
+                        <i class="fa-solid fa-shirt"></i> Apparel
+                    </button>
+                    <button onclick="switchPage('accessories')" class="shortcut-btn">
+                        <i class="fa-solid fa-gem"></i> Accessories
+                    </button>
+                </div>
                 <div class="catalog-grid">
                     <a href="https://www.roblox.com/catalog/131463115379573" target="_blank" class="catalog-item">
                         <img src="atasanputih.png" alt="Black and White Shirt" class="catalog-img">
