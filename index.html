@@ -765,7 +765,14 @@
             }
 
             .standalone-section {
-                padding: 85px 15px 30px 15px;
+                justify-content: flex-start !important; /* Mulai konten dari atas agar scroll bawah tidak terpotong */
+                min-height: 100vh;
+                height: auto;
+                padding-bottom: 80px !important; /* Beri ruang ekstra di bawah agar tidak tertutup floating bar */
+            }
+
+            .catalog-grid {
+                touch-action: pan-x pan-y; /* Meneruskan gestur usap vertikal ke halaman utama */
             }
 
             .page-content, 
