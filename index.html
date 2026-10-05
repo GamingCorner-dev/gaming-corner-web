@@ -801,27 +801,29 @@
                 display: flex;
                 flex-wrap: nowrap;
                 overflow-x: auto;
-                gap: 12px;
+                gap: 10px;
                 margin-top: 18px;
                 width: 100%;
                 padding-bottom: 8px;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
+                justify-content: safe center; /* Otomatis di tengah jika produk sedikit, tetap bisa di-scroll ke samping jika banyak */
             }
 
             .catalog-item {
-                flex: 0 0 75%;
-                max-width: 220px;
+                flex: 0 0 140px; /* Ukuran kartu diperkecil agar tidak memenuhi layar */
+                max-width: 150px;
                 height: auto;
-                min-height: 240px;
-                padding: 10px;
+                min-height: 180px;
+                padding: 8px;
                 border-radius: 8px;
-                scroll-snap-align: start;
+                scroll-snap-align: center;
             }
 
             .catalog-item:only-child {
-                flex: 0 0 100%;
-                max-width: 100%;
+                flex: 0 0 150px;
+                max-width: 150px;
+                margin: 0 auto; /* Memastikan jika hanya ada 1 produk posisinya tepat di tengah */
             }
 
             .catalog-grid::-webkit-scrollbar,
@@ -837,20 +839,21 @@
 
             .catalog-img {
                 width: 100%;
-                aspect-ratio: 1 / 1;
-                height: auto;
+                height: 90px; /* Ukuran gambar diperkecil */
                 object-fit: cover;
-                margin-bottom: 8px;
+                margin-bottom: 6px;
+                border-radius: 6px;
             }
 
             .catalog-title {
-                font-size: 0.85rem;
-                margin-bottom: 10px;
+                font-size: 0.75rem;
+                margin-bottom: 6px;
+                line-height: 1.2;
             }
 
             .catalog-btn {
-                padding: 6px 10px;
-                font-size: 0.75rem;
+                padding: 5px 8px;
+                font-size: 0.65rem;
             }
 
             /* FUNGSI SCROLL MENYAMPING VIDEO KLIP TOUR1 */
@@ -1276,7 +1279,7 @@
                 <p class="page-text">Look cool with official Community premium Cotton T-shirts featuring illustrations of your favorite games.</p>
 
                 <div class="catalog-grid">
-                    <a href="LINK_ITEM_1" target="_blank" class="catalog-item">
+                    <a href="LINK_ITEM_1" target="_blank" class="catalog-item" onclick="event.preventDefault(); alert('Currently in production, coming soon!');">
                         <img src="kaos.png" alt="Official Community T-shirts" class="catalog-img">
                         <h3 class="catalog-title">Official Community T-shirts</h3>
                         <span class="catalog-btn">View Item</span>
@@ -1293,7 +1296,7 @@
                 <p class="page-text">Complete your gaming setup with Official Community Mousepad, custom Keychains, Tumblers, and waterproof vinyl stickers.</p>
             
                 <div class="catalog-grid">
-                    <a href="LINK_ITEM_1" target="_blank" class="catalog-item">
+                    <a href="LINK_ITEM_1" target="_blank" class="catalog-item" onclick="event.preventDefault(); alert('Currently in production, coming soon!');">
                         <img src="mousepad.jpg" alt="Official Mousepad" class="catalog-img">
                         <h3 class="catalog-title">Official Mousepad</h3>
                         <span class="catalog-btn">View Item</span>
