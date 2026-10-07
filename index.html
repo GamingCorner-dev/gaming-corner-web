@@ -2031,6 +2031,22 @@
                 toggleMobileMenu();
             }
         }
+        
+        // ==================== AUTO-PAUSE VIDEO LAIN SAAT DIMPALAY ====================
+        document.addEventListener("DOMContentLoaded", function() {
+            const allVideos = document.querySelectorAll('video');
+
+            allVideos.forEach(video => {
+                video.addEventListener('play', function() {
+                    // Hentikan semua video lain yang sedang berjalan
+                    allVideos.forEach(otherVideo => {
+                        if (otherVideo !== video && !otherVideo.paused) {
+                            otherVideo.pause();
+                        }
+                    });
+                });
+            });
+        });
 
         // ==================== KHUSUS SAFARI: BEHAVIOR GAMEPLAY ====================
         document.addEventListener("DOMContentLoaded", function() {
