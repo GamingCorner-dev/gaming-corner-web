@@ -629,17 +629,22 @@
         /* ==================== PORTRAIT VIDEO GRID ==================== */
         .portrait-video-grid {
             display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;          /* Mencegah video turun ke baris baru */
+            overflow-x: auto;
             gap: 20px;
             justify-content: center;
             align-items: center;
             width: 100%;
             margin: 20px auto 0 auto;
-            flex-wrap: wrap;
+            padding-bottom: 12px;       /* Jarak ruang untuk scrollbar */
+            justify-content: flex-start;/* Menyusun video dari kiri agar scroll lancar */
+            scroll-snap-type: x mandatory; /* Efek magnet per kartu saat di-scroll */
+            -webkit-overflow-scrolling: touch;
         }
 
         .portrait-video-card {
-            flex: 1;
-            min-width: 180px;
+            flex: 0 0 250px;
             max-width: 280px;
             background: rgba(10, 10, 25, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -647,6 +652,7 @@
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, border-color 0.3s ease;
+            scroll-snap-align: start;
         }
 
         .portrait-video-card:hover {
@@ -1028,6 +1034,26 @@
                 font-size: 0.75rem;
             }
 
+            .footer-nav {
+                flex-wrap: nowrap !important;   /* Memaksa seluruh menu tetap dalam 1 baris */
+                justify-content: center;       /* Menata posisi menu tepat di tengah */
+                gap: 8px;                      /* Merapatkan jarak antar menu */
+                width: 100%;
+                overflow-x: auto;              /* Perlindungan agar tetap bisa digeser jika layar sangat sempit */
+                white-space: nowrap;
+                scrollbar-width: none;         /* Menyembunyikan scrollbar di Firefox */
+            }
+
+            .footer-nav::-webkit-scrollbar {
+                display: none;                 /* Menyembunyikan scrollbar di Chrome & Safari */
+            }
+
+            .footer-nav a {
+                font-size: 0.7rem !important;  /* Ukuran huruf diperkecil presisi */
+                padding: 2px 0;
+                flex-shrink: 0;                /* Mencegah teks gepeng atau terdistorsi */
+            }
+
 /* ==================== FOOTER SMARTPHONE RAPI & COMPACT ==================== */
             .site-footer {
                 padding: 25px 20px 35px 20px !important; /* Padding bawah dipangkas ke 35px agar gap tidak terlalu jauh */
@@ -1037,7 +1063,7 @@
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
-                gap: 10px; /* Jarak antar elemen dipersingkat agar lebih padat & rapi */
+                gap: 12px; /* Jarak antar elemen dipersingkat agar lebih padat & rapi */
             }
 
             .footer-brand {
@@ -1442,6 +1468,22 @@
                             Browser Anda tidak mendukung tag video.
                         </video>
                         <div class="portrait-video-title">Gameplay Clip 3</div>
+                    </div>
+
+                    <div class="portrait-video-card">
+                        <video controls preload="metadata">
+                            <source src="Clip4.mp4" type="video/mp4">
+                            Browser Anda tidak mendukung tag video.
+                        </video>
+                        <div class="portrait-video-title">Gameplay Clip 4</div>
+                    </div>
+
+                    <div class="portrait-video-card">
+                        <video controls preload="metadata">
+                            <source src="Clip5.mp4" type="video/mp4">
+                            Browser Anda tidak mendukung tag video.
+                        </video>
+                        <div class="portrait-video-title">Gameplay Clip 5</div>
                     </div>
                 </div>
             </div>
@@ -2031,7 +2073,7 @@
                 toggleMobileMenu();
             }
         }
-        
+
         // ==================== AUTO-PAUSE VIDEO LAIN SAAT DIMPALAY ====================
         document.addEventListener("DOMContentLoaded", function() {
             const allVideos = document.querySelectorAll('video');
