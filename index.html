@@ -626,26 +626,26 @@
             transform: translateY(15px);
         }
 
-        /* ==================== PORTRAIT VIDEO GRID ==================== */
+ /* ==================== PORTRAIT VIDEO GRID DENGAN SCROLLBAR ==================== */
         .portrait-video-grid {
             display: flex;
             flex-direction: row;
-            flex-wrap: nowrap;          /* Mencegah video turun ke baris baru */
+            flex-wrap: nowrap;
             overflow-x: auto;
             gap: 20px;
-            justify-content: center;
-            align-items: center;
             width: 100%;
-            margin: 20px auto 0 auto;
-            padding-bottom: 12px;       /* Jarak ruang untuk scrollbar */
-            justify-content: flex-start;/* Menyusun video dari kiri agar scroll lancar */
-            scroll-snap-type: x mandatory; /* Efek magnet per kartu saat di-scroll */
+            margin-top: 25px;
+            padding-bottom: 12px;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-neon) rgba(255, 255, 255, 0.05);
         }
 
         .portrait-video-card {
             flex: 0 0 250px;
-            max-width: 280px;
+            max-width: 250px;
             background: rgba(10, 10, 25, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 16px;
@@ -675,6 +675,21 @@
             font-weight: 600;
             color: var(--text-primary);
             font-family: var(--font-body);
+        }
+
+        /* Desain Scrollbar Kustom di Bawah Grid */
+        .portrait-video-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .portrait-video-grid::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .portrait-video-grid::-webkit-scrollbar-thumb {
+            background: var(--accent-neon);
+            border-radius: 10px;
         }
         
         /* ==================== SHOP SHORTCUT BUTTONS ==================== */
@@ -1445,7 +1460,7 @@
                 <p class="page-text">Competition Schedule: <strong>April, 2026</strong></p>
                 <p class="page-text" style="margin-top: 10px;">Violence District Fun Match Tournament Final Round</p>  
                 
-                <div class="portrait-video-grid">
+                <div class="portrait-video-grid" id="tournamentVideoGrid">
                     <div class="portrait-video-card">
                         <video controls preload="metadata">
                             <source src="Clip1.mp4" type="video/mp4">
