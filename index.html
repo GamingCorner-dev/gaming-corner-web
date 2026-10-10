@@ -807,6 +807,7 @@
             font-weight: 600;
         }
 
+
         /* ==================== RESPONSIVE STYLE ==================== */
         @media (max-width: 900px) {
             .support-container {
@@ -852,7 +853,7 @@
         }
 
         /* ==================== SMARTPHONE PORTRAIT RESPONSIVE ==================== */
-        @media (max-width: 480px) and (orientation: portrait) {
+            @media (max-width: 480px) and (orientation: portrait) {
             :root {
                 --navbar-height: 60px;
             }
@@ -1049,72 +1050,44 @@
                 font-size: 0.75rem;
             }
 
-            .footer-nav {
-                flex-wrap: wrap;   /* Memaksa seluruh menu tetap dalam 1 baris */
-                justify-content: center;       /* Menata posisi menu tepat di tengah */
-                gap: 8px;                      /* Merapatkan jarak antar menu */
-                width: 100%;
-                overflow-x: auto;              /* Perlindungan agar tetap bisa digeser jika layar sangat sempit */
-                white-space: nowrap;
-                scrollbar-width: none;         /* Menyembunyikan scrollbar di Firefox */
-            }
-
-            .footer-nav::-webkit-scrollbar {
-                display: none;                 /* Menyembunyikan scrollbar di Chrome & Safari */
-            }
-
-            .footer-nav a {
-                font-size: 0.7rem !important;  /* Ukuran huruf diperkecil presisi */
-                padding: 2px 0;
-                flex-shrink: 0;                /* Mencegah teks gepeng atau terdistorsi */
-            }
-
-/* ==================== FOOTER SMARTPHONE RAPI & COMPACT ==================== */
+            /* ==================== FOOTER RATA KIRI & MENU KE BAWAH (HP) ==================== */
             .site-footer {
-                padding: 25px 20px 35px 20px !important; /* Padding bawah dipangkas ke 35px agar gap tidak terlalu jauh */
+                padding: 25px 20px 35px 20px !important;
             }
 
             .footer-content {
                 flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 12px; /* Jarak antar elemen dipersingkat agar lebih padat & rapi */
+                align-items: flex-start; /* Mengubah posisi elemen menjadi rata kiri */
+                text-align: left;        /* Mengatur teks agar rata kiri */
+                gap: 15px;               /* Memberikan jarak antar bagian footer */
             }
 
             .footer-brand {
                 padding-left: 0;
                 max-width: 100%;
-            }
-
-            .footer-logo {
-                font-size: 1.1rem;
-                margin-bottom: 2px;
-            }
-
-            .footer-tagline {
-                font-size: 0.78rem;
-                line-height: 1.3;
+                justify-content: flex-start;
             }
 
             .footer-nav {
-                justify-content: center;
-                gap: 8px 14px; /* Menyusun menu dengan baris rapat */
+                flex-direction: column;  /* Mengubah menu dari horizontal menjadi vertikal (ke bawah) */
+                align-items: flex-start; /* Membuat list menu rata kiri */
+                gap: 0;                /* Jarak antar baris menu */
                 width: 100%;
             }
 
             .footer-nav a {
-                font-size: 0.8rem;
-                padding: 2px 4px;
+                font-size: 0.9rem !important;
+                padding: 3px 0;          /* Memberikan area klik yang nyaman */
             }
 
             .footer-copy {
-                text-align: center;
+                text-align: left;        /* Copyright menjadi rata kiri */
                 font-size: 0.75rem;
-                margin-top: 4px;
+                margin-top: 5px;
+                width: 100%;
             }
         }
 
-        /* CSS Khusus Pengatur Ukuran Video Controls di Safari */
         body.is-safari .video-box video {
             object-fit: contain;
             background: #000;
@@ -1136,7 +1109,11 @@
 
     <!-- ==================== NAVBAR ==================== -->
     <header class="global-navbar" id="navbar" role="navigation" aria-label="Global Navigation">
-        <a onclick="switchPage('home')" class="navbar-brand">Gaming Corner</a>
+        <!-- HEADER NAVBAR -->
+        <a onclick="switchPage('home')" class="navbar-brand" style="display: flex; align-items: center; gap: 10px;">
+            <img src="logo.png" alt="Gaming Corner Logo" style="height: 30px; width: auto; object-fit: contain;">
+            <span>Gaming Corner</span>
+        </a>
         <button class="hamburger-toggle" id="hamburgerBtn" aria-label="Toggle Navigation" aria-expanded="false">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -1354,9 +1331,15 @@
         <section class="snap-section" style="height: auto; min-height: 250px; justify-content: flex-end;">
             <footer class="site-footer">
                 <div class="footer-content">
-                    <div class="footer-brand">
-                        <h3 class="footer-logo">Gaming Corner</h3>
-                        <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                    <div class="footer-brand" style="display: flex; align-items: center; gap: 16px;">
+                        <!-- Logo di sebelah kiri dengan ukuran lebih besar -->
+                        <img src="logo.png" alt="Gaming Corner Logo" style="height: 55px; width: auto; object-fit: contain; flex-shrink: 0;">
+                        
+                        <!-- Kelompok teks di sebelah kanan (tetap atas-bawah) -->
+                        <div style="display: flex; flex-direction: column;">
+                            <h3 class="footer-logo" style="margin-bottom: 2px; font-size: 1.25rem;">Gaming Corner</h3>
+                            <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                        </div>
                     </div>
 
                     <div class="footer-nav">
@@ -1393,9 +1376,15 @@
         <section class="snap-section" style="height: auto; min-height: 250px; justify-content: flex-end;">
             <footer class="site-footer">
                 <div class="footer-content">
-                    <div class="footer-brand">
-                        <h3 class="footer-logo">Gaming Corner</h3>
-                        <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                    <div class="footer-brand" style="display: flex; align-items: center; gap: 16px;">
+                        <!-- Logo di sebelah kiri dengan ukuran lebih besar -->
+                        <img src="logo.png" alt="Gaming Corner Logo" style="height: 55px; width: auto; object-fit: contain; flex-shrink: 0;">
+                        
+                        <!-- Kelompok teks di sebelah kanan (tetap atas-bawah) -->
+                        <div style="display: flex; flex-direction: column;">
+                            <h3 class="footer-logo" style="margin-bottom: 2px; font-size: 1.25rem;">Gaming Corner</h3>
+                            <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                        </div>
                     </div>
 
                     <div class="footer-nav">
@@ -1430,9 +1419,15 @@
         <section class="snap-section" style="height: auto; min-height: 250px; justify-content: flex-end;">
             <footer class="site-footer">
                 <div class="footer-content">
-                    <div class="footer-brand">
-                        <h3 class="footer-logo">Gaming Corner</h3>
-                        <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                    <div class="footer-brand" style="display: flex; align-items: center; gap: 16px;">
+                        <!-- Logo di sebelah kiri dengan ukuran lebih besar -->
+                        <img src="logo.png" alt="Gaming Corner Logo" style="height: 55px; width: auto; object-fit: contain; flex-shrink: 0;">
+                        
+                        <!-- Kelompok teks di sebelah kanan (tetap atas-bawah) -->
+                        <div style="display: flex; flex-direction: column;">
+                            <h3 class="footer-logo" style="margin-bottom: 2px; font-size: 1.25rem;">Gaming Corner</h3>
+                            <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                        </div>
                     </div>
 
                     <div class="footer-nav">
@@ -1452,14 +1447,15 @@
         </section>
     </div>
 
-    <!-- ==================== TOURNAMENT PAGES ==================== -->
+<!-- ==================== TOURNAMENT PAGES ==================== -->
     <div id="tour1-page" class="page-view">
         <section class="standalone-section">
             <div class="page-content" style="max-width: 1000px;">
                 <h2 class="page-heading">VD Tournament</h2>
                 <p class="page-text">Competition Schedule: <strong>April, 2026</strong></p>
                 <p class="page-text" style="margin-top: 10px;">Violence District Fun Match Tournament Final Round</p>  
-                
+
+                <!-- GRID VIDEO LANGSUNG DENGAN SCROLLBAR DI BAWAH -->
                 <div class="portrait-video-grid" id="tournamentVideoGrid">
                     <div class="portrait-video-card">
                         <video controls preload="metadata">
@@ -1503,13 +1499,19 @@
                 </div>
             </div>
         </section>
-
+  
         <section class="snap-section" style="height: auto; min-height: 250px; justify-content: flex-end;">
             <footer class="site-footer">
                 <div class="footer-content">
-                    <div class="footer-brand">
-                        <h3 class="footer-logo">Gaming Corner</h3>
-                        <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                    <div class="footer-brand" style="display: flex; align-items: center; gap: 16px;">
+                        <!-- Logo di sebelah kiri dengan ukuran lebih besar -->
+                        <img src="logo.png" alt="Gaming Corner Logo" style="height: 55px; width: auto; object-fit: contain; flex-shrink: 0;">
+                        
+                        <!-- Kelompok teks di sebelah kanan (tetap atas-bawah) -->
+                        <div style="display: flex; flex-direction: column;">
+                            <h3 class="footer-logo" style="margin-bottom: 2px; font-size: 1.25rem;">Gaming Corner</h3>
+                            <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                        </div>
                     </div>
 
                     <div class="footer-nav">
@@ -1541,9 +1543,15 @@
         <section class="snap-section" style="height: auto; min-height: 250px; justify-content: flex-end;">
             <footer class="site-footer">
                 <div class="footer-content">
-                    <div class="footer-brand">
-                        <h3 class="footer-logo">Gaming Corner</h3>
-                        <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                    <div class="footer-brand" style="display: flex; align-items: center; gap: 16px;">
+                        <!-- Logo di sebelah kiri dengan ukuran lebih besar -->
+                        <img src="logo.png" alt="Gaming Corner Logo" style="height: 55px; width: auto; object-fit: contain; flex-shrink: 0;">
+                        
+                        <!-- Kelompok teks di sebelah kanan (tetap atas-bawah) -->
+                        <div style="display: flex; flex-direction: column;">
+                            <h3 class="footer-logo" style="margin-bottom: 2px; font-size: 1.25rem;">Gaming Corner</h3>
+                            <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                        </div>
                     </div>
 
                     <div class="footer-nav">
@@ -1575,9 +1583,15 @@
         <section class="snap-section" style="height: auto; min-height: 250px; justify-content: flex-end;">
             <footer class="site-footer">
                 <div class="footer-content">
-                    <div class="footer-brand">
-                        <h3 class="footer-logo">Gaming Corner</h3>
-                        <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                    <div class="footer-brand" style="display: flex; align-items: center; gap: 16px;">
+                        <!-- Logo di sebelah kiri dengan ukuran lebih besar -->
+                        <img src="logo.png" alt="Gaming Corner Logo" style="height: 55px; width: auto; object-fit: contain; flex-shrink: 0;">
+                        
+                        <!-- Kelompok teks di sebelah kanan (tetap atas-bawah) -->
+                        <div style="display: flex; flex-direction: column;">
+                            <h3 class="footer-logo" style="margin-bottom: 2px; font-size: 1.25rem;">Gaming Corner</h3>
+                            <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                        </div>
                     </div>
 
                     <div class="footer-nav">
@@ -1639,9 +1653,15 @@
         <section class="snap-section" style="height: auto; min-height: 250px; justify-content: flex-end;">
             <footer class="site-footer">
                 <div class="footer-content">
-                    <div class="footer-brand">
-                        <h3 class="footer-logo">Gaming Corner</h3>
-                        <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                    <div class="footer-brand" style="display: flex; align-items: center; gap: 16px;">
+                        <!-- Logo di sebelah kiri dengan ukuran lebih besar -->
+                        <img src="logo.png" alt="Gaming Corner Logo" style="height: 55px; width: auto; object-fit: contain; flex-shrink: 0;">
+                        
+                        <!-- Kelompok teks di sebelah kanan (tetap atas-bawah) -->
+                        <div style="display: flex; flex-direction: column;">
+                            <h3 class="footer-logo" style="margin-bottom: 2px; font-size: 1.25rem;">Gaming Corner</h3>
+                            <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                        </div>
                     </div>
 
                     <div class="footer-nav">
@@ -1689,9 +1709,15 @@
         <section class="snap-section" style="height: auto; min-height: 250px; justify-content: flex-end;">
             <footer class="site-footer">
                 <div class="footer-content">
-                    <div class="footer-brand">
-                        <h3 class="footer-logo">Gaming Corner</h3>
-                        <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                    <div class="footer-brand" style="display: flex; align-items: center; gap: 16px;">
+                        <!-- Logo di sebelah kiri dengan ukuran lebih besar -->
+                        <img src="logo.png" alt="Gaming Corner Logo" style="height: 55px; width: auto; object-fit: contain; flex-shrink: 0;">
+                        
+                        <!-- Kelompok teks di sebelah kanan (tetap atas-bawah) -->
+                        <div style="display: flex; flex-direction: column;">
+                            <h3 class="footer-logo" style="margin-bottom: 2px; font-size: 1.25rem;">Gaming Corner</h3>
+                            <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                        </div>
                     </div>
 
                     <div class="footer-nav">
@@ -1739,9 +1765,15 @@
         <section class="snap-section" style="height: auto; min-height: 250px; justify-content: flex-end;">
             <footer class="site-footer">
                 <div class="footer-content">
-                    <div class="footer-brand">
-                        <h3 class="footer-logo">Gaming Corner</h3>
-                        <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                    <div class="footer-brand" style="display: flex; align-items: center; gap: 16px;">
+                        <!-- Logo di sebelah kiri dengan ukuran lebih besar -->
+                        <img src="logo.png" alt="Gaming Corner Logo" style="height: 55px; width: auto; object-fit: contain; flex-shrink: 0;">
+                        
+                        <!-- Kelompok teks di sebelah kanan (tetap atas-bawah) -->
+                        <div style="display: flex; flex-direction: column;">
+                            <h3 class="footer-logo" style="margin-bottom: 2px; font-size: 1.25rem;">Gaming Corner</h3>
+                            <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                        </div>
                     </div>
 
                     <div class="footer-nav">
@@ -1813,9 +1845,15 @@
         <section class="snap-section" style="height: auto; min-height: 250px; justify-content: flex-end;">
             <footer class="site-footer">
                 <div class="footer-content">
-                    <div class="footer-brand">
-                        <h3 class="footer-logo">Gaming Corner</h3>
-                        <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                    <div class="footer-brand" style="display: flex; align-items: center; gap: 16px;">
+                        <!-- Logo di sebelah kiri dengan ukuran lebih besar -->
+                        <img src="logo.png" alt="Gaming Corner Logo" style="height: 55px; width: auto; object-fit: contain; flex-shrink: 0;">
+                        
+                        <!-- Kelompok teks di sebelah kanan (tetap atas-bawah) -->
+                        <div style="display: flex; flex-direction: column;">
+                            <h3 class="footer-logo" style="margin-bottom: 2px; font-size: 1.25rem;">Gaming Corner</h3>
+                            <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                        </div>
                     </div>
 
                     <div class="footer-nav">
@@ -1848,9 +1886,15 @@
         <section class="snap-section" style="height: auto; min-height: 250px; justify-content: flex-end;">
             <footer class="site-footer">
                 <div class="footer-content">
-                    <div class="footer-brand">
-                        <h3 class="footer-logo">Gaming Corner</h3>
-                        <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                    <div class="footer-brand" style="display: flex; align-items: center; gap: 16px;">
+                        <!-- Logo di sebelah kiri dengan ukuran lebih besar -->
+                        <img src="logo.png" alt="Gaming Corner Logo" style="height: 55px; width: auto; object-fit: contain; flex-shrink: 0;">
+                        
+                        <!-- Kelompok teks di sebelah kanan (tetap atas-bawah) -->
+                        <div style="display: flex; flex-direction: column;">
+                            <h3 class="footer-logo" style="margin-bottom: 2px; font-size: 1.25rem;">Gaming Corner</h3>
+                            <p class="footer-tagline">Your ultimate hangout spot to play, chill, and connect.</p>
+                        </div>
                     </div>
 
                     <div class="footer-nav">
@@ -1985,7 +2029,6 @@
 
             // ==================== LOGIKA TOGGLE LACI FLOATING SOCIAL (DENGAN LOCALSTORAGE) ====================
             if (floatingBox) {
-                // Baca status laci dari localStorage saat dimuat
                 if (localStorage.getItem('socialBoxCollapsed') === 'true') {
                     floatingBox.classList.add('collapsed');
                 }
@@ -2089,13 +2132,12 @@
             }
         }
 
-        // ==================== AUTO-PAUSE VIDEO LAIN SAAT DIMPALAY ====================
+        // ==================== AUTO-PAUSE VIDEO LAIN SAAT DIPAY ====================
         document.addEventListener("DOMContentLoaded", function() {
             const allVideos = document.querySelectorAll('video');
 
             allVideos.forEach(video => {
                 video.addEventListener('play', function() {
-                    // Hentikan semua video lain yang sedang berjalan
                     allVideos.forEach(otherVideo => {
                         if (otherVideo !== video && !otherVideo.paused) {
                             otherVideo.pause();
