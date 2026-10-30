@@ -397,7 +397,7 @@ main, .site-footer { position: relative; z-index: 1; }
   overflow: hidden;
   background: #000;
 }
-.vslot--clip { border-radius: 6px; }
+.vslot--clip { aspect-ratio: 9 / 16; border-radius: 6px; }
 
 .vslot__btn {
   position: absolute;
@@ -476,7 +476,7 @@ main, .site-footer { position: relative; z-index: 1; }
 .highlights__titles { display: flex; flex-direction: column; gap: 6px; }
 .highlights__title { font-family: var(--font-display); font-weight: 700; font-size: 32px; line-height: 1.1; text-transform: uppercase; }
 
-.clips { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+.clips { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
 .clips__rest { display: contents; }
 .clip--feature { order: 5; }
 .clip { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
