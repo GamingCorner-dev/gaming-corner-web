@@ -29,13 +29,26 @@
   }
 
   /* Cahaya emas menguat saat kotak diikuti cursor */
-  html:not(#gc) :is(.banner-strip__frame, .card, .clip, .partner__art, .qr-card).gc-tilt {
+  html:not(#gc) :is(.banner-strip__frame, .card, .clip, .qr-card).gc-tilt {
     border-color: rgba(232, 190, 110, 0.75);
     box-shadow:
       0 22px 44px rgba(0, 0, 0, 0.50),
       0 0 30px rgba(232, 190, 110, 0.36),
       0 0 3px rgba(232, 190, 110, 0.70),
       inset 0 0 18px rgba(232, 190, 110, 0.10);
+  }
+
+  /* Foto partner: pembungkusnya lebih lebar dari fotonya, jadi cahaya emas dipasang di FOTO, bukan di pembungkus */
+  html:not(#gc) .partner__art.gc-tilt {
+    box-shadow: none;
+    border-color: transparent;
+  }
+  html:not(#gc) .partner__art.gc-tilt img {
+    border-color: rgba(232, 190, 110, 0.75);
+    box-shadow:
+      0 22px 44px rgba(0, 0, 0, 0.50),
+      0 0 30px rgba(232, 190, 110, 0.36),
+      0 0 3px rgba(232, 190, 110, 0.70);
   }
 
   /* Banner: gambar di dalam bingkai sedikit membesar dan bergeser berlawanan arah cursor */
