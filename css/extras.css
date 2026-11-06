@@ -260,3 +260,17 @@
   .merch__body { padding: 16px; gap: 6px; }
   .merch__title { font-size: 19px; }
 }
+
+/* Revisi 10 - Salju tidak terlihat di dalam kotak.
+   Latar kotak yang tadinya bening dibuat pekat dengan warna yang sama seperti tampilannya sekarang,
+   sehingga salju (yang berada di belakang) hanya terlihat di ruang kosong di antara kotak.
+   Mau kotak sedikit lebih terang/gelap? Ubah dua warna di bawah. */
+:root {
+  --box-solid:  #121110;   /* latar kartu */
+  --panel-solid: #0e0c0a;  /* latar panel besar di bagian atas (hero) */
+}
+.card { background: var(--box-solid); }
+.hero__panel { background: var(--panel-solid); }
+@media (max-width: 720px) {
+  .stats li { background: var(--box-solid); }
+}
