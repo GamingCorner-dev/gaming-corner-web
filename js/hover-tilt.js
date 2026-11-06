@@ -61,6 +61,7 @@
     }
     if (!cur) {
       var t = e.target && e.target.closest ? e.target.closest(SEL) : null;
+      if (t && t.classList.contains('roblox__item')) t = null;   // kotak Roblox diam; yang bergerak hanya karakternya (revisi 11)
       if (t && t.getBoundingClientRect().height > 0 && getComputedStyle(t).opacity > 0.6) engage(t);
     }
     if (cur && !raf) raf = requestAnimationFrame(apply);
