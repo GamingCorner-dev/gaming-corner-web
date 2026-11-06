@@ -1,0 +1,49 @@
+/* Revisi 7 - Banner & kotak bergerak mengikuti cursor.
+   Saat cursor masuk ke sebuah kotak: kotak sedikit terangkat, miring ke arah cursor (efek 3D),
+   cahaya emasnya menguat, dan gambar di dalam banner bergeser halus (parallax).
+   Hanya aktif di perangkat dengan mouse dan jika pengunjung tidak memilih "kurangi gerakan".
+   Memakai "transform" (scroll-reveal memakai "translate"), jadi keduanya tidak bentrok. */
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+
+  /* Satu daftar transisi lengkap untuk semua kotak (menggantikan daftar dari glow/scroll-reveal
+     supaya gerak miring, muncul saat scroll, dan cahaya semuanya halus bersamaan). */
+  html:not(#gc) :is(.hero__panel, .banner-strip__frame, .card, .clip, .partner__art, .donor, .qr-card, .cta) {
+    transition:
+      opacity .7s ease var(--gc-d, 0ms),
+      translate .7s cubic-bezier(.2, .7, .2, 1) var(--gc-d, 0ms),
+      transform var(--gc-tt, .5s) cubic-bezier(.2, .7, .2, 1),
+      box-shadow .3s ease,
+      border-color .3s ease;
+  }
+
+  /* Keadaan aktif: cursor sedang berada di kotak */
+  html:not(#gc) :is(.hero__panel, .banner-strip__frame, .card, .clip, .partner__art, .donor, .qr-card, .cta).gc-tilt {
+    --gc-tt: .12s;
+    transform: perspective(1000px)
+               rotateX(var(--gc-rx, 0deg)) rotateY(var(--gc-ry, 0deg))
+               translateY(var(--gc-lift, -6px)) scale(var(--gc-scale, 1.015));
+    will-change: transform;
+    position: relative;
+    z-index: 3;
+  }
+
+  /* Cahaya emas menguat saat kotak diikuti cursor */
+  html:not(#gc) :is(.banner-strip__frame, .card, .clip, .partner__art, .qr-card).gc-tilt {
+    border-color: rgba(232, 190, 110, 0.75);
+    box-shadow:
+      0 22px 44px rgba(0, 0, 0, 0.50),
+      0 0 30px rgba(232, 190, 110, 0.36),
+      0 0 3px rgba(232, 190, 110, 0.70),
+      inset 0 0 18px rgba(232, 190, 110, 0.10);
+  }
+
+  /* Banner: gambar di dalam bingkai sedikit membesar dan bergeser berlawanan arah cursor */
+  .banner-strip__frame img {
+    transition: transform .6s cubic-bezier(.2, .7, .2, 1);
+  }
+  .banner-strip__frame.gc-tilt img {
+    transition-duration: .15s;
+    transform: scale(1.05) translate(calc(var(--gc-px, 0) * -10px), calc(var(--gc-py, 0) * -8px));
+  }
+}

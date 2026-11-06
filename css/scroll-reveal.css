@@ -1,0 +1,47 @@
+/* Revisi 6 - Kotak bergerak saat scroll.
+   Kotak naik dari bawah saat scroll turun, dan turun dari atas saat scroll naik.
+   Kotak yang muncul bersamaan dapat jeda berurutan (stagger).
+   Memakai properti "translate" (bukan "transform") supaya tidak bentrok dengan efek lain.
+   Aman: tanpa JavaScript, atau jika pengunjung memilih "kurangi gerakan", semua kotak tampil biasa. */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ---------- Desktop & tablet: semua kotak bergerak sendiri-sendiri ---------- */
+  @media (min-width: 721px) {
+    html.js-reveal :is(.hero__panel, .banner-strip__frame, .card, .clip, .partner__art, .donor, .qr-card, .cta) {
+      opacity: 0;
+      translate: 0 var(--gc-y, 36px);
+      transition:
+        opacity .7s ease var(--gc-d, 0ms),
+        translate .7s cubic-bezier(.2, .7, .2, 1) var(--gc-d, 0ms),
+        box-shadow .25s ease,
+        border-color .25s ease;
+    }
+    html.js-reveal :is(.hero__panel, .banner-strip__frame, .card, .clip, .partner__art, .donor, .qr-card, .cta).is-in {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  /* ---------- HP: deretan yang bisa digeser (game, klip) bergerak sebagai satu blok ---------- */
+  @media (max-width: 720px) {
+    html.js-reveal :is(.hero__panel, .banner-strip__frame, .card, .clip, .partner__art, .donor, .qr-card, .cta):not(.rail > *),
+    html.js-reveal .rail {
+      opacity: 0;
+      translate: 0 var(--gc-y, 28px);
+      transition:
+        opacity .6s ease var(--gc-d, 0ms),
+        translate .6s cubic-bezier(.2, .7, .2, 1) var(--gc-d, 0ms),
+        box-shadow .25s ease,
+        border-color .25s ease;
+    }
+    html.js-reveal :is(.hero__panel, .banner-strip__frame, .card, .clip, .partner__art, .donor, .qr-card, .cta):not(.rail > *).is-in,
+    html.js-reveal .rail.is-in {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  /* kotak yang tadi keluar lewat atas layar akan masuk lagi dari atas */
+  html.js-reveal [data-gc-side="up"] { --gc-y: -36px; }
+}
