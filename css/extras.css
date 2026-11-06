@@ -274,3 +274,40 @@
 @media (max-width: 720px) {
   .stats li { background: var(--box-solid); }
 }
+
+/* Revisi 11 - Karakter Roblox "melompat" keluar saat kursor di kotaknya.
+   Hanya gambar karakter (PNG transparan) yang membesar dan naik; kotaknya tetap diam.
+   Atur kekuatannya lewat dua angka di bawah. */
+:root {
+  --roblox-pop-scale: 1.3;    /* seberapa besar karakter saat pop-up */
+  --roblox-pop-lift: -14%;    /* seberapa naik (minus = ke atas) */
+}
+
+/* Kotak tidak lagi memotong isinya, supaya karakter bisa keluar dari tepi */
+.roblox__item { overflow: visible; position: relative; }
+.roblox__well { border-radius: 7px 7px 0 0; }
+.roblox__well img { position: relative; transform-origin: 50% 70%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .roblox__well img {
+    transition: transform .45s cubic-bezier(.2, .8, .2, 1.15), filter .35s ease;
+    will-change: transform;
+  }
+  .roblox__well img { filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0)); }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .roblox__item:hover { z-index: 6; }                  /* di atas kotak tetangga */
+  .roblox__item:hover .roblox__well img {
+    transform: translateY(var(--roblox-pop-lift)) scale(var(--roblox-pop-scale));
+    filter: drop-shadow(0 18px 14px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 12px rgba(232, 190, 110, 0.22));
+  }
+}
+
+/* HP / layar sentuh: pop-up singkat saat disentuh */
+@media (hover: none) {
+  .roblox__item:active .roblox__well img {
+    transform: translateY(var(--roblox-pop-lift)) scale(1.2);
+    filter: drop-shadow(0 14px 10px rgba(0, 0, 0, 0.6));
+  }
+}
