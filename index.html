@@ -31,7 +31,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Manrope:wght@400;500;600;700&family=Oxanium:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Manrope:wght@400;500;600;700&family=Oxanium:wght@500;600;700;800&display=swap"></noscript>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/extras.css">
   <script src="js/main.js" defer></script>
+  <script src="js/music.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -75,6 +77,18 @@
   </header>
 
   <main id="main">
+
+    <!-- Banner di atas bagian judul -->
+    <section class="banner-strip banner-strip--top" aria-label="Gaming Corner banner">
+      <div class="container">
+        <figure class="banner-strip__frame">
+          <picture>
+            <source media="(max-width: 720px)" srcset="assets/img/banner-mobile.webp">
+            <img src="assets/img/banner.webp" alt="Gaming Corner: Play, Connect, Grow" width="1920" height="768" fetchpriority="high" decoding="async">
+          </picture>
+        </figure>
+      </div>
+    </section>
 
     <!-- HERO -->
     <section id="top" class="section hero">
