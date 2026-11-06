@@ -245,3 +245,18 @@
   .music-btn[aria-pressed="true"] .music-btn__eq i { animation: none; height: 12px; }
 }
 
+
+/* Revisi 9 - Merch di HP: foto baju & mousepad tampil utuh seperti di komputer.
+   Sebelumnya di HP foto dijadikan kolom sempit 128px sehingga terpotong; sekarang foto di atas, teks di bawah. */
+@media (max-width: 720px) {
+  .merch__item { flex-direction: column; }
+  .merch__item > img {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+  .merch__body { padding: 16px; gap: 6px; }
+  .merch__title { font-size: 19px; }
+}
