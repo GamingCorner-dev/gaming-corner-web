@@ -1,0 +1,94 @@
+/* Revisi 12 (sampel) - Bagian "Our Team": Owner, Admin, Moderator */
+.team { display: flex; flex-direction: column; gap: 28px; }
+.team__group { display: flex; flex-direction: column; gap: 14px; }
+.team__grouptitle { font-family: var(--font-mono); font-weight: 500; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 12px; }
+.team__grouptitle::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.team__row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.team__row--one { grid-template-columns: minmax(0, 1fr); max-width: 440px; }
+.team__row--two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 740px; }
+
+.team__card { display: flex; align-items: center; gap: 16px; padding: 18px; color: var(--text); text-decoration: none; }
+.team__card:hover { color: var(--text); }
+.team__avatar { position: relative; flex: none; width: 72px; height: 72px; }
+.team__avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid rgba(232,190,110,.55); display: block; }
+.team__card--owner .team__avatar { width: 84px; height: 84px; }
+.team__card--owner .team__avatar img { border-color: var(--gold); box-shadow: 0 0 18px rgba(232,190,110,.35); }
+.team__info { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.team__role { align-self: flex-start; font-family: var(--font-mono); font-weight: 500; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(232,190,110,.45); border-radius: 999px; padding: 2px 10px; }
+.team__card--owner .team__role { background: var(--gold); color: #1a1408; border-color: var(--gold); }
+.team__name { font-family: var(--font-display); font-weight: 700; font-size: 20px; line-height: 1.2; text-transform: uppercase; overflow-wrap: anywhere; }
+.team__note { font-size: 13px; color: var(--muted); line-height: 1.4; }
+.team__link { font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); }
+
+/* Khusus tampilan "langsung dari Discord" (sampel 2) */
+.team__dot { position: absolute; right: 1px; bottom: 1px; width: 18px; height: 18px; border-radius: 50%; border: 3px solid #121110; background: #80848e; }
+.team__dot[data-s="online"] { background: #3ba55d; }
+.team__dot[data-s="idle"]   { background: #faa61a; }
+.team__dot[data-s="dnd"]    { background: #ed4245; }
+.team__live { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #8be3a5; }
+.team__live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #3ba55d; animation: teamPulse 1.8s ease-in-out infinite; }
+@keyframes teamPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(59,165,93,.6); } 50% { box-shadow: 0 0 0 7px rgba(59,165,93,0); } }
+.team__status { font-size: 13px; color: var(--muted); }
+.team__status b { color: var(--text); font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { .team__live::before { animation: none; } }
+
+@media (max-width: 720px) {
+  .team__row, .team__row--two { grid-template-columns: minmax(0, 1fr); max-width: none; }
+  .team__row--one { max-width: none; }
+  .team__card { padding: 14px; gap: 14px; }
+  .team__avatar { width: 64px; height: 64px; }
+  .team__card--owner .team__avatar { width: 72px; height: 72px; }
+  .team__name { font-size: 18px; }
+}
+
+/* ===== Pop-up "Our Team" (tombol di atas tombol Music) ===== */
+.team__card { background: #121110; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 0 14px rgba(232,190,110,.12), 0 0 2px rgba(232,190,110,.30); }
+.team__card--owner { border-color: rgba(232,190,110,.55); }
+
+.team-fab {
+  position: fixed; left: 18px; bottom: 76px; z-index: 60;
+  display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 16px 0 14px;
+  border-radius: 999px; border: 1px solid rgba(232,190,110,.55);
+  background: rgba(14,12,9,.88); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  color: #e8be6e; font: 600 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase;
+  cursor: pointer; box-shadow: 0 0 16px rgba(232,190,110,.20), 0 8px 24px rgba(0,0,0,.45);
+  transition: box-shadow .25s ease, border-color .25s ease, transform .25s ease;
+}
+.team-fab:hover { border-color: rgba(232,190,110,.9); box-shadow: 0 0 24px rgba(232,190,110,.38), 0 8px 24px rgba(0,0,0,.45); }
+.team-fab:focus-visible { outline: 2px solid #e8be6e; outline-offset: 3px; }
+.team-fab:active { transform: scale(.97); }
+.team-fab svg { width: 20px; height: 20px; flex: none; }
+
+.team-modal { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(0,0,0,.72); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.team-modal[hidden] { display: none; }
+.team-modal__panel {
+  position: relative; width: min(980px, 100%); max-height: min(86vh, 900px); overflow: auto; overscroll-behavior: contain;
+  padding: 36px; background: #0e0c0a; border: 1px solid rgba(232,190,110,.45); border-radius: 16px;
+  box-shadow: 0 0 40px rgba(232,190,110,.18), 0 30px 80px rgba(0,0,0,.7);
+}
+.team-modal__head { display: flex; flex-direction: column; gap: 8px; margin-bottom: 26px; padding-right: 48px; }
+.team-modal__title { font-family: var(--font-display); font-weight: 700; font-size: clamp(26px, 4vw, 38px); line-height: 1.1; text-transform: uppercase; }
+.team-modal__close {
+  position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(232,190,110,.5); background: rgba(14,12,9,.9); color: #e8be6e; font-size: 22px; line-height: 1; cursor: pointer;
+}
+.team-modal__close:hover { border-color: #e8be6e; box-shadow: 0 0 16px rgba(232,190,110,.35); }
+.team-modal__close:focus-visible { outline: 2px solid #e8be6e; outline-offset: 3px; }
+html.team-open, html.team-open body { overflow: hidden; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .team-modal:not([hidden]) { animation: teamFade .25s ease; }
+  .team-modal:not([hidden]) .team-modal__panel { animation: teamPop .35s cubic-bezier(.2,.8,.2,1); }
+  @keyframes teamFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes teamPop { from { opacity: 0; transform: translateY(18px) scale(.96); } to { opacity: 1; transform: none; } }
+}
+@media (max-width: 720px) {
+  .team-fab { left: 12px; bottom: 142px; height: 44px; padding: 0 14px; }
+  .team-fab__label { display: none; }
+  .team-modal { padding: 0; align-items: stretch; }
+  .team-modal__panel { max-height: none; height: 100%; border-radius: 0; border-width: 0; padding: 24px 16px 40px; }
+}
+
+/* label peran yang panjang (mis. "Moderator Other Games") tetap satu baris */
+.team__role { white-space: nowrap; letter-spacing: .04em; font-size: 10.5px; padding: 2px 9px; }
+.team__info { min-width: 0; }

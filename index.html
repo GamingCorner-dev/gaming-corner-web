@@ -42,11 +42,13 @@
   <link rel="stylesheet" href="css/extras.css">
   <link rel="stylesheet" href="css/scroll-reveal.css">
   <link rel="stylesheet" href="css/hover-tilt.css">
+  <link rel="stylesheet" href="css/team.css">
   <script src="js/main.js" defer></script>
   <script src="js/music.js" defer></script>
   <script src="js/scroll-reveal.js" defer></script>
   <script src="js/hover-tilt.js" defer></script>
   <script src="js/snow.js" defer></script>
+  <script src="js/team-popup.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -546,5 +548,22 @@
   </div>
 
 </div>
+
+  <!-- Pop-up Our Team (revisi 12) -->
+  <div id="team-modal" class="team-modal" hidden role="dialog" aria-modal="true" aria-labelledby="team-title">
+    <div class="team-modal__panel">
+      <button type="button" class="team-modal__close" aria-label="Close">&times;</button>
+      <div class="team-modal__head">
+        <p class="eyebrow">Our team</p>
+        <h2 id="team-title" class="team-modal__title">Meet the people behind the corner</h2>
+      </div>
+      <div class="team">
+          <div class="team__group"><p class="team__grouptitle">Owner</p><ul class="team__row team__row--one"><li class="card team__card team__card--owner"><span class="team__avatar"><img src="assets/img/team-01.png" alt="Foto profil Ara" width="256" height="256" loading="lazy" decoding="async"></span><span class="team__info"><span class="team__role">Owner</span><h4 class="team__name">Ara</h4></span></li></ul></div>
+          <div class="team__group"><p class="team__grouptitle">Admin</p><ul class="team__row "><li class="card team__card "><span class="team__avatar"><img src="assets/img/team-02.png" alt="Foto profil Olaf" width="256" height="256" loading="lazy" decoding="async"></span><span class="team__info"><h4 class="team__name">Olaf</h4></span></li><li class="card team__card "><span class="team__avatar"><img src="assets/img/team-03.png" alt="Foto profil Doot" width="256" height="256" loading="lazy" decoding="async"></span><span class="team__info"><h4 class="team__name">Doot</h4></span></li><li class="card team__card "><span class="team__avatar"><img src="assets/img/team-04.png" alt="Foto profil Nein" width="256" height="256" loading="lazy" decoding="async"></span><span class="team__info"><h4 class="team__name">Nein</h4></span></li></ul></div>
+          <div class="team__group"><p class="team__grouptitle">Admin Pishing</p><ul class="team__row "><li class="card team__card "><span class="team__avatar"><img src="assets/img/team-05.png" alt="Foto profil Mubaz" width="256" height="256" loading="lazy" decoding="async"></span><span class="team__info"><h4 class="team__name">Mubaz</h4></span></li><li class="card team__card "><span class="team__avatar"><img src="assets/img/team-06.png" alt="Foto profil Fiercesun" width="256" height="256" loading="lazy" decoding="async"></span><span class="team__info"><h4 class="team__name">Fiercesun</h4></span></li><li class="card team__card "><span class="team__avatar"><img src="assets/img/team-07.png" alt="Foto profil Spade" width="256" height="256" loading="lazy" decoding="async"></span><span class="team__info"><h4 class="team__name">Spade</h4></span></li></ul></div>
+          <div class="team__group"><p class="team__grouptitle">Moderator</p><ul class="team__row "><li class="card team__card "><span class="team__avatar"><img src="assets/img/team-08.png" alt="Foto profil Jakabay" width="256" height="256" loading="lazy" decoding="async"></span><span class="team__info"><span class="team__role">Moderator Touch</span><h4 class="team__name">Jakabay</h4></span></li><li class="card team__card "><span class="team__avatar"><img src="assets/img/team-09.png" alt="Foto profil Krixie" width="256" height="256" loading="lazy" decoding="async"></span><span class="team__info"><span class="team__role">Moderator Touch</span><h4 class="team__name">Krixie</h4></span></li><li class="card team__card "><span class="team__avatar"><img src="assets/img/team-10.png" alt="Foto profil Ipori" width="256" height="256" loading="lazy" decoding="async"></span><span class="team__info"><span class="team__role">Moderator Roblox</span><h4 class="team__name">Ipori</h4></span></li><li class="card team__card "><span class="team__avatar"><img src="assets/img/team-11.png" alt="Foto profil Masking" width="256" height="256" loading="lazy" decoding="async"></span><span class="team__info"><span class="team__role">Moderator Moba</span><h4 class="team__name">Masking</h4></span></li><li class="card team__card "><span class="team__avatar"><img src="assets/img/team-12.png" alt="Foto profil LilChoco" width="256" height="256" loading="lazy" decoding="async"></span><span class="team__info"><span class="team__role">Moderator Heartopia</span><h4 class="team__name">LilChoco</h4></span></li><li class="card team__card "><span class="team__avatar"><img src="assets/img/team-13.png" alt="Foto profil Hashkazu" width="256" height="256" loading="lazy" decoding="async"></span><span class="team__info"><span class="team__role">Moderator Other Games</span><h4 class="team__name">Hashkazu</h4></span></li></ul></div>
+        </div>
+    </div>
+  </div>
 </body>
 </html>
