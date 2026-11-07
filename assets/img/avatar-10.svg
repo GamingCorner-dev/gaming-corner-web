@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="256" height="256"><style>@media (prefers-reduced-motion:no-preference){#ch{animation:bounce .8s ease-in-out infinite;transform-origin:100px 200px}@keyframes bounce{50%{transform:translateY(-7px)}}#glint{animation:glint 2.4s infinite;opacity:0}@keyframes glint{70%{opacity:0}80%{opacity:1}100%{opacity:0}}}.ring{animation:rot 10s linear infinite;transform-origin:100px 100px;animation-direction:reverse}@keyframes rot{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style><defs><radialGradient id="bg" cx="50%" cy="38%" r="75%"><stop offset="0" stop-color="#74448a"/><stop offset="1" stop-color="#2e1636"/></radialGradient><clipPath id="c"><circle cx="100" cy="100" r="98"/></clipPath></defs><rect width="200" height="200" fill="url(#bg)" clip-path="url(#c)"/><g class="ring"><circle cx="100" cy="100" r="96" fill="none" stroke="#e8be6e" stroke-opacity=".6" stroke-width="2" stroke-dasharray="6 8"/></g><path class="sp" d="M30 40 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2z" fill="#e8be6e" opacity=".7"/><g id="ch" clip-path="url(#c)">
+<path d="M26 206 Q26 150 100 146 Q174 150 174 206Z" fill="#3a9a68"/>
+<rect x="88" y="120" width="24" height="30" rx="8" fill="#e6b189"/>
+<g id="head"><ellipse cx="100" cy="94" rx="38" ry="42" fill="#e6b189"/><path d="M60 90 Q48 44 86 30 Q126 14 146 50 Q152 72 138 92 Q136 74 124 66 Q104 56 84 64 Q70 70 60 90Z" fill="#c9a24a"/><path d="M84 34 Q110 22 134 40" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="3" stroke-linecap="round"/>
+<ellipse cx="86" cy="98" rx="4" ry="5" fill="#222"/><g id="eR"><ellipse cx="114" cy="98" rx="4" ry="5" fill="#222"/></g>
+<circle cx="87.5" cy="96" r="1.4" fill="#fff"/><circle cx="115.5" cy="96" r="1.4" fill="#fff"/>
+<path d="M78 87 Q86 83 94 87M106 87 Q114 83 122 87" fill="none" stroke="#c9a24a" stroke-width="3.6" stroke-linecap="round"/>
+<circle cx="76" cy="110" r="6" fill="#ff7a8a" opacity="0.1"/><circle cx="124" cy="110" r="6" fill="#ff7a8a" opacity="0.1"/>
+<path d="M100 100 Q97 108 101 108" fill="none" stroke="#000" stroke-opacity=".25" stroke-width="2" stroke-linecap="round"/>
+<path d="M90 116 Q100 124 110 116" fill="none" stroke="#7a3b30" stroke-width="3" stroke-linecap="round"/>
+</g></g></svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -40 200 240" width="256" height="307"><style>@media (prefers-reduced-motion:no-preference){#ch{animation:fl 3s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-8px)}}#starp{animation:spin 3s linear infinite;transform-origin:134px 60px}@keyframes spin{to{transform:rotate(360deg)}}}.ring{animation:rot 16s linear infinite;transform-origin:100px 100px;animation-direction:normal}@keyframes rot{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style><g id="ch">
+<path d="M26 206 Q26 150 100 146 Q174 150 174 206Z" fill="#8aa0d0"/>
+<rect x="88" y="120" width="24" height="30" rx="8" fill="#ebbf9a"/>
+<g id="head"><ellipse cx="100" cy="94" rx="38" ry="42" fill="#ebbf9a"/><path d="M62 92 Q58 44 100 44 Q142 44 138 92 Q130 66 100 66 Q70 66 62 92Z" fill="#2fa89a"/><path d="M64 60 Q100 36 136 60 Q100 52 64 60Z" fill="#2fa89a"/>
+<ellipse cx="86" cy="98" rx="4" ry="5" fill="#222"/><g id="eR"><ellipse cx="114" cy="98" rx="4" ry="5" fill="#222"/></g>
+<circle cx="87.5" cy="96" r="1.4" fill="#fff"/><circle cx="115.5" cy="96" r="1.4" fill="#fff"/>
+<path d="M78 87 Q86 83 94 87M106 87 Q114 83 122 87" fill="none" stroke="#2fa89a" stroke-width="3.6" stroke-linecap="round"/>
+<circle cx="76" cy="110" r="6" fill="#ff7a8a" opacity="0.1"/><circle cx="124" cy="110" r="6" fill="#ff7a8a" opacity="0.1"/>
+<path d="M100 100 Q97 108 101 108" fill="none" stroke="#000" stroke-opacity=".25" stroke-width="2" stroke-linecap="round"/>
+<path d="M90 116 Q100 124 110 116" fill="none" stroke="#7a3b30" stroke-width="3" stroke-linecap="round"/>
+<g id="starp"><path d="M134 50 L137 58 L146 59 L139 65 L142 74 L134 69 L126 74 L129 65 L122 59 L131 58Z" fill="#f2d24a" stroke="#a88a1a" stroke-width="1.5" stroke-linejoin="round"/></g></g></g></svg>
