@@ -1,0 +1,55 @@
+/* Revisi 13 - Tombol Staff & Music "menyelip" di tepi kiri layar, masing-masing sendiri.
+   Normal: hanya separuh ikon yang terlihat. Saat kursor/jari mengarah ke SALAH SATU ikon, hanya ikon itu
+   yang bergeser keluar dan tulisannya ("Staff" atau "Music") terbuka; yang satunya tetap menyelip.
+   Pasangan dari js/dock.js (untuk layar sentuh). */
+
+.gc-dock {
+  position: fixed; left: 0; bottom: 18px; z-index: 60;   /* menempel di tepi: area hover tidak putus saat ikon keluar */
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+}
+
+.gc-dock .music-btn, .gc-dock .team-fab {
+  position: relative; left: auto; bottom: auto; margin: 0;
+  height: 48px; padding: 0 14px; gap: 0; overflow: hidden;
+  transform: translateX(-28px);                      /* menyelip: ~22px (separuh ikon) terlihat */
+  opacity: .9;
+  /* menyelip lagi dengan jeda singkat (.18s) supaya tidak 'bergetar' saat kursor di tepi */
+  transition: transform .5s cubic-bezier(.22, 1, .36, 1) .18s, box-shadow .3s ease, border-color .3s ease, opacity .3s ease .18s, gap .5s cubic-bezier(.22, 1, .36, 1) .18s, padding .5s cubic-bezier(.22, 1, .36, 1) .18s;
+}
+.gc-dock .music-btn:focus-visible, .gc-dock .team-fab:focus-visible,
+.gc-dock .music-btn.is-open, .gc-dock .team-fab.is-open {
+  transform: translateX(0); opacity: 1; gap: 10px; padding-right: 18px;
+  transition-delay: 0s;
+}
+/* hover hanya untuk perangkat dengan mouse (di layar sentuh :hover "menempel" setelah disentuh) */
+@media (hover: hover) {
+  .gc-dock .music-btn:hover, .gc-dock .team-fab:hover { transform: translateX(0); opacity: 1; gap: 10px; padding-right: 18px; transition-delay: 0s; }
+  .gc-dock .music-btn:hover:active, .gc-dock .team-fab:hover:active { transform: translateX(0) scale(.97); }
+  .gc-dock .music-btn:hover .music-btn__label, .gc-dock .team-fab:hover .team-fab__label { max-width: 80px; opacity: 1; transition-delay: 0s; }
+}
+
+/* tulisan: tersembunyi saat menyelip, terbuka saat tombolnya keluar (juga di HP) */
+.gc-dock .music-btn__label, .gc-dock .team-fab__label {
+  display: inline-block; max-width: 0; opacity: 0; overflow: hidden; white-space: nowrap;
+  transition: max-width .5s cubic-bezier(.22, 1, .36, 1) .18s, opacity .3s ease .18s;
+}
+.gc-dock .music-btn:focus-visible .music-btn__label, .gc-dock .team-fab:focus-visible .team-fab__label,
+.gc-dock .music-btn.is-open .music-btn__label, .gc-dock .team-fab.is-open .team-fab__label { max-width: 80px; opacity: 1; transition-delay: 0s; }
+
+/* ikon musik: not balok */
+.gc-dock .music-btn__eq { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; flex: none; }
+.gc-dock .music-btn__eq svg { width: 22px; height: 22px; display: block; }
+.gc-dock .music-btn[aria-pressed="true"] .music-btn__eq svg { animation: gcNote 1.6s ease-in-out infinite; }
+@keyframes gcNote { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-2px) rotate(-6deg); } }
+/* tanda "mati": garis miring di atas ikon not */
+.gc-dock .music-btn__off { left: 14px; width: 24px; }
+
+@media (max-width: 720px) {
+  .gc-dock { left: 0; bottom: 88px; gap: 8px; }          /* di atas bar 'Join us on Discord' */
+  .gc-dock .music-btn, .gc-dock .team-fab { height: 44px; transform: translateX(-30px); }
+  .gc-dock .music-btn__label, .gc-dock .team-fab__label { display: inline-block; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gc-dock .music-btn, .gc-dock .team-fab, .gc-dock .music-btn__label, .gc-dock .team-fab__label { transition: none !important; }
+  .gc-dock .music-btn[aria-pressed="true"] .music-btn__eq svg { animation: none; }
+}

@@ -8,6 +8,13 @@
   var VOLUME = 0.4;
   var FADE_MS = 450;
 
+  // Tombol Staff & Music berbagi satu "dock" di tepi kiri layar (lihat css/dock.css)
+  function getDock() {
+    var d = document.querySelector('.gc-dock');
+    if (!d) { d = document.createElement('div'); d.className = 'gc-dock'; document.body.appendChild(d); }
+    return d;
+  }
+
   var audio = new Audio();
   audio.src = SRC;
   audio.loop = true;
@@ -20,10 +27,10 @@
   btn.setAttribute('aria-pressed', 'false');
   btn.setAttribute('aria-label', 'Play background music');
   btn.innerHTML =
-    '<span class="music-btn__eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>' +
+    '<span class="music-btn__eq" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg></span>' +
     '<span class="music-btn__off" aria-hidden="true"></span>' +
     '<span class="music-btn__label">Music</span>';
-  document.body.appendChild(btn);
+  getDock().appendChild(btn);
 
   var wanted = false;        // pengunjung ingin musik menyala
   var pausedByVideo = false; // sedang berhenti karena klip diputar

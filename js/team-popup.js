@@ -16,7 +16,9 @@
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
     '<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><circle cx="17" cy="9" r="2.4"/><path d="M16.5 14.6c2.6.1 4.5 1.9 4.5 4.4"/></svg>' +
     '<span class="team-fab__label">Staff</span>';
-  document.body.appendChild(fab);
+  var dock = document.querySelector('.gc-dock');
+  if (!dock) { dock = document.createElement('div'); dock.className = 'gc-dock'; document.body.appendChild(dock); }
+  dock.insertBefore(fab, dock.firstChild);   // Staff di atas Music
 
   var opener = null;
   function open() {
@@ -29,7 +31,8 @@
   function close() {
     modal.hidden = true;
     document.documentElement.classList.remove('team-open');
-    if (opener && opener.focus) opener.focus();
+    if (opener && opener.blur && opener.closest && opener.closest(".gc-dock")) opener.blur();   // dock menyelip lagi setelah pop-up ditutup
+    else if (opener && opener.focus) opener.focus();
   }
   fab.addEventListener('click', open);
   closeBtn.addEventListener('click', close);
