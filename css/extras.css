@@ -311,3 +311,14 @@
     filter: drop-shadow(0 14px 10px rgba(0, 0, 0, 0.6));
   }
 }
+
+/* ================= REVISI 17 - Cursor mengecil di atas tombol ================= */
+/* Saat cursor di atas tombol / link / kotak yang bisa diklik, maskot jadi KECIL (32px).
+   Titik klik (hotspot) = tangan kiri maskot, disesuaikan dengan ukuran kecil. */
+@media (hover: hover) and (pointer: fine) {
+  html :is(a[href], button, [role="button"], summary, .btn, label[for]) {
+    cursor: url("../assets/img/cursor-small.png") 7 16, pointer;
+    cursor: -webkit-image-set(url("../assets/img/cursor-small.png") 1x, url("../assets/img/cursor-small@2x.png") 2x) 7 16, pointer;
+    cursor: image-set(url("../assets/img/cursor-small.png") 1x, url("../assets/img/cursor-small@2x.png") 2x) 7 16, pointer;
+  }
+}
