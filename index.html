@@ -40,6 +40,7 @@
   </script>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/extras.css">
+  <link rel="stylesheet" href="css/intro.css">
   <link rel="stylesheet" href="css/scroll-reveal.css">
   <link rel="stylesheet" href="css/hover-tilt.css">
   <link rel="stylesheet" href="css/team.css">
@@ -52,8 +53,38 @@
   <script src="js/team-popup.js" defer></script>
   <script src="js/dock.js" defer></script>
   <script src="js/click-sound.js" defer></script>
+  <script>
+    /* Revisi 22: layar pembuka tampil sekali per kunjungan. Jika js/intro.js gagal jalan dalam 8 detik, layar dilepas supaya website tetap bisa dibuka. */
+    (function (d) {
+      try { if (sessionStorage.getItem('gcIntroSeen')) return; } catch (e) {}
+      d.documentElement.classList.add('gc-intro-on');
+      setTimeout(function () { var el = d.getElementById('gc-intro'); if (el && !window.__gcIntro) { d.documentElement.classList.remove('gc-intro-on'); } }, 8000);
+    })(document);
+  </script>
+  <script src="js/intro.js" defer></script>
 </head>
 <body>
+  <div class="gc-intro" id="gc-intro" role="dialog" aria-label="Welcome to Gaming Corner">
+    <div class="gc-intro__dust" aria-hidden="true"></div>
+    <div class="gc-intro__cine" aria-hidden="true">
+      <div class="cine-char cine-char--war"><img src="assets/img/intro-war.webp" alt="" width="665" height="1000"></div>
+      <div class="cine-char cine-char--mage"><img src="assets/img/intro-mage.webp" alt="" width="558" height="1000"></div>
+      <div class="cine-char cine-char--girl"><img src="assets/img/intro-girl.webp" alt="" width="666" height="1000"></div>
+    </div>
+    <div class="gc-intro__sweep" aria-hidden="true"></div>
+    <div class="gc-intro__flash" aria-hidden="true"></div>
+    <div class="gc-intro__stage">
+      <div class="gc-intro__logo"><img src="assets/img/logo-512.webp" alt="" width="466" height="512"></div>
+      <div class="gc-intro__title" aria-hidden="true"></div>
+      <div class="gc-intro__tag">Play &middot; Connect &middot; Grow</div>
+      <div class="gc-intro__action">
+        <button class="gc-intro__enter" type="button">Enter</button>
+        <div class="gc-intro__hint">Music will play</div>
+      </div>
+    </div>
+    <div class="gc-intro__beam" aria-hidden="true"></div>
+    <button class="gc-intro__skip" type="button">Skip</button>
+  </div>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="page">
 
