@@ -394,3 +394,7 @@
   z-index: 0;
 }
 .page > main { padding-top: clamp(120px, 21vw, 290px); }
+
+/* Revisi 21 — video layar penuh tampil utuh (portrait tidak ditarik/dipotong) */
+.vslot video:fullscreen { object-fit: contain; background: #000; width: 100%; height: 100%; }
+.vslot video:-webkit-full-screen { object-fit: contain; background: #000; width: 100%; height: 100%; }
