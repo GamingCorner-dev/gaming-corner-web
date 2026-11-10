@@ -22,7 +22,7 @@
   words.forEach(function (w, wi) {
     for (var i = 0; i < w[0].length; i++) {
       var s = document.createElement('span');
-      s.textContent = w[0][i]; if (w[1]) s.className = w[1];
+      var b = document.createElement('b'); b.textContent = w[0][i]; b.style.setProperty('--i', n); s.appendChild(b); if (w[1]) s.className = w[1];
       s.style.animationDelay = (3.2 + n * 0.07) + 's'; n++;
       title.appendChild(s);
     }
