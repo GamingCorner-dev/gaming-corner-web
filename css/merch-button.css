@@ -1,0 +1,61 @@
+/* Revisi 24 — tombol "Order via WhatsApp" berkotak + efek hover & tekan */
+.merch__body .text-link {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 220, 160, .45);
+  border-radius: 999px;
+  background: rgba(212, 175, 90, .08);
+  transition: transform .35s cubic-bezier(.2,.9,.3,1.3), box-shadow .35s ease, border-color .25s ease, color .25s ease, background-color .3s ease;
+  will-change: transform;
+}
+.merch__body .text-link .arr { display: inline-block; transition: transform .3s ease; }
+.merch__body .text-link::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: -60%;
+  width: 45%;
+  background: linear-gradient(105deg, transparent, rgba(255, 226, 150, .55), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: -1;
+}
+.merch__body .text-link:focus-visible,
+.merch__body .text-link:active {
+  transform: translateY(-4px) scale(1.05);
+  border-color: var(--gold);
+  background-color: rgba(212, 175, 90, .16);
+  box-shadow: 0 8px 22px rgba(212, 175, 90, .28), 0 0 0 1px rgba(255, 220, 160, .55), 0 0 16px rgba(255, 210, 120, .35);
+}
+.merch__body .text-link:focus-visible .arr { transform: translateX(5px); }
+@media (hover: hover) {
+  .merch__body .text-link:hover {
+    transform: translateY(-4px) scale(1.05);
+    border-color: var(--gold);
+    background-color: rgba(212, 175, 90, .16);
+    box-shadow: 0 8px 22px rgba(212, 175, 90, .28), 0 0 0 1px rgba(255, 220, 160, .55), 0 0 16px rgba(255, 210, 120, .35);
+  }
+  .merch__body .text-link:hover .arr { transform: translateX(5px); }
+  .merch__body .text-link:hover::after { animation: gc-merch-shine .75s ease forwards; }
+}
+/* Tertekan */
+.merch__body .text-link:active,
+.merch__body .text-link:hover:active {
+  transform: translateY(2px) scale(.94);
+  background-color: rgba(212, 175, 90, .24);
+  box-shadow: inset 0 3px 10px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 220, 160, .6), 0 0 8px rgba(255, 210, 120, .25);
+  transition-duration: .08s;
+}
+.merch__body .text-link:active::after { animation: gc-merch-shine .75s ease forwards; }
+@keyframes gc-merch-shine { from { left: -60%; } to { left: 130%; } }
+@media (prefers-reduced-motion: reduce) {
+  .merch__body .text-link, .merch__body .text-link:hover, .merch__body .text-link:active { transform: none; transition: none; }
+  .merch__body .text-link .arr { transition: none; transform: none !important; }
+  .merch__body .text-link::after { display: none; }
+}
