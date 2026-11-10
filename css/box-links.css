@@ -1,0 +1,89 @@
+/* Revisi 28 — "Watch the highlights" / "Register interest" jadi tombol berkotak,
+   plus efek hover untuk "See what we play" dan "Become a partner" */
+.text-link--box {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 220, 160, .45);
+  border-radius: 999px;
+  background: rgba(212, 175, 90, .08);
+  will-change: transform;
+}
+.text-link--box .arr { display: inline-block; transition: transform .3s ease; }
+
+.text-link--box,
+.hero__buttons .btn--secondary,
+.partner__btn {
+  transition: transform .35s cubic-bezier(.2,.9,.3,1.3), box-shadow .35s ease, border-color .25s ease, color .25s ease, background-color .3s ease;
+}
+.hero__buttons .btn--secondary,
+.partner__btn { position: relative; overflow: hidden; isolation: isolate; }
+
+/* kilau emas */
+.text-link--box::after,
+.hero__buttons .btn--secondary::after,
+.partner__btn::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: -60%;
+  width: 40%;
+  background: linear-gradient(105deg, transparent, rgba(255, 226, 150, .5), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.text-link--box:focus-visible,
+.hero__buttons .btn--secondary:focus-visible,
+.partner__btn:focus-visible {
+  transform: translateY(-4px) scale(1.05);
+  border-color: var(--gold);
+  background-color: rgba(212, 175, 90, .16);
+  box-shadow: 0 8px 22px rgba(212, 175, 90, .28), 0 0 0 1px rgba(255, 220, 160, .55), 0 0 16px rgba(255, 210, 120, .35);
+}
+@media (hover: hover) {
+  .text-link--box:hover,
+  .hero__buttons .btn--secondary:hover,
+  .partner__btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    border-color: var(--gold);
+    background-color: rgba(212, 175, 90, .16);
+    box-shadow: 0 8px 22px rgba(212, 175, 90, .28), 0 0 0 1px rgba(255, 220, 160, .55), 0 0 16px rgba(255, 210, 120, .35);
+  }
+  .text-link--box:hover .arr { transform: translateX(5px); }
+  .text-link--box:hover .arr--down { transform: translateY(4px); }
+  .text-link--box:hover::after,
+  .hero__buttons .btn--secondary:hover::after,
+  .partner__btn:hover::after { animation: gc-box-shine .75s ease forwards; }
+}
+
+/* tertekan (menimpa hover) */
+.text-link--box:active,
+.text-link--box:hover:active,
+.hero__buttons .btn--secondary:active,
+.hero__buttons .btn--secondary:hover:active,
+.partner__btn:active,
+.partner__btn:hover:active {
+  transform: translateY(2px) scale(.94);
+  border-color: var(--gold);
+  background-color: rgba(212, 175, 90, .24);
+  box-shadow: inset 0 3px 10px rgba(0, 0, 0, .55), 0 0 10px rgba(255, 210, 120, .22);
+  transition-duration: .08s;
+}
+.text-link--box:active::after,
+.hero__buttons .btn--secondary:active::after,
+.partner__btn:active::after { animation: gc-box-shine .75s ease forwards; }
+
+@keyframes gc-box-shine { from { left: -60%; } to { left: 130%; } }
+@media (prefers-reduced-motion: reduce) {
+  .text-link--box, .text-link--box:hover, .text-link--box:active,
+  .hero__buttons .btn--secondary:hover, .partner__btn:hover { transform: none; transition: none; }
+  .text-link--box .arr { transform: none !important; transition: none; }
+  .text-link--box::after, .hero__buttons .btn--secondary::after, .partner__btn::after { display: none; }
+}
