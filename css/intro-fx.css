@@ -1,0 +1,102 @@
+/* Revisi 29 — layar opening: tulisan GAMING CORNER bergerak, efek hover & tekan tombol Enter/Skip,
+   dan jarak tulisan "Music will play" dari tombol Enter. File terpisah, intro.css asli tidak diubah. */
+
+/* ===== 1. Tulisan GAMING CORNER: kilau emas, CORNER bersinar, huruf melayang halus (mulai setelah huruf selesai muncul) ===== */
+.gc-intro__title span b {
+  --c: #F3EEE4;
+  display: inline-block;
+  font-weight: inherit;
+  color: transparent;
+  background: linear-gradient(105deg, var(--c) 0 40%, #fffbe6 50%, var(--c) 60% 100%);
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation:
+    gc-int-shine 4.6s linear infinite calc(5s + var(--i) * .08s),
+    gc-int-float 3.4s ease-in-out infinite calc(4.8s + var(--i) * .12s);
+}
+.gc-intro__title .gold b { --c: #E8C27A; }
+.gc-intro__title .gold { text-shadow: none; }
+.gc-intro__title .gold b {
+  animation:
+    gc-int-shine 4.6s linear infinite calc(5s + var(--i) * .08s),
+    gc-int-float 3.4s ease-in-out infinite calc(4.8s + var(--i) * .12s),
+    gc-int-glow 3.2s ease-in-out infinite 4.8s;
+}
+@keyframes gc-int-shine {
+  0%   { background-position: 100% 0; }
+  18%  { background-position: 0% 0; }
+  100% { background-position: 0% 0; }
+}
+@keyframes gc-int-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+@keyframes gc-int-glow {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(232, 194, 122, .25)); }
+  50%      { filter: drop-shadow(0 0 16px rgba(232, 194, 122, .75)); }
+}
+
+/* ===== 2 & 3. Tombol Enter dan Skip: hover + tertekan ===== */
+.gc-intro__enter, .gc-intro__skip { overflow: hidden; isolation: isolate; }
+.gc-intro__enter::after, .gc-intro__skip::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: -60%;
+  width: 40%;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .6), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+.gc-intro__skip::after { background: linear-gradient(105deg, transparent, rgba(255, 226, 150, .4), transparent); }
+@keyframes gc-int-btn-shine { from { left: -60%; } to { left: 130%; } }
+
+.gc-intro__enter { transition: opacity .5s ease, transform .35s cubic-bezier(.2,.9,.3,1.4), background-color .2s ease, box-shadow .2s ease, filter .25s ease; }
+.gc-intro__skip { transition: transform .35s cubic-bezier(.2,.9,.3,1.4), border-color .2s, color .2s, background-color .2s, box-shadow .25s ease; }
+
+@media (hover: hover) {
+  .gc-intro.is-ready .gc-intro__enter:hover {
+    transform: translateY(-4px) scale(1.07);
+    background: #F7DFA9;
+    filter: drop-shadow(0 8px 20px rgba(232, 194, 122, .6));
+  }
+  .gc-intro__enter:hover::after, .gc-intro__skip:hover::after { animation: gc-int-btn-shine .75s ease forwards; }
+  .gc-intro__skip:hover {
+    transform: translateY(-3px) scale(1.07);
+    border-color: #E8C27A; color: #FFE9B0;
+    background-color: rgba(232, 194, 122, .12);
+    box-shadow: 0 8px 20px rgba(232, 194, 122, .3), 0 0 14px rgba(255, 210, 120, .3);
+  }
+}
+
+/* tertekan (menimpa hover) */
+.gc-intro.is-ready .gc-intro__enter:active,
+.gc-intro.is-ready .gc-intro__enter:hover:active {
+  transform: translateY(2px) scale(.93);
+  animation: none;
+  background: #D9AE62;
+  filter: none;
+  box-shadow: inset 0 4px 10px rgba(0, 0, 0, .4);
+  transition-duration: .08s;
+}
+.gc-intro__skip:active,
+.gc-intro__skip:hover:active {
+  transform: translateY(2px) scale(.93);
+  border-color: #E8C27A; color: #FFE9B0;
+  background-color: rgba(232, 194, 122, .22);
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, .5);
+  transition-duration: .08s;
+}
+.gc-intro__enter:active::after, .gc-intro__skip:active::after { animation: gc-int-btn-shine .75s ease forwards; }
+
+/* ===== 4. "Music will play" lebih jauh dari tombol Enter ===== */
+.gc-intro__action { height: 128px; }
+.gc-intro__hint { top: 102px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gc-intro__title span b, .gc-intro__title .gold b { animation: none !important; color: inherit; background: none; }
+  .gc-intro__title .gold b { color: #E8C27A; }
+  .gc-intro__enter::after, .gc-intro__skip::after { display: none; }
+  .gc-intro__enter:hover, .gc-intro__skip:hover, .gc-intro__enter:active, .gc-intro__skip:active { transform: none !important; }
+}
