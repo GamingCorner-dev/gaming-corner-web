@@ -1,0 +1,57 @@
+/* Revisi 25 — efek tulisan GAMING CORNER */
+.gc-title-fx .gc-ch {
+  --c: var(--text);
+  display: inline-block;
+  color: transparent;
+  background: linear-gradient(105deg, var(--c) 0 40%, #fffbe6 50%, var(--c) 60% 100%);
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: transform .35s cubic-bezier(.2,.9,.3,1.5), filter .3s ease;
+  cursor: default;
+}
+.gc-title-fx .gold .gc-ch { --c: var(--gold); }
+.gc-title-fx .gold { display: inline-block; }
+
+/* sebelum muncul */
+.gc-title-fx:not(.is-in) .gc-ch { opacity: 0; transform: translateY(.55em) rotateX(-80deg) scale(.8); }
+
+/* muncul satu-satu + kilau berkala */
+.gc-title-fx.is-in .gc-ch {
+  animation:
+    gc-ch-in .75s cubic-bezier(.2,.9,.3,1.35) backwards calc(var(--i) * .07s),
+    gc-ch-shine 5.5s linear infinite calc(1.4s + var(--i) * .08s);
+}
+@keyframes gc-ch-in {
+  0%   { opacity: 0; transform: translateY(.55em) rotateX(-80deg) scale(.8); filter: brightness(2.2); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: none; filter: none; }
+}
+@keyframes gc-ch-shine {
+  0%   { background-position: 100% 0; }
+  16%  { background-position: 0% 0; }
+  100% { background-position: 0% 0; }
+}
+
+/* CORNER bersinar pelan (napas) */
+.gc-title-fx.is-in .gold { animation: gc-gold-breathe 3.6s ease-in-out 1.6s infinite; }
+@keyframes gc-gold-breathe {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(255, 200, 100, 0)); }
+  50%      { filter: drop-shadow(0 0 14px rgba(255, 200, 100, .5)); }
+}
+
+/* hover / sentuh per huruf */
+@media (hover: hover) {
+  .gc-title-fx.is-in .gc-ch:hover {
+    transform: translateY(-.14em) scale(1.12) rotate(-3deg);
+    filter: drop-shadow(0 6px 10px rgba(255, 200, 100, .55));
+  }
+}
+.gc-title-fx.is-in .gc-ch:active {
+  transform: translateY(-.14em) scale(1.12) rotate(-3deg);
+  filter: drop-shadow(0 6px 10px rgba(255, 200, 100, .55));
+}
+@media (prefers-reduced-motion: reduce) {
+  .gc-title-fx .gc-ch, .gc-title-fx .gold { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
