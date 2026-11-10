@@ -1,0 +1,49 @@
+/* Revisi 30 — kotak baju Roblox: tulisan nama + panah ↗ berefek saat hover, kotak "tertekan" saat diklik.
+   Efek karakter melompat (revisi 11) tetap seperti semula. */
+.roblox__item {
+  transition: transform .35s cubic-bezier(.2,.9,.3,1.4), box-shadow .3s ease, border-color .3s ease;
+}
+.roblox__label { transition: background-color .3s ease; }
+.roblox__label > span:first-child {
+  display: inline-block;
+  padding-bottom: 2px;
+  background: linear-gradient(90deg, #E8C27A, #FFE9B0) no-repeat 0 100% / 0% 2px;
+  transition: color .25s ease, transform .35s cubic-bezier(.2,.9,.3,1.3), background-size .4s ease, text-shadow .3s ease;
+}
+.roblox__label .gold {
+  display: inline-block;
+  transition: transform .35s cubic-bezier(.2,.9,.3,1.5), filter .3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .roblox__item:hover .roblox__label { background-color: rgba(232, 194, 122, .07); }
+  .roblox__item:hover .roblox__label > span:first-child {
+    color: #E8C27A;
+    transform: translateX(5px);
+    background-size: 100% 2px;
+    text-shadow: 0 0 14px rgba(232, 194, 122, .45);
+  }
+  .roblox__item:hover .roblox__label .gold {
+    transform: translate(4px, -4px) scale(1.25);
+    filter: drop-shadow(0 0 7px rgba(255, 210, 120, .8));
+  }
+}
+.roblox__item:focus-visible .roblox__label > span:first-child { color: #E8C27A; transform: translateX(5px); background-size: 100% 2px; }
+.roblox__item:focus-visible .roblox__label .gold { transform: translate(4px, -4px) scale(1.25); }
+
+/* tertekan */
+.roblox__item:active,
+.roblox__item:hover:active {
+  transform: scale(.95);
+  border-color: var(--gold);
+  box-shadow: inset 0 4px 14px rgba(0, 0, 0, .55), 0 0 12px rgba(255, 210, 120, .22);
+  transition-duration: .08s;
+}
+.roblox__item:active .roblox__label > span:first-child { transform: translateX(2px); }
+.roblox__item:active .roblox__label .gold { transform: translate(1px, -1px) scale(.95); }
+
+@media (prefers-reduced-motion: reduce) {
+  .roblox__item, .roblox__label > span:first-child, .roblox__label .gold { transition: none; }
+  .roblox__item:active, .roblox__item:hover:active { transform: none; }
+  .roblox__item:hover .roblox__label > span:first-child, .roblox__item:hover .roblox__label .gold { transform: none; }
+}
