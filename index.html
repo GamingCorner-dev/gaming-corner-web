@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="css/extras.css">
   <link rel="stylesheet" href="css/intro.css">
   <link rel="stylesheet" href="css/intro-fx.css">
+  <link rel="stylesheet" href="css/intro-lite.css">
   <link rel="stylesheet" href="css/scroll-reveal.css">
   <link rel="stylesheet" href="css/hover-tilt.css">
   <link rel="stylesheet" href="css/team.css">
@@ -67,6 +68,9 @@
     (function (d) {
       try { if (sessionStorage.getItem('gcIntroSeen')) return; } catch (e) {}
       d.documentElement.classList.add('gc-intro-on');
+      ['intro-war', 'intro-mage', 'intro-girl'].forEach(function (n) {   /* Revisi 33: muat gambar karakter lebih awal */
+        var l = d.createElement('link'); l.rel = 'preload'; l.as = 'image'; l.href = 'assets/img/' + n + '.webp'; d.head.appendChild(l);
+      });
       setTimeout(function () { var el = d.getElementById('gc-intro'); if (el && !window.__gcIntro) { d.documentElement.classList.remove('gc-intro-on'); } }, 8000);
     })(document);
   </script>
