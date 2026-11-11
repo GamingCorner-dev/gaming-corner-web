@@ -30,7 +30,7 @@
   });
   // titik cahaya
   var dust = el.querySelector('.gc-intro__dust');
-  for (var d = 0; d < 22; d++) {
+  for (var d = 0; d < 12; d++) {
     var i = document.createElement('i');
     i.style.left = (Math.random() * 100) + '%';
     i.style.animationDelay = (Math.random() * 6) + 's';

@@ -80,8 +80,16 @@
     if (flakes.length > want) flakes.length = want;
   }
 
+  var introEl = null;
+  function introBusy() {
+    if (!document.documentElement.classList.contains('gc-intro-on')) return false;
+    introEl = introEl || document.getElementById('gc-intro');
+    return !!introEl && !introEl.classList.contains('is-leaving');
+  }
+
   function frame(now) {
     raf = requestAnimationFrame(frame);
+    if (introBusy()) { last = now; return; }      /* Revisi 33: salju dijeda selama layar opening tampil */
     var dt = Math.min((now - last) / 1000, 0.05);
     last = now;
     clock += dt;
