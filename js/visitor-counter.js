@@ -9,7 +9,7 @@
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function fetchCount(path) {
-    return fetch(BASE + path + '.json', { headers: { Accept: 'application/json' } })
+    return fetch(BASE + path + '.json', { headers: { Accept: 'application/json' }, cache: 'no-store' })
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (d) {
         var n = parseInt(String(d.count).replace(/[^0-9]/g, ''), 10);
@@ -32,9 +32,16 @@
     })(start);
   }
 
-  // coba total seluruh situs, kalau tidak ada coba halaman utama
-  fetchCount('TOTAL')
-    .catch(function () { return fetchCount(encodeURIComponent(location.pathname)); })
-    .then(show)
+  // GoatCounter menyimpan alamat halaman dengan atau tanpa garis miring di akhir, jadi semua kemungkinan
+  // ditanyakan sekaligus; angka terbesar yang berhasil didapat yang ditampilkan.
+  var p = location.pathname.replace(/\/+$/, '') || '/';
+  var paths = ['TOTAL', encodeURIComponent(p), encodeURIComponent(p + '/')];
+  if (p !== '/') paths.push(encodeURIComponent('/'));
+  Promise.all(paths.map(function (x) { return fetchCount(x).catch(function () { return null; }); }))
+    .then(function (list) {
+      var best = null;
+      list.forEach(function (n) { if (n !== null && (best === null || n > best)) best = n; });
+      if (best !== null) show(best);
+    })
     .catch(function () { /* diam saja */ });
 })();
