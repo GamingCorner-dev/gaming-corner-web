@@ -1,0 +1,55 @@
+/* Revisi 38 — banner ajakan daftar tournament (di bawah kartu Tournaments, di atas video highlights) */
+.signup {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px 40px;
+  padding: 40px 44px;
+  border: 1px solid rgba(232, 190, 110, .6);
+  background: linear-gradient(135deg, #2b2212 0%, #17130c 58%, #0e0c0a 100%);
+  box-shadow: 0 0 34px rgba(232, 190, 110, .24), 0 0 2px rgba(255, 230, 170, .6);
+}
+.signup__text { flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.signup__title { font-family: var(--font-display); font-weight: 800; font-size: clamp(30px, 4.2vw, 48px); line-height: 1; text-transform: uppercase; color: var(--text); }
+.signup__title em { font-style: normal; color: var(--gold); }
+.signup__lead { max-width: 560px; font-size: 17px; color: var(--text-2); }
+.signup__facts { display: flex; flex-wrap: wrap; gap: 10px; margin: 4px 0 0; padding: 0; list-style: none; }
+.signup__facts li {
+  display: inline-flex; align-items: baseline; gap: 8px; padding: 7px 14px;
+  border: 1px solid rgba(232, 190, 110, .35); border-radius: 999px; background: rgba(232, 190, 110, .08);
+  font-size: 14px; font-weight: 600; color: var(--text); white-space: nowrap;
+}
+.signup__facts li span { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+
+.signup__btn {
+  position: relative; overflow: hidden; isolation: isolate; flex: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 64px; padding: 0 34px; border-radius: 999px;
+  background: var(--gold); color: var(--on-gold); text-decoration: none;
+  font-family: var(--font-display); font-weight: 800; font-size: 20px; letter-spacing: .04em; text-transform: uppercase;
+  box-shadow: 0 8px 24px rgba(232, 190, 110, .3);
+  transition: transform .3s cubic-bezier(.2, .9, .3, 1.3), box-shadow .3s ease, background-color .25s ease;
+}
+.signup__btn .arr { display: inline-block; transition: transform .3s ease; }
+.signup__btn::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; z-index: -1; pointer-events: none;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .55), transparent); transform: skewX(-20deg);
+}
+.signup__btn:focus-visible { outline: 3px solid var(--gold-hover); outline-offset: 4px; }
+@media (hover: hover) {
+  .signup__btn:hover { transform: translateY(-4px) scale(1.04); background: var(--gold-hover); box-shadow: 0 14px 34px rgba(232, 190, 110, .5); }
+  .signup__btn:hover .arr { transform: translateX(6px); }
+  .signup__btn:hover::after { animation: gc-signup-shine .8s ease forwards; }
+}
+.signup__btn:active, .signup__btn:hover:active {
+  transform: translateY(2px) scale(.95); box-shadow: inset 0 3px 10px rgba(0, 0, 0, .35); transition-duration: .08s;
+}
+@keyframes gc-signup-shine { from { left: -60%; } to { left: 130%; } }
+@media (prefers-reduced-motion: reduce) {
+  .signup__btn, .signup__btn:hover, .signup__btn:active { transform: none; transition: none; }
+  .signup__btn::after { display: none; }
+}
+@media (max-width: 720px) {
+  .signup { flex-direction: column; align-items: stretch; padding: 28px 20px; gap: 24px; }
+  .signup__text { flex-basis: auto; }
+  .signup__lead { font-size: 16px; }
+  .signup__facts li { white-space: normal; }
+  .signup__btn { min-height: 58px; font-size: 18px; }
+}
