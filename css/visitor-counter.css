@@ -1,0 +1,39 @@
+/* Revisi 35 — penghitung pengunjung (ikon mata + angka) di footer */
+.gc-visitors {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 5px 12px;
+  border: 1px solid rgba(255, 220, 160, .28);
+  border-radius: 999px;
+  background: rgba(212, 175, 90, .08);
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .6s ease, transform .6s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.gc-visitors[hidden] { display: none; }
+.gc-visitors.is-on { opacity: 1; transform: none; }
+.gc-visitors svg { flex: none; filter: drop-shadow(0 0 4px rgba(232, 194, 122, .55)); }
+.gc-visitors__num { color: var(--text); font-variant-numeric: tabular-nums; }
+.gc-visitors__label { color: var(--muted); font-weight: 500; }
+@media (hover: hover) {
+  .gc-visitors.is-on:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 14px rgba(255, 210, 120, .28);
+  }
+}
+@media (max-width: 600px) {
+  .gc-visitors { display: flex; width: fit-content; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gc-visitors { transition: none; transform: none; }
+}
