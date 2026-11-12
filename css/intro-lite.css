@@ -13,9 +13,9 @@
 @keyframes cine-dim  { to { opacity: 0; transform: scale(.97); } }
 @keyframes cine-blur-in { from { opacity: 0; transform: none; } to { opacity: .65; transform: scale(.97); } }
 .cine-char::after { content: ""; position: absolute; inset: 0; background: center / 100% 100% no-repeat; opacity: 0; pointer-events: none; animation: cine-blur-in .8s ease 2.6s forwards; }
-.cine-char--war::after  { background-image: url(../assets/img/intro-war-blur.webp); }
-.cine-char--mage::after { background-image: url(../assets/img/intro-mage-blur.webp); }
-.cine-char--girl::after { background-image: url(../assets/img/intro-girl-blur.webp); }
+.cine-char--war::after  { background-image: url(../assets/img/intro-war-blur.webp);  inset: -5.6% -8.46%; }   /* Revisi 41: kotak dilebarkan + gambar punya ruang kosong, jadi tepi buram menyebar halus (tidak terpotong) */
+.cine-char--mage::after { background-image: url(../assets/img/intro-mage-blur.webp); inset: -5.6% -10.04%; }
+.cine-char--girl::after { background-image: url(../assets/img/intro-girl-blur.webp); inset: -5.6% -8.41%; }
 .cine-char img { will-change: transform, opacity; }
 
 /* 2. Huruf judul: muncul tanpa blur */
