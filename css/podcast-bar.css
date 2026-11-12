@@ -1,0 +1,59 @@
+/* Revisi 42 — Bar podcast Spotify yang menempel di bawah layar.
+   Bisa dilipat dengan tombol "Podcast"; saat dilipat, podcast yang sedang diputar tetap jalan.
+   Tinggi bar dikirim lewat --gc-pod-h (dari js/podcast-bar.js) supaya footer tidak tertutup dan tombol Staff/Music naik. */
+
+.gc-pod { position: fixed; left: 0; right: 0; bottom: 0; z-index: 55; pointer-events: none; display: flex; flex-direction: column; align-items: center; }
+.gc-pod[hidden] { display: none; }
+
+.gc-pod__tab, .gc-pod__panel { pointer-events: auto; flex: none; }   /* flex:none = tombol tidak ikut mengecil saat bar dilipat */
+
+/* tombol kecil "Podcast" di atas bar */
+.gc-pod__tab {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: inline-flex; align-items: center; gap: 8px; height: 28px; padding: 0 14px; margin-bottom: -1px;
+  background: #14110c; color: var(--gold, #E8C27A); font: 600 11px/1 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .16em; text-transform: uppercase;
+  border: 1px solid rgba(232, 190, 110, .55); border-bottom: 0; border-radius: 12px 12px 0 0; cursor: pointer;
+  transition: transform .25s cubic-bezier(.2, .9, .3, 1.3), background-color .2s, box-shadow .25s, border-color .2s;
+}
+.gc-pod__tab svg { flex: none; }
+.gc-pod__chev { transition: transform .35s ease; }
+.gc-pod.is-collapsed .gc-pod__chev { transform: rotate(180deg); }
+.gc-pod__tab::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; background: linear-gradient(105deg, transparent, rgba(255, 226, 150, .35), transparent); transform: skewX(-20deg); pointer-events: none; z-index: -1; }
+.gc-pod__tab:focus-visible { outline: 2px solid var(--gold, #E8C27A); outline-offset: 2px; }
+@media (hover: hover) {
+  .gc-pod__tab:hover { transform: translateY(-2px); border-color: var(--gold, #E8C27A); background: #1c1710; box-shadow: 0 -6px 18px rgba(232, 190, 110, .25); }
+  .gc-pod__tab:hover::after { animation: gc-pod-shine .75s ease forwards; }
+}
+.gc-pod__tab:active { transform: translateY(1px) scale(.96); transition-duration: .08s; }
+@keyframes gc-pod-shine { from { left: -60%; } to { left: 130%; } }
+
+/* panel pemutar */
+.gc-pod__panel {
+  width: min(420px, calc(100% - 24px)); box-sizing: border-box; padding: 3px;
+  background: linear-gradient(180deg, #1a1610, #0e0c0a);
+  border: 1px solid rgba(232, 190, 110, .55); border-bottom: 0; border-radius: 12px 12px 0 0;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, .6), 0 0 26px rgba(232, 190, 110, .14);
+  transition: transform .45s cubic-bezier(.22, 1, .36, 1), opacity .3s ease;
+}
+.gc-pod__frame { height: 64px; border-radius: 10px; overflow: hidden; background: #121212; }
+.gc-pod__frame iframe { display: block; width: 100%; height: 64px; border: 0; color-scheme: normal; }
+
+/* dilipat: panel turun keluar layar (iframe tetap ada, jadi suara tidak putus) */
+.gc-pod.is-collapsed .gc-pod__panel { transform: translateY(calc(100% + 2px)); opacity: 0; pointer-events: none; }
+.gc-pod.is-collapsed { height: 28px; }
+.gc-pod:not(.is-collapsed) { height: auto; }
+
+/* halaman diberi ruang di bawah, tombol Staff/Music naik di atas bar */
+body { padding-bottom: var(--gc-pod-h, 0px); transition: padding-bottom .4s ease; }
+.gc-dock { bottom: calc(18px + var(--gc-pod-h, 0px)); transition: bottom .4s ease; }
+
+@media (max-width: 720px) {
+  /* di HP: bar duduk tepat di atas bar "Join us on Discord" (tinggi sekitar 76px), tombol Staff/Music tetap di atas keduanya */
+  .gc-pod { bottom: calc(76px + env(safe-area-inset-bottom)); }
+  .gc-pod__panel { width: min(420px, calc(100% - 16px)); border-radius: 10px 10px 0 0; padding: 3px; }
+  .gc-dock { bottom: calc(88px + var(--gc-pod-h, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gc-pod__tab::after { display: none; }
+  .gc-pod__panel, body, .gc-dock, .gc-pod__chev { transition: none; }
+}
