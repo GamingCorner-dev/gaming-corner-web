@@ -638,10 +638,17 @@
         </div>
     </div>
   </div>
-  <!-- Revisi 42: bar podcast Spotify di bawah layar. Link podcast ada pada atribut data-show. -->
-  <aside class="gc-pod" id="gc-pod" aria-label="Gaming Corner Podcast" data-show="https://open.spotify.com/show/266Y8hPnKqD6yOoBnZwNVs" hidden>
+  <!-- Revisi 42/44: bar podcast Spotify di bawah layar. Episode (urut dari Episode 1) ada pada atribut data-episodes: ID episode Spotify dipisah koma. Episode baru: tambahkan ID-nya di belakang. -->
+  <aside class="gc-pod" id="gc-pod" aria-label="Gaming Corner Podcast" data-episodes="1a6fxQGSN3nDEpwNnSlqoZ,2lIk37YDMabIVHpnhI6S24" hidden>
     <button type="button" class="gc-pod__tab" aria-expanded="false" aria-controls="gc-pod-panel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4M8 22h8"/></svg><span>Podcast</span><svg class="gc-pod__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-    <div class="gc-pod__panel" id="gc-pod-panel"><div class="gc-pod__frame"></div></div>
+    <div class="gc-pod__panel" id="gc-pod-panel">
+      <div class="gc-pod__nav">
+        <button type="button" class="gc-pod__prev" aria-label="Previous episode"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 5v14L7 12z"/></svg></button>
+        <span class="gc-pod__count" aria-live="polite">Episode 1 / 1</span>
+        <button type="button" class="gc-pod__next" aria-label="Next episode"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5v14l10-7z"/></svg></button>
+      </div>
+      <div class="gc-pod__frame"></div>
+    </div>
   </aside>
 </body>
 </html>
