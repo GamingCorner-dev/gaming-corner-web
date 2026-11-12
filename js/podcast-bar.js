@@ -2,7 +2,8 @@
    - Muncul setelah layar pembuka selesai (atau langsung kalau layar pembuka tidak tampil).
    - Pemutar Spotify baru dimuat saat bar pertama kali tampil (tidak membebani layar pembuka).
    - Tombol "Podcast" melipat/membuka bar; saat dilipat, iframe tetap ada sehingga podcast tetap jalan.
-   - Link podcast diambil dari atribut data-show pada <aside id="gc-pod"> di index.html. */
+   - Episode diambil dari atribut data-episodes pada <aside id="gc-pod"> di index.html (ID episode Spotify, dipisah koma, urut dari Episode 1).
+   Tombol ◀ ▶ mengganti episode di pemutar yang sama; setelah berganti, pengunjung menekan play. */
 (function () {
   'use strict';
   var bar = document.getElementById('gc-pod');
@@ -12,11 +13,29 @@
   var frame = bar.querySelector('.gc-pod__frame');
   var shown = false;
 
-  function embedUrl(link) {
-    // https://open.spotify.com/show/XXXX?si=...  ->  https://open.spotify.com/embed/show/XXXX
-    var m = /open\.spotify\.com\/(?:intl-[a-z]+\/)?show\/([A-Za-z0-9]+)/.exec(link || '');
-    return m ? 'https://open.spotify.com/embed/show/' + m[1] + '?utm_source=generator&theme=0' : '';
+  var episodes = (bar.getAttribute('data-episodes') || '').split(',').map(function (x) { return x.trim(); }).filter(function (x) { return /^[A-Za-z0-9]+$/.test(x); });
+  var idx = 0;
+  var nav = bar.querySelector('.gc-pod__nav');
+  var prevBtn = bar.querySelector('.gc-pod__prev');
+  var nextBtn = bar.querySelector('.gc-pod__next');
+  var count = bar.querySelector('.gc-pod__count');
+  var iframe = null;
+
+  function embedUrl(id) { return 'https://open.spotify.com/embed/episode/' + id + '?utm_source=generator&theme=0'; }
+
+  function render() {
+    count.textContent = 'Episode ' + (idx + 1) + ' / ' + episodes.length;
+    prevBtn.disabled = idx <= 0;
+    nextBtn.disabled = idx >= episodes.length - 1;
+    if (iframe) iframe.src = embedUrl(episodes[idx]);
   }
+  function go(d) {
+    var n = idx + d;
+    if (n < 0 || n >= episodes.length) return;
+    idx = n; render();
+  }
+  prevBtn.addEventListener('click', function () { go(-1); });
+  nextBtn.addEventListener('click', function () { go(1); });
 
   function setHeight() {
     var h = bar.getBoundingClientRect().height;
@@ -26,13 +45,14 @@
   function show() {
     if (shown) return;
     shown = true;
-    var src = embedUrl(bar.getAttribute('data-show'));
-    if (src) {
-      var f = document.createElement('iframe');
-      f.src = src; f.loading = 'lazy'; f.title = 'Gaming Corner Podcast on Spotify';
-      f.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
-      frame.appendChild(f);
-    }
+    if (episodes.length) {
+      iframe = document.createElement('iframe');
+      iframe.loading = 'lazy'; iframe.title = 'Gaming Corner Podcast on Spotify';
+      iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+      frame.appendChild(iframe);
+      if (episodes.length < 2) nav.hidden = true;
+      render();
+    } else { nav.hidden = true; }
     bar.hidden = false;
     /* bar mulai terlipat (hanya tombol Podcast); pengunjung membuka pemutar dengan menekan tombol itu */
     bar.classList.add('is-collapsed'); tab.setAttribute('aria-expanded', 'false');
