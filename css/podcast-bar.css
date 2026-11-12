@@ -35,8 +35,8 @@
   box-shadow: 0 -10px 40px rgba(0, 0, 0, .6), 0 0 26px rgba(232, 190, 110, .14);
   transition: transform .45s cubic-bezier(.22, 1, .36, 1), opacity .3s ease;
 }
-.gc-pod__frame { height: 64px; border-radius: 10px; overflow: hidden; background: #121212; }
-.gc-pod__frame iframe { display: block; width: 100%; height: 64px; border: 0; color-scheme: normal; }
+.gc-pod__frame { height: max(152px, min(352px, 60vh));   /* pemutar dengan daftar semua episode (352px); di layar pendek mengecil sampai minimal 152px */ border-radius: 10px; overflow: hidden; background: #121212; }
+.gc-pod__frame iframe { display: block; width: 100%; height: 100%; border: 0; color-scheme: normal; }
 
 /* dilipat: panel turun keluar layar (iframe tetap ada, jadi suara tidak putus) */
 .gc-pod.is-collapsed .gc-pod__panel { transform: translateY(calc(100% + 2px)); opacity: 0; pointer-events: none; }
