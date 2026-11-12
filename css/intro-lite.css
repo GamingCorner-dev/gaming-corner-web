@@ -8,7 +8,14 @@
 @keyframes cine-in-l { 0% { opacity: 0; transform: translateX(-90px) scale(1.5); } 100% { opacity: 1; transform: none; } }
 @keyframes cine-in-r { 0% { opacity: 0; transform: translateX(90px) scale(1.5); } 100% { opacity: 1; transform: none; } }
 @keyframes cine-in-c { 0% { opacity: 0; transform: translateY(40px) scale(1.6); } 100% { opacity: 1; transform: none; } }
-@keyframes cine-dim  { to { opacity: .65; transform: scale(.97); filter: blur(7px); } }   /* saat logo muncul: karakter tetap terlihat di latar, hanya diburamkan */
+/* saat logo muncul: karakter tetap terlihat di latar, tampil buram.
+   Revisi 40: blur tidak lagi dihitung langsung di gambar besar (berat). Gambar tajam memudar, gambar buram siap-pakai (intro-*-blur.webp) muncul menggantikannya. */
+@keyframes cine-dim  { to { opacity: 0; transform: scale(.97); } }
+@keyframes cine-blur-in { from { opacity: 0; transform: none; } to { opacity: .65; transform: scale(.97); } }
+.cine-char::after { content: ""; position: absolute; inset: 0; background: center / 100% 100% no-repeat; opacity: 0; pointer-events: none; animation: cine-blur-in .8s ease 2.6s forwards; }
+.cine-char--war::after  { background-image: url(../assets/img/intro-war-blur.webp); }
+.cine-char--mage::after { background-image: url(../assets/img/intro-mage-blur.webp); }
+.cine-char--girl::after { background-image: url(../assets/img/intro-girl-blur.webp); }
 .cine-char img { will-change: transform, opacity; }
 
 /* 2. Huruf judul: muncul tanpa blur */
@@ -20,8 +27,12 @@
 .gc-intro__title::before {
   content: ""; position: absolute; left: 50%; right: -4%; top: -35%; bottom: -35%; z-index: -1; pointer-events: none;
   background: radial-gradient(ellipse at center, rgba(232, 194, 122, .38), rgba(232, 194, 122, 0) 68%);
-  opacity: .25; animation: gc-lite-glow 3.2s ease-in-out 4.8s infinite;
+  opacity: .25;
+  /* Revisi 40: cahaya oval tidak lagi muncul sebelum tulisan. Ia membesar dari nol tepat saat huruf pertama muncul (3,2 detik), lalu berdenyut seperti sebelumnya. */
+  animation: gc-lite-glow-in 1.4s ease-out 3.2s backwards, gc-lite-glow 3.2s ease-in-out 4.8s infinite;
 }
+@keyframes gc-lite-glow-in { from { scale: 0; } to { scale: 1; } }
+@supports not (scale: 0) { .gc-intro__title::before { opacity: 0; } }
 @keyframes gc-lite-glow { 0%, 100% { opacity: .25; } 50% { opacity: .9; } }
 .gc-intro__title .gold b { animation: gc-int-shine 4.6s linear infinite calc(5s + var(--i) * .08s), gc-int-float 3.4s ease-in-out infinite calc(4.8s + var(--i) * .12s); }
 
@@ -51,4 +62,4 @@ html.gc-intro-on .gc-intro.is-leaving ~ * * { animation-play-state: running !imp
 .gc-intro__stage { z-index: 1; }
 
 /* 7. Tulisan GAMING CORNER: bayangan (glow) emas seperti pada logo */
-.gc-intro__title { filter: drop-shadow(0 0 16px rgba(232, 194, 122, .6)) drop-shadow(0 0 3px rgba(255, 226, 160, .35)); }
+.gc-intro__title { filter: drop-shadow(0 0 14px rgba(232, 194, 122, .6)); }   /* Revisi 40: dua lapis bayangan jadi satu (lebih ringan) */
