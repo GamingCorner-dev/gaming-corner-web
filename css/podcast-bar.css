@@ -35,8 +35,24 @@
   box-shadow: 0 -10px 40px rgba(0, 0, 0, .6), 0 0 26px rgba(232, 190, 110, .14);
   transition: transform .45s cubic-bezier(.22, 1, .36, 1), opacity .3s ease;
 }
-.gc-pod__frame { height: max(152px, min(352px, 60vh));   /* pemutar dengan daftar semua episode (352px); di layar pendek mengecil sampai minimal 152px */ border-radius: 10px; overflow: hidden; background: #121212; }
-.gc-pod__frame iframe { display: block; width: 100%; height: 100%; border: 0; color-scheme: normal; }
+.gc-pod__frame { height: 152px; border-radius: 10px; overflow: hidden; background: #121212; }
+.gc-pod__frame iframe { display: block; width: 100%; height: 152px; border: 0; color-scheme: normal; }
+
+/* tombol Episode sebelumnya / berikutnya (Revisi 44) */
+.gc-pod__nav { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 32px; padding: 0 2px 3px; }
+.gc-pod__nav[hidden] { display: none; }
+.gc-pod__count { flex: 1; text-align: center; font: 600 11px/1 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--gold, #E8C27A); }
+.gc-pod__prev, .gc-pod__next {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 28px; padding: 0; flex: none;
+  background: rgba(232, 190, 110, .08); color: var(--gold, #E8C27A); border: 1px solid rgba(232, 190, 110, .45); border-radius: 8px; cursor: pointer;
+  transition: transform .2s cubic-bezier(.2, .9, .3, 1.3), background-color .2s, border-color .2s, box-shadow .2s, opacity .2s;
+}
+.gc-pod__prev:focus-visible, .gc-pod__next:focus-visible { outline: 2px solid var(--gold, #E8C27A); outline-offset: 2px; }
+.gc-pod__prev:disabled, .gc-pod__next:disabled { opacity: .3; cursor: default; }
+@media (hover: hover) {
+  .gc-pod__prev:not(:disabled):hover, .gc-pod__next:not(:disabled):hover { transform: translateY(-2px); border-color: var(--gold, #E8C27A); background: rgba(232, 190, 110, .2); box-shadow: 0 6px 16px rgba(232, 190, 110, .25); }
+}
+.gc-pod__prev:not(:disabled):active, .gc-pod__next:not(:disabled):active { transform: translateY(1px) scale(.94); transition-duration: .08s; }
 
 /* dilipat: panel turun keluar layar (iframe tetap ada, jadi suara tidak putus) */
 .gc-pod.is-collapsed .gc-pod__panel { transform: translateY(calc(100% + 2px)); opacity: 0; pointer-events: none; }
