@@ -11,9 +11,20 @@ button.signup__btn--ghost { border: 2px solid rgba(232, 190, 110, .75); }
 .signup__btn--ghost, .signup__btn--ghost:hover, .signup__btn--ghost:focus-visible, .signup__btn--ghost:active { color: var(--gold); }
 .signup__btn--ghost::after { background: linear-gradient(105deg, transparent, rgba(255, 226, 150, .45), transparent); }
 @media (hover: hover) {
-  .signup__btn--ghost:hover { background: rgba(232, 190, 110, .16); border-color: var(--gold); box-shadow: 0 10px 26px rgba(232, 190, 110, .28); }
+  .signup__btn--ghost:hover { background: rgba(232, 190, 110, .12); border-color: var(--gold); }
 }
 .signup__btn--ghost:active, .signup__btn--ghost:hover:active { background: rgba(232, 190, 110, .1); }
+
+/* ===== Revisi 46: tombol lebih tenang (tidak terlalu terang) =====
+   Tidak disorot: tanpa bayangan emas. Kursor di atasnya: naik 4px, warna emas hampir sama, bayangan gelap tipis, kilau lebih halus. */
+.signup__btn, .signup__btn--ghost { box-shadow: none; }
+.signup__btn::after { background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .28), transparent); }
+.signup__btn--ghost::after { background: linear-gradient(105deg, transparent, rgba(255, 226, 150, .22), transparent); }
+@media (hover: hover) {
+  .signup__btn:hover { transform: translateY(-4px); background: #ebc680; box-shadow: 0 12px 20px rgba(0, 0, 0, .5); }
+  .signup__btn--ghost:hover { background: rgba(232, 190, 110, .12); box-shadow: 0 12px 20px rgba(0, 0, 0, .45); }
+  .signup__btn:hover .arr { transform: translateX(4px); }
+}
 
 /* banner turnamen yang sudah selesai: bentuk sama, tapi tidak disorot */
 .signup--done {
