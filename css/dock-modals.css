@@ -56,3 +56,12 @@
 .gc-modal .info__bullets li { position: relative; padding-left: 24px; font-size: 16px; line-height: 1.55; color: var(--text-2, #d8d2c6); }
 .gc-modal .info__bullets li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
 @media (max-width: 720px) { .gc-modal .info__bullets li { font-size: 15px; } }
+
+/* Revisi 55: langkah "Cara order" bernomor emas (1, 2, 3) */
+.gc-modal .info__steps--num { list-style: none; padding: 0; counter-reset: gc-step; gap: 12px; }
+.gc-modal .info__steps--num li { counter-increment: gc-step; position: relative; padding-left: 40px; min-height: 28px; display: flex; align-items: center; }
+.gc-modal .info__steps--num li::before {
+  content: counter(gc-step); position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  border: 1.5px solid var(--gold); color: var(--gold); font: 700 14px/1 var(--font-body, inherit);
+}
