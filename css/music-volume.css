@@ -20,7 +20,7 @@
 /* bagian volume: tertutup (lebar 0) sampai musik menyala dan tombol terbuka */
 .gc-dock .music-vol {
   display: flex; align-items: center; gap: 10px; flex: none;
-  max-width: 0; opacity: 0; overflow: hidden; margin-left: -10px;
+  max-width: 0; opacity: 0; overflow: hidden; margin-left: 0;
   transition: max-width .5s cubic-bezier(.22, 1, .36, 1), opacity .3s ease, margin-left .5s cubic-bezier(.22, 1, .36, 1);
 }
 .gc-dock .music-btn[aria-pressed="true"].is-open .music-vol,
