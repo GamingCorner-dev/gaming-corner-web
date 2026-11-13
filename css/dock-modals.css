@@ -45,3 +45,14 @@
 @media (hover: hover) { .gc-modal a.store__link:hover { background: rgba(232, 190, 110, .14); border-color: var(--gold); transform: translateY(-2px); } }
 .gc-modal .store__link:active { transform: scale(.96); }
 @media (max-width: 720px) { .gc-modal .store__links { justify-content: flex-start; } }
+
+/* Revisi 54: tulisan "Sponsorship" tidak terpotong (batas lebar tulisan tombol dilebarkan khusus tombol ini) */
+.gc-dock .team-fab.team-fab--sponsor:hover .team-fab__label,
+.gc-dock .team-fab.team-fab--sponsor:focus-visible .team-fab__label,
+.gc-dock .team-fab.team-fab--sponsor.is-open .team-fab__label { max-width: 140px; }
+
+/* Revisi 54: daftar persyaratan sponsor (titik emas) */
+.gc-modal .info__bullets { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.gc-modal .info__bullets li { position: relative; padding-left: 24px; font-size: 16px; line-height: 1.55; color: var(--text-2, #d8d2c6); }
+.gc-modal .info__bullets li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+@media (max-width: 720px) { .gc-modal .info__bullets li { font-size: 15px; } }
