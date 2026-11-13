@@ -15,14 +15,29 @@ button.signup__btn--ghost { border: 2px solid rgba(232, 190, 110, .75); }
 }
 .signup__btn--ghost:active, .signup__btn--ghost:hover:active { background: rgba(232, 190, 110, .1); }
 
-/* ===== Revisi 46: tombol lebih tenang (tidak terlalu terang) =====
-   Tidak disorot: tanpa bayangan emas. Kursor di atasnya: naik 4px, warna emas hampir sama, bayangan gelap tipis, kilau lebih halus. */
+/* ===== Revisi 46 + 48: tombol lebih tenang =====
+   Tanpa bayangan emas saat diam.
+   - Register your team / Register interest / Watch VD Tournament (Revisi 48): kursor di atas tombol = tombol diam (tidak naik, tidak membesar,
+     warna tetap), lalu sebuah garis emas digambar berputar mengelilingi tombol sampai membentuk cincin penuh. Efek tekan saat diklik tetap ada.
+   - VD Rules (garis emas): tetap seperti Revisi 46: naik 4px dengan bayangan gelap tipis. */
 .signup__btn, .signup__btn--ghost { box-shadow: none; }
-.signup__btn::after { background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .28), transparent); }
 .signup__btn--ghost::after { background: linear-gradient(105deg, transparent, rgba(255, 226, 150, .22), transparent); }
+
+@property --gc-ring { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+.signup__btn:not(.signup__btn--ghost) { overflow: visible; }
+.signup__btn:not(.signup__btn--ghost)::after { display: none; }
+.signup__btn:not(.signup__btn--ghost)::before {
+  content: ""; position: absolute; inset: -8px; border-radius: 999px; padding: 2px; pointer-events: none;
+  background: conic-gradient(from 0deg, var(--gold) var(--gc-ring), transparent 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  transition: --gc-ring .8s ease;
+}
 @media (hover: hover) {
-  .signup__btn:hover { transform: translateY(-4px); background: #ebc680; box-shadow: 0 12px 20px rgba(0, 0, 0, .5); }
-  .signup__btn--ghost:hover { background: rgba(232, 190, 110, .12); box-shadow: 0 12px 20px rgba(0, 0, 0, .45); }
+  .signup__btn:not(.signup__btn--ghost):hover { transform: none; background: var(--gold); box-shadow: none; }
+  .signup__btn:not(.signup__btn--ghost):hover::before { --gc-ring: 100%; }
+  .signup__btn:not(.signup__btn--ghost):hover:active { transform: translateY(2px) scale(.95); box-shadow: inset 0 3px 10px rgba(0, 0, 0, .35); }
+  .signup__btn--ghost:hover { transform: translateY(-4px); background: rgba(232, 190, 110, .12); box-shadow: 0 12px 20px rgba(0, 0, 0, .45); }
   .signup__btn:hover .arr { transform: translateX(4px); }
 }
 
