@@ -57,6 +57,7 @@
   <link rel="stylesheet" href="css/logo-burst.css">
   <link rel="stylesheet" href="css/visitor-counter.css">
   <link rel="stylesheet" href="css/signup-banner.css">
+  <link rel="stylesheet" href="css/tournament-modals.css">
   <link rel="stylesheet" href="css/podcast-bar.css">
   <script src="js/main.js" defer></script>
   <script src="js/music.js" defer></script>
@@ -66,6 +67,7 @@
   <script src="js/team-popup.js" defer></script>
   <script src="js/dock.js" defer></script>
   <script src="js/click-sound.js" defer></script>
+  <script src="js/tournament-modals.js" defer></script>
   <script src="js/podcast-bar.js" defer></script>
   <script>
     /* Revisi 22: layar pembuka tampil sekali per kunjungan. Jika js/intro.js gagal jalan dalam 8 detik, layar dilepas supaya website tetap bisa dibuka. */
@@ -230,27 +232,6 @@
           <h2 class="h2">Compete. Win. Repeat.</h2>
           <p class="lead">Want in on the next one? Sign up through the registration form below.</p>
         </div>
-        <ul class="events">
-          <li class="card event event--done">
-            <div class="event__top"><span class="event__date">April 2026</span><span class="pill pill--outline">Completed</span></div>
-            <h3 class="event__title">VD Tournament</h3>
-            <p class="event__text">Violence District fun match tournament — final round. Five highlight clips from the finals.</p>
-            <a class="text-link text-link--box" href="#vd-highlights">Watch the highlights <span class="arr arr--down" aria-hidden="true">↓</span></a>
-          </li>
-          <li class="card event event--soon">
-            <div class="event__top"><span class="event__date">April 2027</span><span class="pill pill--filled">Coming soon</span></div>
-            <h3 class="event__title">Next VD Tournament</h3>
-            <p class="event__text">Round two of Violence District. Something you don't want to miss.</p>
-            <a class="text-link text-link--box" href="https://docs.google.com/forms/d/e/1FAIpQLScwtspIp4-EGSRzdDNWn163uytkiciXBWcdVxS6nHu5uU5eJA/viewform" target="_blank" rel="noopener noreferrer">Register interest <span class="arr" aria-hidden="true">→</span></a>
-          </li>
-          <li class="card event event--soon">
-            <div class="event__top"><span class="event__date">April 2027</span><span class="pill pill--filled">Coming soon</span></div>
-            <h3 class="event__title">Counter-Strike 2 Quiz</h3>
-            <p class="event__text">Think you know CS2 inside out? Prove it in our community quiz event.</p>
-            <a class="text-link text-link--box" href="#contact">Register interest <span class="arr" aria-hidden="true">→</span></a>
-          </li>
-        </ul>
-
         <div id="register" class="card signup">
           <div class="signup__text">
             <p class="eyebrow eyebrow--sm">VD Tournament · Batch 2</p>
@@ -262,50 +243,42 @@
               <li><span>Sign-ups close :</span>23 April 2027</li>
             </ul>
           </div>
-          <a class="signup__btn" href="https://docs.google.com/forms/d/e/1FAIpQLScwtspIp4-EGSRzdDNWn163uytkiciXBWcdVxS6nHu5uU5eJA/viewform" target="_blank" rel="noopener noreferrer">Register your team <span class="arr" aria-hidden="true">→</span></a>
+          <div class="signup__actions">
+            <a class="signup__btn" href="https://docs.google.com/forms/d/e/1FAIpQLScwtspIp4-EGSRzdDNWn163uytkiciXBWcdVxS6nHu5uU5eJA/viewform" target="_blank" rel="noopener noreferrer">Register your team <span class="arr" aria-hidden="true">→</span></a>
+            <button type="button" class="signup__btn signup__btn--ghost" data-modal="vd-rules">VD Rules</button>
+          </div>
         </div>
 
-        <div id="vd-highlights" class="card highlights">
-          <div class="highlights__head">
-            <div class="highlights__titles">
-              <p class="eyebrow eyebrow--sm">April 2026 · Final round</p>
-              <h3 class="highlights__title">VD Tournament highlights</h3>
-            </div>
-            <a class="btn btn--secondary btn--sm yt-btn" href="https://www.youtube.com/@GamingCornerCommunity" target="_blank" rel="noopener">More on YouTube <span class="arr arr--ne" aria-hidden="true">↗</span></a>
+        <!-- Revisi 45: banner Counter-Strike 2 Quiz (bentuk sama seperti banner VD) -->
+        <div id="cs2-quiz" class="card signup">
+          <div class="signup__text">
+            <p class="eyebrow eyebrow--sm">CS2 Quiz · Coming soon</p>
+            <h3 class="signup__title">Join <em>Counter-Strike 2 Quiz</em></h3>
+            <p class="signup__lead">Think you know CS2 inside out? Prove it in our community quiz event.</p>
+            <ul class="signup__facts">
+              <li><span>Event :</span>April 2027</li>
+              <li><span>Status :</span>Coming soon</li>
+            </ul>
           </div>
-          <div class="clips">
-            <figure class="clip clip--feature">
-              <div class="vslot vslot--clip" data-src="assets/video/Clip5.mp4" data-label="VD Tournament final, clip 5">
-                <button class="vslot__btn" type="button" aria-label="Play VD Tournament final, clip 5"><img src="assets/posters/Clip5.jpg" alt="" width="540" height="956" loading="lazy" decoding="async"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button>
-              </div>
-              <figcaption><span class="clip__name">Clip 05</span><span class="clip__len">1:27</span></figcaption>
-            </figure>
-            <div class="clips__rest rail">
-              <figure class="clip">
-                <div class="vslot vslot--clip" data-src="assets/video/Clip1.mp4" data-label="VD Tournament final, clip 1">
-                  <button class="vslot__btn" type="button" aria-label="Play VD Tournament final, clip 1"><img src="assets/posters/Clip1.jpg" alt="" width="540" height="956" loading="lazy" decoding="async"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button>
-                </div>
-                <figcaption><span class="clip__name">Clip 01</span><span class="clip__len">0:34</span></figcaption>
-              </figure>
-              <figure class="clip">
-                <div class="vslot vslot--clip" data-src="assets/video/Clip2.mp4" data-label="VD Tournament final, clip 2">
-                  <button class="vslot__btn" type="button" aria-label="Play VD Tournament final, clip 2"><img src="assets/posters/Clip2.jpg" alt="" width="540" height="956" loading="lazy" decoding="async"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button>
-                </div>
-                <figcaption><span class="clip__name">Clip 02</span><span class="clip__len">0:26</span></figcaption>
-              </figure>
-              <figure class="clip">
-                <div class="vslot vslot--clip" data-src="assets/video/Clip3.mp4" data-label="VD Tournament final, clip 3">
-                  <button class="vslot__btn" type="button" aria-label="Play VD Tournament final, clip 3"><img src="assets/posters/Clip3.jpg" alt="" width="540" height="956" loading="lazy" decoding="async"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button>
-                </div>
-                <figcaption><span class="clip__name">Clip 03</span><span class="clip__len">0:27</span></figcaption>
-              </figure>
-              <figure class="clip">
-                <div class="vslot vslot--clip" data-src="assets/video/Clip4.mp4" data-label="VD Tournament final, clip 4">
-                  <button class="vslot__btn" type="button" aria-label="Play VD Tournament final, clip 4"><img src="assets/posters/Clip4.jpg" alt="" width="540" height="956" loading="lazy" decoding="async"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button>
-                </div>
-                <figcaption><span class="clip__name">Clip 04</span><span class="clip__len">0:59</span></figcaption>
-              </figure>
-            </div>
+          <div class="signup__actions">
+            <a class="signup__btn" href="#contact">Register interest <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <!-- Revisi 45: banner VD Tournament (sudah selesai); tombolnya membuka pop-up video -->
+        <div id="vd-tournament" class="card signup signup--done">
+          <div class="signup__text">
+            <p class="eyebrow eyebrow--sm">April 2026 · Final round</p>
+            <h3 class="signup__title">VD <em>Tournament</em></h3>
+            <p class="signup__lead">Violence District fun match tournament — final round. Five highlight clips from the finals.</p>
+            <ul class="signup__facts">
+              <li><span>Event :</span>April 2026</li>
+              <li><span>Status :</span>Completed</li>
+              <li><span>Clips :</span>5 highlights</li>
+            </ul>
+          </div>
+          <div class="signup__actions">
+            <button type="button" class="signup__btn" data-modal="vd-videos">Watch VD Tournament <span class="arr" aria-hidden="true">→</span></button>
           </div>
         </div>
       </div>
@@ -638,6 +611,119 @@
         </div>
     </div>
   </div>
+  <!-- Revisi 45: pop-up VD Rules dan pop-up video VD Tournament (js/tournament-modals.js) -->
+  <div class="gc-modal" id="vd-rules" role="dialog" aria-modal="true" aria-labelledby="vd-rules-title" hidden>
+    <div class="gc-modal__backdrop" data-close></div>
+    <div class="gc-modal__dialog gc-modal__dialog--rules" tabindex="-1">
+      <button type="button" class="gc-modal__close" data-close aria-label="Close">&times;</button>
+      <div class="gc-modal__scroll">
+        <p class="eyebrow eyebrow--sm">Mohon dibaca!</p>
+        <h3 class="gc-modal__title" id="vd-rules-title">VD Rules</h3>
+        <section class="rules">
+          <ol class="rules__list">
+            <li>Untuk urutan pertandingan berdasarkan urutan pendaftaran.</li>
+            <li>1 tim terdiri dari = 1 ketua dan 4 anggota (wajib punya timnya sendiri, nama tim &amp; ketua).</li>
+            <li>Semua tim, anggota, dan pemain cadangan wajib join discord Gaming Corner, jika salah satu diantaranya tidak join maka tidak dapat mengikuti pertandingan.</li>
+            <li>Unlimited pemain cadangan dengan catatan yang bermain tetap 5 orang dan diberikan 1x kesempatan untuk ganti pemain.</li>
+            <li>Ability/Item seperti pistol, senter, dll, tiap anggota harus berbeda.</li>
+            <li>Untuk item pistol maksimal 4x limit peluru keluar baik kopong maupun yang terkena.</li>
+            <li>Sweeping pistol dan senter diperbolehkan.</li>
+            <li>Untuk killer wajib sharescreen di voice room yang disediakan oleh panitia.</li>
+            <li>Untuk pemilihan karakter killer seperti: The Stalker, The Slasher, The Hidden, The Killer, The Masked, The Abysswalker, The Veil, The Cure, dipilih menggunakan sistem roll (Mirroring).</li>
+            <li>Untuk babak awal pertandingan, killer bernama The Veil dan The Cure dibanned global dan tiap tim dapat 1x ban killer.</li>
+            <li>Untuk 2 team dibabak final tidak ada ban killer.</li>
+            <li>Map Mercy Hospital dibanned global.</li>
+            <li>Perks PWYF Killer di banned Global.</li>
+            <li>Untuk slugging hanya diperbolehkan dibabak final saja saat late game.</li>
+            <li>Peserta yang sengaja menggunakan bug akan diskualifikasi.</li>
+            <li>Disconnect atau bermasalah dalam game (bug yg gak sengaja atau merugikan 2 belah pihak) di 2 menit awal maka match akan di rematch, dengan catatan tidak ada gene aktif dan belum ada survivor yg dihook killer.</li>
+            <li>Untuk peserta yang telat datang / berhalangan datang tepat waktu maka timnya akan diundur ke urutan paling belakang.</li>
+            <li>Wajib SS lobby (Jika di PC klik F9 | Jika di Hp klik /console) untuk menghindari skrip / cheat.</li>
+            <li>Dilarang pakai crosshair / aplikasi pihak ketiga / aplikasi lainnya untuk cheat.</li>
+            <li>Dilarang mengenakan pakaian / aksesoris yg membuat killer tidak bisa melihat saat menggendong survivor ataupun pakaian dan aksesoris lainnya yang bertujuan untuk mengecoh killer.</li>
+            <li>Wajib mengenakan baju gaming corner seharga 4 sampai 5 robux.</li>
+            <li>Saat bertanding wajib join voice room di Discord Gaming Corner.</li>
+          </ol>
+        </section>
+        <section class="rules rules--score">
+          <h4 class="rules__head">Penilaian</h4>
+          <ol class="rules__list">
+            <li>Penilaian untuk babak awal :
+              <ul>
+                <li>Generator : +1 poin</li>
+                <li>Escape (gate) : +2 poin</li>
+                <li>Time Escape di menit 2:00 keluar : +1 poin</li>
+              </ul>
+            </li>
+            <li>Penilaian untuk 2 tim di babak final :
+              <ul>
+                <li>Generator = +1 poin</li>
+                <li>Escape (gate) = +2 poin</li>
+                <li>Time Escape di menit 2:00 keluar : +1 poin</li>
+                <li>Killer = 1 hook +1 poin</li>
+              </ul>
+            </li>
+            <li>Tim dengan perolehan poin terbanyak pemenangnya.</li>
+            <li>Reward MVP Killer dengan hook terbanyak.</li>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="gc-modal" id="vd-videos" role="dialog" aria-modal="true" aria-label="VD Tournament highlights" hidden>
+    <div class="gc-modal__backdrop" data-close></div>
+    <div class="gc-modal__dialog gc-modal__dialog--videos" tabindex="-1">
+      <button type="button" class="gc-modal__close" data-close aria-label="Close">&times;</button>
+      <div class="gc-modal__scroll">
+        <div class="highlights">
+          <div class="highlights__head">
+            <div class="highlights__titles">
+              <p class="eyebrow eyebrow--sm">April 2026 · Final round</p>
+              <h3 class="highlights__title">VD Tournament highlights</h3>
+            </div>
+            <a class="btn btn--secondary btn--sm yt-btn" href="https://www.youtube.com/@GamingCornerCommunity" target="_blank" rel="noopener">More on YouTube <span class="arr arr--ne" aria-hidden="true">↗</span></a>
+          </div>
+          <div class="clips">
+            <figure class="clip clip--feature">
+              <div class="vslot vslot--clip" data-src="assets/video/Clip5.mp4" data-label="VD Tournament final, clip 5">
+                <button class="vslot__btn" type="button" aria-label="Play VD Tournament final, clip 5"><img src="assets/posters/Clip5.jpg" alt="" width="540" height="956" loading="lazy" decoding="async"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button>
+              </div>
+              <figcaption><span class="clip__name">Clip 05</span><span class="clip__len">1:27</span></figcaption>
+            </figure>
+            <div class="clips__rest rail">
+              <figure class="clip">
+                <div class="vslot vslot--clip" data-src="assets/video/Clip1.mp4" data-label="VD Tournament final, clip 1">
+                  <button class="vslot__btn" type="button" aria-label="Play VD Tournament final, clip 1"><img src="assets/posters/Clip1.jpg" alt="" width="540" height="956" loading="lazy" decoding="async"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button>
+                </div>
+                <figcaption><span class="clip__name">Clip 01</span><span class="clip__len">0:34</span></figcaption>
+              </figure>
+              <figure class="clip">
+                <div class="vslot vslot--clip" data-src="assets/video/Clip2.mp4" data-label="VD Tournament final, clip 2">
+                  <button class="vslot__btn" type="button" aria-label="Play VD Tournament final, clip 2"><img src="assets/posters/Clip2.jpg" alt="" width="540" height="956" loading="lazy" decoding="async"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button>
+                </div>
+                <figcaption><span class="clip__name">Clip 02</span><span class="clip__len">0:26</span></figcaption>
+              </figure>
+              <figure class="clip">
+                <div class="vslot vslot--clip" data-src="assets/video/Clip3.mp4" data-label="VD Tournament final, clip 3">
+                  <button class="vslot__btn" type="button" aria-label="Play VD Tournament final, clip 3"><img src="assets/posters/Clip3.jpg" alt="" width="540" height="956" loading="lazy" decoding="async"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button>
+                </div>
+                <figcaption><span class="clip__name">Clip 03</span><span class="clip__len">0:27</span></figcaption>
+              </figure>
+              <figure class="clip">
+                <div class="vslot vslot--clip" data-src="assets/video/Clip4.mp4" data-label="VD Tournament final, clip 4">
+                  <button class="vslot__btn" type="button" aria-label="Play VD Tournament final, clip 4"><img src="assets/posters/Clip4.jpg" alt="" width="540" height="956" loading="lazy" decoding="async"><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></button>
+                </div>
+                <figcaption><span class="clip__name">Clip 04</span><span class="clip__len">0:59</span></figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- Revisi 42/44: bar podcast Spotify di bawah layar. Episode (urut dari Episode 1) ada pada atribut data-episodes: ID episode Spotify dipisah koma. Episode baru: tambahkan ID-nya di belakang. -->
   <aside class="gc-pod" id="gc-pod" aria-label="Gaming Corner Podcast" data-episodes="1a6fxQGSN3nDEpwNnSlqoZ,2lIk37YDMabIVHpnhI6S24" hidden>
     <button type="button" class="gc-pod__tab" aria-expanded="false" aria-controls="gc-pod-panel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4M8 22h8"/></svg><span>Podcast</span><svg class="gc-pod__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
