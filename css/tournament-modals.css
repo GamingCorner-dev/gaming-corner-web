@@ -78,10 +78,12 @@ button.signup__btn--ghost { border: 2px solid rgba(232, 190, 110, .75); }
 .rules--score { margin-top: 30px; padding-top: 26px; border-top: 1px solid rgba(232, 190, 110, .35); }
 .rules__head { margin: 0 0 16px; font-family: var(--font-display); font-weight: 800; font-size: 26px; text-transform: uppercase; color: var(--gold); letter-spacing: .02em; }
 
-/* isi pop-up video: pakai susunan video yang sama; efek tilt / muncul saat scroll dimatikan di dalam pop-up */
+/* isi pop-up video: pakai susunan video yang sama; animasi muncul saat scroll dimatikan di dalam pop-up */
 .gc-modal .highlights { padding: 6px 0 0; gap: 22px; }
 .gc-modal .highlights__head { padding-right: 52px; }
-.gc-modal .clip, .gc-modal .clip.is-in { opacity: 1 !important; transform: none !important; transition: none !important; }
+/* Revisi 47: efek gerak mengikuti kursor (miring 3D, naik, sinar emas) dinyalakan lagi di dalam pop-up, sama seperti kotak Mobile Legends.
+   Hanya animasi "muncul saat scroll" yang dimatikan (opacity dan translate), "transform" dibiarkan untuk efek gerak. */
+.gc-modal .clip, .gc-modal .clip.is-in { opacity: 1 !important; translate: none !important; }
 
 @media (max-width: 720px) {
   .gc-modal { padding: 10px; }
