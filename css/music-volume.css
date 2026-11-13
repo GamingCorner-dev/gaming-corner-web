@@ -1,0 +1,57 @@
+/* Revisi 50 - pengatur volume menyatu di dalam tombol Music.
+   Tombol Music = [ikon] [tulisan Music] [ikon speaker + slider]. Slider baru terbuka saat musik menyala
+   dan tombolnya sedang keluar (kursor di atasnya / disentuh). Menggeser slider tidak mematikan musik. */
+
+/* tombol nyala/mati di dalam pembungkus: tampil polos, pembungkuslah yang berbentuk pil */
+.gc-dock .music-btn { cursor: default; }
+.gc-dock .music-btn__toggle {
+  display: inline-flex; align-items: center; gap: inherit; flex: none;
+  margin: 0; padding: 0; border: 0; background: none; color: inherit;
+  font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer;
+}
+.gc-dock .music-btn__toggle:focus-visible { outline: 2px solid #e8be6e; outline-offset: 6px; border-radius: 999px; }
+/* fokus lewat keyboard pada tombol di dalam = sama seperti sebelumnya (tombol keluar) */
+.gc-dock .music-btn:has(.music-btn__toggle:focus-visible) {
+  transform: translateX(0); opacity: 1; gap: 10px; padding-right: 18px; transition-delay: 0s;
+}
+.gc-dock .music-btn:has(.music-btn__toggle:focus-visible) .music-btn__label { max-width: 80px; opacity: 1; transition-delay: 0s; }
+.gc-dock .music-btn:active { transform: translateX(0); }
+
+/* bagian volume: tertutup (lebar 0) sampai musik menyala dan tombol terbuka */
+.gc-dock .music-vol {
+  display: flex; align-items: center; gap: 10px; flex: none;
+  max-width: 0; opacity: 0; overflow: hidden; margin-left: -10px;
+  transition: max-width .5s cubic-bezier(.22, 1, .36, 1), opacity .3s ease, margin-left .5s cubic-bezier(.22, 1, .36, 1);
+}
+.gc-dock .music-btn[aria-pressed="true"].is-open .music-vol,
+.gc-dock .music-btn[aria-pressed="true"]:has(.music-btn__toggle:focus-visible) .music-vol,
+.gc-dock .music-btn[aria-pressed="true"]:has(.music-vol input:focus-visible) .music-vol {
+  max-width: 150px; opacity: 1; margin-left: 4px;
+}
+@media (hover: hover) {
+  .gc-dock .music-btn[aria-pressed="true"]:hover .music-vol { max-width: 150px; opacity: 1; margin-left: 4px; }
+  .gc-dock .music-btn:hover:active { transform: translateX(0); }   /* menggeser slider jangan 'menekan' tombol */
+}
+.music-vol__ic { width: 20px; height: 20px; flex: none; }
+.music-vol .w1, .music-vol .w2 { transition: opacity .2s ease; }
+.music-vol.is-low .w2, .music-vol.is-muted .w1, .music-vol.is-muted .w2 { opacity: 0; }
+
+.music-vol__range {
+  -webkit-appearance: none; appearance: none; width: 100px; height: 20px; margin: 0;
+  background: transparent; cursor: pointer; --v: 40%;
+}
+.music-vol__range::-webkit-slider-runnable-track {
+  height: 4px; border-radius: 4px;
+  background: linear-gradient(90deg, #e8be6e var(--v), rgba(255,255,255,.18) var(--v));
+}
+.music-vol__range::-moz-range-track { height: 4px; border-radius: 4px; background: rgba(255,255,255,.18); }
+.music-vol__range::-moz-range-progress { height: 4px; border-radius: 4px; background: #e8be6e; }
+.music-vol__range::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 14px; height: 14px; margin-top: -5px;
+  border-radius: 50%; background: #f3d28f; border: 0; box-shadow: 0 0 0 3px rgba(232,190,110,.22);
+}
+.music-vol__range::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #f3d28f; border: 0; box-shadow: 0 0 0 3px rgba(232,190,110,.22); }
+.music-vol__range:focus-visible { outline: 2px solid #e8be6e; outline-offset: 4px; border-radius: 4px; }
+
+@media (max-width: 720px) { .music-vol__range { width: 84px; } }
+@media (prefers-reduced-motion: reduce) { .gc-dock .music-vol { transition: none; } }
