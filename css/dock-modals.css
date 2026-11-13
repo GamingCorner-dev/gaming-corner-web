@@ -1,0 +1,47 @@
+/* Revisi 52 - isi pop-up Top up & Sponsorship (kerangka pop-up dari css/tournament-modals.css) */
+.gc-modal__dialog--info { width: min(640px, 100%); }
+.gc-modal .info__lead { margin: 0 0 22px; font-size: 17px; line-height: 1.6; color: var(--text-2, #d8d2c6); }
+.gc-modal .info__head { margin: 26px 0 12px; font-family: var(--font-display); font-weight: 800; font-size: 22px; text-transform: uppercase; color: var(--gold); letter-spacing: .02em; }
+.gc-modal .info__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.gc-modal .info__list li { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; padding: 12px 16px; border-radius: 12px; background: rgba(255, 255, 255, .04); border: 1px solid rgba(232, 190, 110, .22); font-size: 16px; color: var(--text); }
+.gc-modal .info__list li span:last-child { color: var(--gold); font-weight: 700; white-space: nowrap; }
+.gc-modal .info__steps { margin: 0; padding: 0 0 0 22px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.5; color: var(--text-2, #d8d2c6); }
+.gc-modal .info__cta { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 12px; }
+.gc-modal .info__sample { display: inline-block; margin: 0 0 14px; padding: 4px 10px; border-radius: 999px; border: 1px dashed rgba(232, 190, 110, .7); color: var(--gold); font: 600 11px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; }
+@media (max-width: 720px) { .gc-modal .info__list li { font-size: 15px; padding: 10px 12px; } }
+
+/* daftar game di pop-up Top up: tiap baris adalah tombol yang membuka pop-up daftar barang */
+.gc-modal .info__list--games li { padding: 0; display: block; }
+.gc-modal .info__game {
+  width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 16px 18px; margin: 0; border: 0; border-radius: 12px; background: none; cursor: pointer;
+  font: 700 17px/1.2 var(--font-body, inherit); color: var(--text); text-align: left;
+  transition: background .25s ease, box-shadow .25s ease;
+}
+.gc-modal .info__list--games li { transition: border-color .25s ease, transform .25s ease; }
+.gc-modal .info__go { color: var(--gold); font-weight: 600; font-size: 14px; white-space: nowrap; }
+.gc-modal .info__go i { display: inline-block; font-style: normal; transition: transform .25s ease; }
+.gc-modal .info__game:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (hover: hover) {
+  .gc-modal .info__list--games li:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .gc-modal .info__game:hover { background: rgba(232, 190, 110, .1); }
+  .gc-modal .info__game:hover .info__go i { transform: translateX(4px); }
+}
+.gc-modal .info__game:active { transform: scale(.985); }
+
+/* Revisi 52: kartu rekomendasi store di pop-up tiap game */
+.gc-modal .info__list--stores li.store { flex-wrap: wrap; align-items: center; padding: 14px 16px; }
+.gc-modal .store__name { font-weight: 700; font-size: 17px; color: var(--text); }
+.gc-modal .store__links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.gc-modal .info__list--stores li.store .store__links { color: inherit; font-weight: 600; white-space: normal; }
+.gc-modal .store__link {
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; white-space: nowrap;
+  border: 1px solid rgba(232, 190, 110, .6); color: var(--gold); font-size: 14px; text-decoration: none;
+  transition: background .25s ease, border-color .25s ease, transform .25s ease, color .25s ease;
+}
+.gc-modal .store__link:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.gc-modal a.store__link:hover { color: var(--gold); }
+.gc-modal .info__list li .store__soon { color: var(--text-2, #b9b2a4); font-weight: 500; font-size: 14px; font-style: italic; }
+@media (hover: hover) { .gc-modal a.store__link:hover { background: rgba(232, 190, 110, .14); border-color: var(--gold); transform: translateY(-2px); } }
+.gc-modal .store__link:active { transform: scale(.96); }
+@media (max-width: 720px) { .gc-modal .store__links { justify-content: flex-start; } }
