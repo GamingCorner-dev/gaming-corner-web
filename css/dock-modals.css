@@ -65,3 +65,8 @@
   width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
   border: 1.5px solid var(--gold); color: var(--gold); font: 700 14px/1 var(--font-body, inherit);
 }
+
+/* Revisi 56: tombol "Buka store" (tombol, bukan link), tombol Sell RC / Sell Item, label "Dalam proses" */
+.gc-modal button.store__link { background: none; cursor: pointer; font-family: inherit; font-weight: 600; margin: 0; }
+.gc-modal .info__stack { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 8px; }   /* bersebelahan; di layar sempit turun ke bawah */
+.gc-modal .store__soon--pill { display: inline-block; padding: 8px 16px; border-radius: 999px; border: 1px dashed rgba(232, 190, 110, .6); color: var(--gold); font: 600 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; font-style: normal; }
