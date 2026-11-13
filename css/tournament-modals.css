@@ -1,0 +1,84 @@
+/* Revisi 45 — banner Tournaments (VD / CS2 Quiz / VD selesai), tombol VD Rules, dan pop-up (VD Rules + video VD Tournament). */
+
+/* ===== tombol di banner ===== */
+.signup__actions { flex: none; display: flex; flex-direction: column; align-items: stretch; gap: 14px; }
+button.signup__btn { border: 0; cursor: pointer; font-family: var(--font-display); }
+button.signup__btn--ghost, .signup__btn--ghost {
+  min-height: 52px; font-size: 17px; background: transparent; color: var(--gold);
+  border: 2px solid rgba(232, 190, 110, .75); box-shadow: none;
+}
+button.signup__btn--ghost { border: 2px solid rgba(232, 190, 110, .75); }
+.signup__btn--ghost, .signup__btn--ghost:hover, .signup__btn--ghost:focus-visible, .signup__btn--ghost:active { color: var(--gold); }
+.signup__btn--ghost::after { background: linear-gradient(105deg, transparent, rgba(255, 226, 150, .45), transparent); }
+@media (hover: hover) {
+  .signup__btn--ghost:hover { background: rgba(232, 190, 110, .16); border-color: var(--gold); box-shadow: 0 10px 26px rgba(232, 190, 110, .28); }
+}
+.signup__btn--ghost:active, .signup__btn--ghost:hover:active { background: rgba(232, 190, 110, .1); }
+
+/* banner turnamen yang sudah selesai: bentuk sama, tapi tidak disorot */
+.signup--done {
+  border-color: rgba(255, 255, 255, .16); background: #141210; box-shadow: none;
+}
+.signup--done .signup__facts li { border-color: rgba(255, 255, 255, .16); background: rgba(255, 255, 255, .04); }
+.signup--done .signup__facts li span { color: var(--gold); }
+
+@media (max-width: 720px) {
+  .signup__actions { align-items: stretch; }
+}
+
+/* ===== pop-up ===== */
+.gc-modal { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.gc-modal[hidden] { display: none; }
+.gc-modal__backdrop { position: absolute; inset: 0; background: rgba(4, 3, 2, .82); animation: gc-modal-fade .25s ease both; }
+.gc-modal__dialog {
+  position: relative; width: min(760px, 100%); max-height: calc(100vh - 40px); max-height: calc(100dvh - 40px); display: flex; flex-direction: column;
+  background: linear-gradient(160deg, #1d170d 0%, #110e09 60%, #0c0a08 100%); color: var(--text);
+  border: 1px solid rgba(232, 190, 110, .6); border-radius: 18px;
+  box-shadow: 0 0 40px rgba(232, 190, 110, .22), 0 24px 70px rgba(0, 0, 0, .7);
+  animation: gc-modal-pop .32s cubic-bezier(.2, .9, .3, 1.15) both; outline: none;
+}
+.gc-modal__dialog--videos { width: min(1180px, 100%); }
+.gc-modal__scroll { overflow-y: auto; overscroll-behavior: contain; padding: 34px 36px 36px; -webkit-overflow-scrolling: touch; }
+.gc-modal__close {
+  position: absolute; top: 12px; right: 12px; z-index: 2; width: 40px; height: 40px; border-radius: 50%; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center; font: 400 28px/1 var(--font-body, sans-serif);
+  background: rgba(14, 12, 10, .85); color: var(--gold); border: 1px solid rgba(232, 190, 110, .55); cursor: pointer;
+  transition: transform .25s cubic-bezier(.2, .9, .3, 1.3), background-color .2s, border-color .2s;
+}
+.gc-modal__close:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (hover: hover) { .gc-modal__close:hover { transform: rotate(90deg) scale(1.08); background: rgba(232, 190, 110, .2); border-color: var(--gold); } }
+.gc-modal__close:active { transform: scale(.92); }
+.gc-modal__title { margin: 6px 0 22px; font-family: var(--font-display); font-weight: 800; font-size: clamp(30px, 5vw, 44px); line-height: 1; text-transform: uppercase; color: var(--gold); }
+.gc-modal .eyebrow { margin: 0; }
+.gc-modal .eyebrow--sm { color: var(--gold); }
+
+@keyframes gc-modal-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes gc-modal-pop { from { opacity: 0; transform: translateY(18px) scale(.96); } to { opacity: 1; transform: none; } }
+
+/* isi VD Rules */
+.rules__list { margin: 0; padding: 0; list-style: none; counter-reset: gc-rule; display: flex; flex-direction: column; gap: 10px; }
+.rules__list > li { counter-increment: gc-rule; position: relative; padding-left: 38px; font-size: 16px; line-height: 1.55; color: var(--text-2, #d8d2c6); }
+.rules__list > li::before {
+  content: counter(gc-rule) ")"; position: absolute; left: 0; top: 0; min-width: 30px; font-family: var(--font-mono); font-size: 13px; font-weight: 600; line-height: 1.9; color: var(--gold);
+}
+.rules__list ul { margin: 8px 0 4px; padding: 0 0 0 4px; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.rules__list ul li { position: relative; padding-left: 20px; color: var(--text); }
+.rules__list ul li::before { content: ""; position: absolute; left: 4px; top: .7em; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+.rules--score { margin-top: 30px; padding-top: 26px; border-top: 1px solid rgba(232, 190, 110, .35); }
+.rules__head { margin: 0 0 16px; font-family: var(--font-display); font-weight: 800; font-size: 26px; text-transform: uppercase; color: var(--gold); letter-spacing: .02em; }
+
+/* isi pop-up video: pakai susunan video yang sama; efek tilt / muncul saat scroll dimatikan di dalam pop-up */
+.gc-modal .highlights { padding: 6px 0 0; gap: 22px; }
+.gc-modal .highlights__head { padding-right: 52px; }
+.gc-modal .clip, .gc-modal .clip.is-in { opacity: 1 !important; transform: none !important; transition: none !important; }
+
+@media (max-width: 720px) {
+  .gc-modal { padding: 10px; }
+  .gc-modal__dialog { max-height: calc(100dvh - 20px); border-radius: 14px; }
+  .gc-modal__scroll { padding: 28px 18px 24px; }
+  .rules__list > li { font-size: 15px; padding-left: 34px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gc-modal__backdrop, .gc-modal__dialog { animation: none; }
+  .gc-modal__close, .gc-modal__close:hover { transition: none; transform: none; }
+}
