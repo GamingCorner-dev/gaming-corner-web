@@ -23,4 +23,18 @@
     '<circle cx="12" cy="12" r="8.5"/><path d="M14.6 9.3c-.5-.8-1.4-1.3-2.6-1.3-1.5 0-2.6.8-2.6 1.9 0 2.8 5.2 1.3 5.2 4 0 1.2-1.1 2-2.7 2-1.3 0-2.3-.5-2.8-1.5"/><path d="M12 6.3V8m0 8v1.7"/>');
   make('team-fab--sponsor', 'sponsor-modal', 'Sponsorship', 'Open sponsorship info',
     '<path d="M12 3.6l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.8 1-5.8-4.3-4.1 5.9-.9z"/>');
+
+  // tombol di dalam pop-up yang mengarah ke bagian halaman (mis. "Hubungi kami" -> QR WhatsApp di Contact):
+  // pop-up ditutup, lalu halaman bergulir halus ke bagian tersebut
+  document.addEventListener('click', function (e) {
+    var g = e.target.closest ? e.target.closest('[data-goto]') : null;
+    if (!g) return;
+    var target = document.querySelector(g.getAttribute('data-goto'));
+    if (!target) return;
+    e.preventDefault();
+    var m = g.closest('.gc-modal');
+    var x = m && m.querySelector('.gc-modal__close');
+    if (x) x.click();
+    setTimeout(function () { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+  });
 })();
