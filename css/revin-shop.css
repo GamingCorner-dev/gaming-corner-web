@@ -50,3 +50,28 @@
   .gc-modal .rc-list li.rc-row, .gc-modal .rc-lines li.rc-row { grid-template-columns: 1fr auto; row-gap: 8px; }
   .gc-modal .rc-list li.rc-row .rc-step, .gc-modal .rc-lines li.rc-row .rc-step { grid-column: 1 / -1; justify-self: end; }
 }
+
+/* Revisi 59: jarak antar tombol, kolom IGN, tombol "Kosongkan keranjang" berkotak (merah lembut, beda dari tombol emas) */
+.gc-modal .rc-pane .info__cta { gap: 18px 26px; margin-top: 30px; }
+.gc-modal .rc-field { margin-top: 22px; }
+.gc-modal .rc-field label { display: block; margin: 0 0 8px; font-weight: 700; font-size: 15px; color: var(--gold); letter-spacing: .02em; }
+.gc-modal .rc-input {
+  width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(232, 190, 110, .5);
+  background: rgba(255, 255, 255, .05); color: var(--text); font: 600 17px/1.2 var(--font-body, inherit);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.gc-modal .rc-input::placeholder { color: rgba(216, 210, 198, .45); font-weight: 400; }
+.gc-modal .rc-input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(232, 190, 110, .2); }
+.gc-modal .rc-hint { margin: 8px 2px 0; font-size: 14px; line-height: 1.5; color: var(--text-2, #b9b2a4); }
+.gc-modal .rc-ign-show { color: var(--gold); word-break: break-all; }
+
+.gc-modal .rc-clear {
+  display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px; margin: 0;
+  border: 1.5px solid rgba(255, 128, 116, .6); background: rgba(255, 128, 116, .08); color: #ff9d92;
+  font: 600 14px/1 var(--font-body, inherit); text-decoration: none; cursor: pointer;
+  transition: background .25s ease, border-color .25s ease, color .25s ease, transform .25s ease;
+}
+.gc-modal .rc-clear svg { width: 17px; height: 17px; flex: none; }
+.gc-modal .rc-clear:focus-visible { outline: 2px solid #ff9d92; outline-offset: 3px; }
+@media (hover: hover) { .gc-modal .rc-clear:hover { color: #ffb9b0; background: rgba(255, 128, 116, .18); border-color: #ff9d92; transform: translateY(-2px); } }
+.gc-modal .rc-clear:active { transform: scale(.96); }
