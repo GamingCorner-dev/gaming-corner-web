@@ -1,7 +1,7 @@
 /* Revisi 45 — banner Tournaments (VD / CS2 Quiz / VD selesai), tombol VD Rules, dan pop-up (VD Rules + video VD Tournament). */
 
 /* ===== tombol di banner ===== */
-.signup__actions { flex: none; display: flex; flex-direction: column; align-items: stretch; gap: 14px; }
+.signup__actions { flex: none; display: flex; flex-direction: column; align-items: stretch; gap: 28px; }
 button.signup__btn { border: 0; cursor: pointer; font-family: var(--font-display); }
 button.signup__btn--ghost, .signup__btn--ghost {
   min-height: 52px; font-size: 17px; background: transparent; color: var(--gold);
