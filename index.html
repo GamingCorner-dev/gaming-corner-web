@@ -750,7 +750,7 @@
           <div class="info__cta">
             <button type="button" class="signup__btn" data-step="order" data-needs-items>Order <span class="arr" aria-hidden="true">&rarr;</span></button>
             <button type="button" class="signup__btn signup__btn--ghost" data-modal="revin-store">+ Lanjut belanja</button>
-            <button type="button" class="rc-clear" data-clear>Kosongkan keranjang</button>
+            <button type="button" class="rc-clear" data-clear><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4.5h6V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10 11v5M14 11v5"/></svg>Kosongkan keranjang</button>
           </div>
         </div>
         <div class="rc-pane" data-pane="order" hidden>
@@ -758,16 +758,21 @@
           <p class="info__lead">Periksa pesananmu dulu sebelum membayar.</p>
           <ul class="info__list rc-lines rc-lines--ro" data-lines></ul>
           <div class="rc-sum"><span>Total bayar</span><b class="rc-total">Rp 0</b></div>
+          <div class="rc-field">
+            <label for="rc-ign">IGN Touch 4games kamu</label>
+            <input id="rc-ign" class="rc-input" type="text" maxlength="40" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tulis IGN kamu di sini">
+            <p class="rc-hint" data-ign-hint>Isi IGN dulu sebelum membayar. Barang akan dikirim ke IGN ini, jadi pastikan benar.</p>
+          </div>
           <div class="info__cta">
-            <button type="button" class="signup__btn" data-step="pay">Bayar <span class="arr" aria-hidden="true">&rarr;</span></button>
+            <button type="button" class="signup__btn" data-step="pay" data-needs-ign disabled>Bayar <span class="arr" aria-hidden="true">&rarr;</span></button>
             <button type="button" class="signup__btn signup__btn--ghost" data-step="cart">&larr; Kembali</button>
           </div>
         </div>
         <div class="rc-pane" data-pane="pay" hidden>
           <h3 class="gc-modal__title">Pembayaran</h3>
-          <p class="info__lead">Scan QR Revinz Store di bawah ini untuk membayar <b class="rc-total">Rp 0</b>.</p>
+          <p class="info__lead">Scan QR Revinz Store di bawah ini untuk membayar <b class="rc-total">Rp 0</b>.<br>IGN Touch 4games: <b class="rc-ign-show" data-ign-show></b></p>
           <div class="rc-qr"><img src="assets/img/revinz-qr.jpg" alt="QRIS pembayaran Revinz Store" width="1000" height="1408" loading="lazy" decoding="async"></div>
-          <p class="rc-note"><b>Jika sudah membayar, silakan WhatsApp Revinz Store lalu kirimkan IGN Touch 4games Anda.</b></p>
+          <p class="rc-note"><b>Jika sudah membayar, silakan chat WhatsApp Revinz Store dan kirim bukti pembayaranmu.</b> Pesanan, total, dan IGN kamu sudah terisi otomatis di pesannya, tinggal kirim.</p>
           <div class="info__cta">
             <a class="signup__btn" data-wa href="#" target="_blank" rel="noopener noreferrer">Chat WhatsApp Revinz Store <span class="arr" aria-hidden="true">&rarr;</span></a>
             <button type="button" class="signup__btn signup__btn--ghost" data-step="order">&larr; Kembali</button>
