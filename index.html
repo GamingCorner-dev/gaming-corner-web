@@ -60,6 +60,7 @@
   <link rel="stylesheet" href="css/signup-banner.css">
   <link rel="stylesheet" href="css/tournament-modals.css">
   <link rel="stylesheet" href="css/dock-modals.css">
+  <link rel="stylesheet" href="css/revin-shop.css">
   <link rel="stylesheet" href="css/podcast-bar.css">
   <script src="js/main.js" defer></script>
   <script src="js/music.js" defer></script>
@@ -71,6 +72,7 @@
   <script src="js/dock.js" defer></script>
   <script src="js/click-sound.js" defer></script>
   <script src="js/tournament-modals.js" defer></script>
+  <script src="js/revin-cart.js" defer></script>
   <script src="js/podcast-bar.js" defer></script>
   <script>
     /* Revisi 22: layar pembuka tampil sekali per kunjungan. Jika js/intro.js gagal jalan dalam 8 detik, layar dilepas supaya website tetap bisa dibuka. */
@@ -665,7 +667,7 @@
         <h3 class="gc-modal__title" id="topup-touch4games-title">Touch 4games</h3>
         <h4 class="info__head">Rekomendasi store</h4>
         <ul class="info__list info__list--stores">
-          <li class="store"><span class="store__name">Revin Store</span><span class="store__links"><button type="button" class="store__link" data-modal="revin-store">Buka store <span aria-hidden="true">&rarr;</span></button></span></li>
+          <li class="store"><span class="store__name">Revinz Store</span><span class="store__links"><button type="button" class="store__link" data-modal="revin-store">Buka store <span aria-hidden="true">&rarr;</span></button></span></li>
         </ul>
         <div class="info__cta">
           <button type="button" class="signup__btn signup__btn--ghost" data-modal="topup-modal">&larr; Kembali</button>
@@ -679,12 +681,13 @@
       <button type="button" class="gc-modal__close" data-close aria-label="Close">&times;</button>
       <div class="gc-modal__scroll">
         <p class="eyebrow eyebrow--sm">Touch 4games</p>
-        <h3 class="gc-modal__title" id="revin-store-title">Revin Store</h3>
-        <p class="info__lead">Welcome to Revin Store, semua ready stock RC dan Item!</p>
+        <h3 class="gc-modal__title" id="revin-store-title">Revinz Store</h3>
+        <p class="info__lead">Welcome to Revinz Store, semua ready stock RC dan Item!</p>
         <ul class="info__list info__list--stores">
           <li class="store"><span class="store__name">Sell RC</span><span class="store__links"><button type="button" class="store__link" data-modal="revin-rc" aria-label="Buy RC">Buy <span aria-hidden="true">&rarr;</span></button></span></li>
           <li class="store"><span class="store__name">Sell Item</span><span class="store__links"><button type="button" class="store__link" data-modal="revin-item" aria-label="Buy Item">Buy <span aria-hidden="true">&rarr;</span></button></span></li>
         </ul>
+        <button type="button" class="rc-bar" data-modal="revin-cart" hidden><span class="rc-bar__txt">Keranjang <b class="rc-count">0</b> item &middot; <b class="rc-total">Rp 0</b></span><span class="rc-bar__go">Lihat keranjang &rarr;</span></button>
         <div class="info__cta">
           <button type="button" class="signup__btn signup__btn--ghost" data-modal="topup-touch4games">&larr; Kembali</button>
         </div>
@@ -696,10 +699,16 @@
     <div class="gc-modal__dialog gc-modal__dialog--info" tabindex="-1">
       <button type="button" class="gc-modal__close" data-close aria-label="Close">&times;</button>
       <div class="gc-modal__scroll">
-        <p class="eyebrow eyebrow--sm">Revin Store</p>
+        <p class="eyebrow eyebrow--sm">Revinz Store</p>
         <h3 class="gc-modal__title" id="revin-rc-title">Sell RC</h3>
-        <p class="info__lead">Daftar RC yang dijual masih dalam proses. Segera hadir!</p>
-        <span class="store__soon store__soon--pill">Dalam proses</span>
+        <span class="info__sample">Contoh harga - isi asli menyusul</span>
+        <p class="info__lead">Tekan + untuk memasukkan ke keranjang. Kamu bisa belanja RC dan item sekaligus.</p>
+        <ul class="info__list rc-list">
+          <li class="rc-row" data-id="rc-100" data-name="100 RC" data-price="10000"><span class="rc-row__name">100 RC</span><span class="rc-row__price"></span><div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Kurangi 100 RC">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Tambah 100 RC">+</button></div></li>
+          <li class="rc-row" data-id="rc-500" data-name="500 RC" data-price="45000"><span class="rc-row__name">500 RC</span><span class="rc-row__price"></span><div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Kurangi 500 RC">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Tambah 500 RC">+</button></div></li>
+          <li class="rc-row" data-id="rc-1000" data-name="1.000 RC" data-price="85000"><span class="rc-row__name">1.000 RC</span><span class="rc-row__price"></span><div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Kurangi 1.000 RC">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Tambah 1.000 RC">+</button></div></li>
+        </ul>
+        <button type="button" class="rc-bar" data-modal="revin-cart" hidden><span class="rc-bar__txt">Keranjang <b class="rc-count">0</b> item &middot; <b class="rc-total">Rp 0</b></span><span class="rc-bar__go">Lihat keranjang &rarr;</span></button>
         <div class="info__cta">
           <button type="button" class="signup__btn signup__btn--ghost" data-modal="revin-store">&larr; Kembali</button>
         </div>
@@ -711,12 +720,58 @@
     <div class="gc-modal__dialog gc-modal__dialog--info" tabindex="-1">
       <button type="button" class="gc-modal__close" data-close aria-label="Close">&times;</button>
       <div class="gc-modal__scroll">
-        <p class="eyebrow eyebrow--sm">Revin Store</p>
+        <p class="eyebrow eyebrow--sm">Revinz Store</p>
         <h3 class="gc-modal__title" id="revin-item-title">Sell Item</h3>
-        <p class="info__lead">Daftar item yang dijual masih dalam proses. Segera hadir!</p>
-        <span class="store__soon store__soon--pill">Dalam proses</span>
+        <span class="info__sample">Contoh harga - isi asli menyusul</span>
+        <p class="info__lead">Tekan + untuk memasukkan ke keranjang. Kamu bisa belanja RC dan item sekaligus.</p>
+        <ul class="info__list rc-list">
+          <li class="rc-row" data-id="it-a" data-name="Item A" data-price="5000"><span class="rc-row__name">Item A</span><span class="rc-row__price"></span><div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Kurangi Item A">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Tambah Item A">+</button></div></li>
+          <li class="rc-row" data-id="it-b" data-name="Item B" data-price="15000"><span class="rc-row__name">Item B</span><span class="rc-row__price"></span><div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Kurangi Item B">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Tambah Item B">+</button></div></li>
+          <li class="rc-row" data-id="it-c" data-name="Item C" data-price="30000"><span class="rc-row__name">Item C</span><span class="rc-row__price"></span><div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Kurangi Item C">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Tambah Item C">+</button></div></li>
+        </ul>
+        <button type="button" class="rc-bar" data-modal="revin-cart" hidden><span class="rc-bar__txt">Keranjang <b class="rc-count">0</b> item &middot; <b class="rc-total">Rp 0</b></span><span class="rc-bar__go">Lihat keranjang &rarr;</span></button>
         <div class="info__cta">
           <button type="button" class="signup__btn signup__btn--ghost" data-modal="revin-store">&larr; Kembali</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="gc-modal" id="revin-cart" role="dialog" aria-modal="true" aria-labelledby="revin-cart-title" hidden>
+    <div class="gc-modal__backdrop" data-close></div>
+    <div class="gc-modal__dialog gc-modal__dialog--info" tabindex="-1">
+      <button type="button" class="gc-modal__close" data-close aria-label="Close">&times;</button>
+      <div class="gc-modal__scroll">
+        <p class="eyebrow eyebrow--sm">Revinz Store</p>
+        <div class="rc-pane" data-pane="cart">
+          <h3 class="gc-modal__title" id="revin-cart-title">Keranjang</h3>
+          <ul class="info__list rc-lines" data-lines></ul>
+          <p class="rc-empty" data-empty>Keranjang masih kosong.</p>
+          <div class="rc-sum"><span>Total</span><b class="rc-total">Rp 0</b></div>
+          <div class="info__cta">
+            <button type="button" class="signup__btn" data-step="order" data-needs-items>Order <span class="arr" aria-hidden="true">&rarr;</span></button>
+            <button type="button" class="signup__btn signup__btn--ghost" data-modal="revin-store">+ Lanjut belanja</button>
+            <button type="button" class="rc-clear" data-clear>Kosongkan keranjang</button>
+          </div>
+        </div>
+        <div class="rc-pane" data-pane="order" hidden>
+          <h3 class="gc-modal__title">Ringkasan Pesanan</h3>
+          <p class="info__lead">Periksa pesananmu dulu sebelum membayar.</p>
+          <ul class="info__list rc-lines rc-lines--ro" data-lines></ul>
+          <div class="rc-sum"><span>Total bayar</span><b class="rc-total">Rp 0</b></div>
+          <div class="info__cta">
+            <button type="button" class="signup__btn" data-step="pay">Bayar <span class="arr" aria-hidden="true">&rarr;</span></button>
+            <button type="button" class="signup__btn signup__btn--ghost" data-step="cart">&larr; Kembali</button>
+          </div>
+        </div>
+        <div class="rc-pane" data-pane="pay" hidden>
+          <h3 class="gc-modal__title">Pembayaran</h3>
+          <p class="info__lead">Scan QR Revinz Store di bawah ini untuk membayar <b class="rc-total">Rp 0</b>.</p>
+          <div class="rc-qr"><img src="assets/img/revinz-qr.jpg" alt="QRIS pembayaran Revinz Store" width="1000" height="1408" loading="lazy" decoding="async"></div>
+          <p class="rc-note"><b>Jika sudah membayar, silakan WhatsApp Revinz Store lalu kirimkan IGN Touch 4games Anda.</b></p>
+          <div class="info__cta">
+            <a class="signup__btn" data-wa href="#" target="_blank" rel="noopener noreferrer">Chat WhatsApp Revinz Store <span class="arr" aria-hidden="true">&rarr;</span></a>
+            <button type="button" class="signup__btn signup__btn--ghost" data-step="order">&larr; Kembali</button>
+          </div>
         </div>
       </div>
     </div>
