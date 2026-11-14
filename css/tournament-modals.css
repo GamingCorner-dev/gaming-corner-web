@@ -110,3 +110,6 @@ button.signup__btn--ghost { border: 2px solid rgba(232, 190, 110, .75); }
   .gc-modal__backdrop, .gc-modal__dialog { animation: none; }
   .gc-modal__close, .gc-modal__close:hover { transition: none; transform: none; }
 }
+
+/* Revisi 62: tombol silang (x) digeser ke kiri supaya tidak menimpa batang scroll di komputer (layar mouse) */
+@media (hover: hover) and (pointer: fine) { .gc-modal__close { right: 32px; } }
