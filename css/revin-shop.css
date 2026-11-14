@@ -1,0 +1,52 @@
+/* Revisi 58 - keranjang Revinz Store (Sell RC / Sell Item / Keranjang / Ringkasan / Pembayaran) */
+.gc-modal .rc-list { gap: 10px; }
+.gc-modal .rc-list li.rc-row, .gc-modal .rc-lines li.rc-row {
+  display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 14px;
+}
+.gc-modal .rc-row__name { font-weight: 700; font-size: 17px; color: var(--text); }
+.gc-modal .info__list .rc-row .rc-row__price { color: var(--gold); font-weight: 700; white-space: nowrap; }
+.gc-modal .rc-step { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border-radius: 999px; border: 1px solid rgba(232, 190, 110, .45); }
+.gc-modal .rc-step__btn {
+  width: 32px; height: 32px; border-radius: 50%; border: 0; margin: 0; padding: 0; cursor: pointer;
+  display: grid; place-items: center; font: 700 20px/1 var(--font-body, inherit);
+  background: rgba(232, 190, 110, .16); color: var(--gold);
+  transition: background .2s ease, transform .2s ease, opacity .2s ease;
+}
+.gc-modal .rc-step__btn:disabled { opacity: .35; cursor: default; }
+.gc-modal .rc-step__btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (hover: hover) { .gc-modal .rc-step__btn:not(:disabled):hover { background: var(--gold); color: #1a140a; transform: scale(1.08); } }
+.gc-modal .rc-step__btn:not(:disabled):active { transform: scale(.9); }
+.gc-modal .rc-step__qty { min-width: 28px; text-align: center; font-weight: 700; font-size: 16px; color: var(--text); }
+.gc-modal .rc-ro-qty { font-weight: 700; color: var(--text-2, #d8d2c6); }
+
+/* bar keranjang di bawah daftar */
+.gc-modal .rc-bar {
+  width: 100%; margin: 20px 0 0; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  border-radius: 14px; border: 1px solid var(--gold); background: rgba(232, 190, 110, .12); color: var(--text); cursor: pointer;
+  font: 600 15px/1.3 var(--font-body, inherit); text-align: left;
+  transition: background .25s ease, transform .25s ease;
+}
+.gc-modal .rc-bar[hidden] { display: none; }
+.gc-modal .rc-bar b { color: var(--gold); }
+.gc-modal .rc-bar__go { color: var(--gold); font-weight: 700; }
+.gc-modal .rc-bar:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (hover: hover) { .gc-modal .rc-bar:hover { background: rgba(232, 190, 110, .22); transform: translateY(-2px); } }
+.gc-modal .rc-bar:active { transform: scale(.985); }
+
+/* keranjang / ringkasan / pembayaran */
+.gc-modal .rc-pane[hidden] { display: none; }
+.gc-modal .rc-empty { margin: 0 0 6px; color: var(--text-2, #b9b2a4); font-style: italic; }
+.gc-modal .rc-empty[hidden] { display: none; }
+.gc-modal .rc-sum { margin: 18px 0 0; padding: 14px 4px 0; border-top: 1px solid rgba(232, 190, 110, .35); display: flex; justify-content: space-between; align-items: baseline; font-size: 18px; color: var(--text); }
+.gc-modal .rc-sum b { color: var(--gold); font-size: 24px; }
+.gc-modal .rc-clear { background: none; border: 0; padding: 8px 4px; cursor: pointer; color: var(--text-2, #b9b2a4); font: 500 14px/1 var(--font-body, inherit); text-decoration: underline; }
+.gc-modal .rc-clear[hidden] { display: none; }
+.gc-modal .rc-clear:hover { color: var(--gold); }
+.gc-modal .rc-qr { display: flex; justify-content: center; margin: 6px 0 18px; }
+.gc-modal .rc-qr img { width: min(380px, 100%); height: auto; border-radius: 14px; background: #fff; }
+.gc-modal .rc-note { margin: 0 0 4px; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(232, 190, 110, .4); background: rgba(232, 190, 110, .08); color: var(--text); line-height: 1.55; }
+.gc-modal .signup__btn:disabled { opacity: .45; cursor: default; pointer-events: none; }
+@media (max-width: 720px) {
+  .gc-modal .rc-list li.rc-row, .gc-modal .rc-lines li.rc-row { grid-template-columns: 1fr auto; row-gap: 8px; }
+  .gc-modal .rc-list li.rc-row .rc-step, .gc-modal .rc-lines li.rc-row .rc-step { grid-column: 1 / -1; justify-self: end; }
+}
