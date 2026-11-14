@@ -68,5 +68,13 @@
 
 /* Revisi 56: tombol "Buka store" (tombol, bukan link), tombol Sell RC / Sell Item, label "Dalam proses" */
 .gc-modal button.store__link { background: none; cursor: pointer; font-family: inherit; font-weight: 600; margin: 0; }
-.gc-modal .info__stack { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 8px; }   /* bersebelahan; di layar sempit turun ke bawah */
+.gc-modal .info__stack { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 24px; margin-top: 8px; }   /* Sell RC di kiri, Sell Item di kanan */   /* bersebelahan; di layar sempit turun ke bawah */
 .gc-modal .store__soon--pill { display: inline-block; padding: 8px 16px; border-radius: 999px; border: 1px dashed rgba(232, 190, 110, .6); color: var(--gold); font: 600 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; font-style: normal; }
+
+/* Revisi 57: tombol "Buka store" (tombol) dapat efek hover & klik seperti tombol link store lainnya */
+.gc-modal .store__link .arr, .gc-modal .store__link > span { display: inline-block; transition: transform .25s ease; }
+@media (hover: hover) {
+  .gc-modal button.store__link:hover { color: var(--gold); background: rgba(232, 190, 110, .14); border-color: var(--gold); transform: translateY(-2px); }
+  .gc-modal .store__link:hover > span { transform: translateX(4px); }
+}
+.gc-modal button.store__link:active { transform: scale(.96); }
