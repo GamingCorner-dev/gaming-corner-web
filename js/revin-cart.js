@@ -5,7 +5,7 @@
 (function () {
   'use strict';
   /* ===== Pengaturan (ganti saat isi asli sudah ada) ===== */
-  var WA_NUMBER = '620000000000';   /* CONTOH - ganti dengan nomor WhatsApp Revinz Store, format 62..., tanpa + dan spasi */
+  var WA_NUMBER = '6281255424543';   /* nomor WhatsApp Revinz Store, format 62..., tanpa + dan spasi */
   var STORE_KEY = 'gcRevinCart';
   var IGN_KEY = 'gcRevinIGN';
 
