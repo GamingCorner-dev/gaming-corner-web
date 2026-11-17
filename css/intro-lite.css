@@ -22,18 +22,8 @@
 .gc-intro__title span { filter: none; }
 @keyframes gc-letter { to { opacity: 1; transform: none; } }
 
-/* glow CORNER: lapisan terpisah (hanya opacity yang bergerak), bukan filter per huruf */
+/* Revisi 65: cahaya oval di sisi kanan (belakang CORNER) dihapus. Tinggal bayangan emas rata di sekeliling huruf (lihat bagian 7). */
 .gc-intro__title { position: relative; }
-.gc-intro__title::before {
-  content: ""; position: absolute; left: 50%; right: -4%; top: -35%; bottom: -35%; z-index: -1; pointer-events: none;
-  background: radial-gradient(ellipse at center, rgba(232, 194, 122, .38), rgba(232, 194, 122, 0) 68%);
-  opacity: .25;
-  /* Revisi 40: cahaya oval tidak lagi muncul sebelum tulisan. Ia membesar dari nol tepat saat huruf pertama muncul (3,2 detik), lalu berdenyut seperti sebelumnya. */
-  animation: gc-lite-glow-in 1.4s ease-out 3.2s backwards, gc-lite-glow 3.2s ease-in-out 4.8s infinite;
-}
-@keyframes gc-lite-glow-in { from { scale: 0; } to { scale: 1; } }
-@supports not (scale: 0) { .gc-intro__title::before { opacity: 0; } }
-@keyframes gc-lite-glow { 0%, 100% { opacity: .25; } 50% { opacity: .9; } }
 .gc-intro__title .gold b { animation: gc-int-shine 4.6s linear infinite calc(5s + var(--i) * .08s), gc-int-float 3.4s ease-in-out infinite calc(4.8s + var(--i) * .12s); }
 
 /* 3. Selama opening tampil, animasi di balik layar dijeda (salju dijeda lewat snow.js) */
