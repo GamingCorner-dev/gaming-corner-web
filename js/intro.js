@@ -77,5 +77,5 @@
   if (skipBtn) skipBtn.addEventListener('click', function () { leave(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') leave(false); });
 
-  setTimeout(function () { el.classList.add('is-ready'); try { enterBtn.focus({ preventScroll: true }); } catch (e) {} }, 4500);
+  setTimeout(function () { el.classList.add('is-ready'); try { enterBtn.focus({ preventScroll: true }); } catch (e) {} }, 0);
 })();
