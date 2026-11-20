@@ -1,0 +1,5 @@
+/* Revisi 67 - halaman Shop (sementara: dalam proses pembuatan) */
+.shop-page { min-height: calc(100vh - var(--header-h, 72px)); display: grid; place-items: center; padding: 48px 20px; }
+.shop-page__panel { text-align: center; max-width: 560px; display: grid; gap: 18px; justify-items: center; padding: clamp(28px, 6vw, 56px); border: 1px solid var(--line, rgba(232,194,122,.3)); background: rgba(20, 15, 8, .6); border-radius: 12px; }
+.shop-page__text { color: #B8AE9C; font-size: 17px; line-height: 1.6; margin: 0 0 8px; }
+.main-nav a[aria-current="page"] { color: var(--gold, #E8C27A); }
