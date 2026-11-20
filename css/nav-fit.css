@@ -10,3 +10,33 @@
   .main-nav a { display: flex; min-height: 52px; color: var(--text); font-family: var(--font-display); font-weight: 600; font-size: 20px; text-transform: uppercase; }
 }
 @media (min-width: 1201px) and (max-width: 1480px) { .main-nav ul { gap: 18px; } .main-nav a { font-size: 14px; } }
+
+/* Revisi 69 - mengembalikan posisi cahaya emas di latar seperti sebelum Revisi 67.
+   Posisinya dihitung dari persen tinggi halaman, dan halaman jadi sedikit lebih pendek (~0,3%) setelah judul bagian Shop diganti. */
+@media (min-width: 861px) {
+  .glow--2 { top: 4.01%; }
+  .glow--3 { top: 6.52%; }
+  .glow--4 { top: 21.07%; }
+  .glow--5 { top: 36.11%; }
+  .glow--6 { top: 52.16%; }
+  .glow--7 { top: 68.21%; }
+  .glow--8 { top: 84.26%; }
+}
+@media (max-width: 860px) {
+  .glow--2 { top: 3.99%; }
+  .glow--3 { top: 6.48%; }
+  .glow--4 { top: 18.94%; }
+  .glow--5 { top: 33.89%; }
+  .glow--6 { top: 49.84%; }
+  .glow--7 { top: 65.79%; }
+  .glow--8 { top: 81.74%; }
+}
+
+/* Revisi 70 - cahaya emas di landing page dibuat lebih tipis (sedang): cahaya latar sekitar 70%, cahaya sisi kotak sekitar 70-75% */
+.glows { opacity: .7; }
+html:root {
+  --glow-border: rgba(232, 190, 110, 0.32);
+  --glow-soft:   rgba(232, 190, 110, 0.11);
+  --glow-inner:  rgba(232, 190, 110, 0.04);
+}
+.page .event--soon { box-shadow: 0 0 18px rgba(232, 190, 110, 0.17), 0 0 2px rgba(232, 190, 110, 0.4), inset 0 0 14px var(--glow-inner); }
