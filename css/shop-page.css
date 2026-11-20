@@ -3,3 +3,8 @@
 .shop-page__panel { text-align: center; max-width: 560px; display: grid; gap: 18px; justify-items: center; padding: clamp(28px, 6vw, 56px); border: 1px solid var(--line, rgba(232,194,122,.3)); background: rgba(20, 15, 8, .6); border-radius: 12px; }
 .shop-page__text { color: #B8AE9C; font-size: 17px; line-height: 1.6; margin: 0 0 8px; }
 .main-nav a[aria-current="page"] { color: var(--gold, #E8C27A); }
+
+/* Revisi 68b - latar sama dengan Halaman 1: halaman Shop pendek, jadi cahaya emas dibuat seperti tampilan layar pertama Halaman 1 */
+.glow--4, .glow--5, .glow--6, .glow--7, .glow--8 { display: none; }
+.glow--2 { top: 320px; }
+.glow--3 { top: 520px; }
