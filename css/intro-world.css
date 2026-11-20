@@ -1,0 +1,81 @@
+/* Revisi 66 - Opening bertema blok (gaya kotak-kotak): pemandangan bergerak, logo yang pecah lalu menyatu, tombol Enter.
+   Menggantikan tiga hero. Digambar dengan kanvas beresolusi rendah (piksel besar) sehingga ringan. */
+.gc-intro { background: #8ec9f2; overflow: hidden; }
+.gc-intro__cine, .gc-intro__sweep, .gc-intro__flash, .gc-intro__dust, .gc-intro__title, .gc-intro__tag { display: none !important; }
+.gc-world { position: absolute; left: 0; top: 0; image-rendering: pixelated; image-rendering: crisp-edges; pointer-events: none; }
+.gc-intro__stage { z-index: 2; animation: none; gap: clamp(10px, 2vh, 22px); }
+
+/* logo: potongan-potongan balok yang menyatu lalu pecah lagi (dibuat oleh js/intro-world.js) */
+.gc-intro__logo {
+  width: clamp(170px, 36vmin, 340px); aspect-ratio: 1 / 1; display: block; position: relative; opacity: 1; transform: none;
+  animation: gc-w-bob 3s steps(6) infinite; filter: drop-shadow(0 6px 0 rgba(40, 26, 10, .38)); margin-top: clamp(0px, 1vh, 10px);
+}
+.gc-intro__logo::before, .gc-intro__logo::after { display: none; }
+.gc-intro__logo img { display: none; }
+@keyframes gc-w-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+.gc-piece {
+  position: absolute; background-repeat: no-repeat;
+}
+@keyframes gc-w-piece {
+  0%, 30% { transform: none; animation-timing-function: ease-in-out; }
+  50%, 62% { transform: translate(var(--dx), var(--dy)) rotate(var(--r)); animation-timing-function: ease-in-out; }
+  82%, 100% { transform: none; }
+}
+
+/* tombol Enter bergaya blok */
+.gc-intro__action { height: 110px; margin-top: 0; }
+.gc-intro__enter {
+  border-radius: 0; font-size: 19px; letter-spacing: .18em; padding: 14px 46px; color: #2a1b0b; background: #F0C55E;
+  box-shadow: inset -4px -4px 0 #b9812a, inset 4px 4px 0 #ffe9a8, 0 0 0 4px #2a1b0b, 0 7px 0 4px #2a1b0b;
+  transition: opacity .5s ease, transform .15s steps(2), background-color .15s;
+}
+.gc-intro.is-ready .gc-intro__enter { animation: none; }
+.gc-intro__enter:hover { background: #ffd978; transform: translateY(-3px); }
+.gc-intro__enter:active { transform: translateY(5px); box-shadow: inset 4px 4px 0 #b9812a, inset -4px -4px 0 #ffe9a8, 0 0 0 4px #2a1b0b, 0 2px 0 4px #2a1b0b; }
+.gc-intro__hint { top: 84px; color: #fff; text-shadow: 0 2px 0 rgba(30, 20, 10, .6); font-weight: 600; opacity: 0; }
+.gc-intro.is-ready .gc-intro__hint { opacity: .95; }
+@media (prefers-reduced-motion: reduce) { .gc-piece, .gc-intro__logo { animation: none !important; } }
+
+.gc-piece.is-move { animation: gc-w-piece 6s infinite both; will-change: transform; }
+.gc-intro__hint { display: none !important; }
+.gc-intro__action { height: 70px; }
+
+/* Revisi 66b: logo lebih kecil & lebih ke atas; dua tombol (Home, Shop); layar Shop */
+.gc-intro__stage { justify-content: center; padding-bottom: 9vh; gap: 0; }
+.gc-intro__logo { width: clamp(110px, 24vmin, 230px); margin-bottom: clamp(36px, 9vmin, 90px); }
+.gc-intro__action { height: auto; width: auto; display: flex; flex-direction: column; align-items: center; gap: 22px; margin: 0; }
+.gc-intro__action .gc-intro__enter { min-width: 190px; }
+.gc-intro.is-ready .gc-intro__enter { opacity: 1; pointer-events: auto; transform: none; }
+.gc-intro__shopbtn { background: #7fd05a; box-shadow: inset -4px -4px 0 #3f8f2e, inset 4px 4px 0 #b9f08e, 0 0 0 4px #2a1b0b, 0 7px 0 4px #2a1b0b; }
+.gc-intro__shopbtn:hover { background: #95e06e; }
+.gc-intro__shopbtn:active { box-shadow: inset 4px 4px 0 #3f8f2e, inset -4px -4px 0 #b9f08e, 0 0 0 4px #2a1b0b, 0 2px 0 4px #2a1b0b; }
+.gc-intro__shop { position: absolute; inset: 0; z-index: 3; display: none; align-items: center; justify-content: center; padding: 24px; }
+.gc-intro.is-shop .gc-intro__shop { display: flex; }
+.gc-intro.is-shop .gc-intro__stage { display: none; }
+.gc-shop__panel { text-align: center; padding: clamp(24px, 5vmin, 44px) clamp(22px, 6vmin, 56px); background: rgba(40, 26, 10, .82); box-shadow: 0 0 0 4px #2a1b0b, inset 0 0 0 4px #b9812a; max-width: 92vw; }
+.gc-shop__title { font-family: 'Oxanium', system-ui, sans-serif; font-weight: 800; font-size: clamp(34px, 9vmin, 64px); letter-spacing: .18em; color: #F0C55E; text-shadow: 0 4px 0 #2a1b0b; }
+.gc-shop__text { color: #fff; font-size: clamp(14px, 2.6vmin, 18px); line-height: 1.6; margin: 14px 0 26px; }
+
+/* Revisi 66c: video latar (sedikit blur), tombol & logo langsung tampil tanpa transisi */
+.gc-intro { background: #1b1f3a; }
+.gc-intro__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(3px); transform: scale(1.04); pointer-events: none; }
+.gc-intro__enter, .gc-intro__enter:hover, .gc-intro__enter:active { transition: none !important; }
+.gc-intro .gc-intro__enter { opacity: 1 !important; pointer-events: auto !important; transform: none; animation: none !important; }
+.gc-intro .gc-intro__enter:hover { transform: translateY(-3px); }
+.gc-intro .gc-intro__enter:active { transform: translateY(5px); }
+.gc-intro__logo img { display: block; width: 100%; height: 100%; }
+.gc-intro__logo.is-built img { display: none; }
+
+/* Revisi 66d: tanpa blur, logo di kiri + tulisan di kanan (gaya sama dengan tombol), animasi simpel */
+.gc-intro__bg { filter: none; transform: none; }
+.gc-brand { display: flex; align-items: center; justify-content: center; gap: clamp(12px, 3vmin, 30px); margin-bottom: clamp(36px, 9vmin, 80px); animation: gc-w-bob 3s steps(6) infinite; }
+.gc-brand .gc-intro__logo { width: clamp(84px, 21vmin, 190px); margin: 0; animation: none; filter: drop-shadow(0 6px 0 #2a1b0b); }
+.gc-intro__logo img { display: block; width: 100%; height: 100%; }
+.gc-brand__name { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; font-family: 'Oxanium', system-ui, sans-serif; font-weight: 800; letter-spacing: .12em; font-size: clamp(24px, min(6.4vw, 8vmin), 60px); text-align: left; }
+.gc-brand__name span { display: block; color: #F0C55E; padding: .06em 0; text-shadow: 3px 3px 0 #b9812a, 0 0 0 #2a1b0b, 0 6px 0 #2a1b0b, 3px 6px 0 #2a1b0b, -2px 2px 0 #2a1b0b, 4px 4px 0 #2a1b0b; }
+.gc-brand__name span + span { color: #ffe9a8; }
+@media (prefers-reduced-motion: reduce) { .gc-brand { animation: none; } }
+
+/* Revisi 66e: tanpa logo; tulisan tetap sama seperti 66d, hanya diletakkan di tengah */
+.gc-brand .gc-intro__logo { display: none; }
+.gc-brand__name { align-items: center; text-align: center; }
