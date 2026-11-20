@@ -11,6 +11,7 @@
   shopBtn.addEventListener('click', function () {
     if (going) return; going = true;
     try { sessionStorage.setItem('gcIntroSeen', '1'); } catch (e) {}
+    document.documentElement.classList.add('gc-to-shop'); // sembunyikan landing page di balik pintu
     if (homeBtn) homeBtn.click(); // jalankan efek yang sama dengan HOME
     setTimeout(function () { window.location.href = 'shop.html'; }, homeBtn ? 1050 : 0);
   });
