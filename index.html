@@ -43,6 +43,7 @@
   <link rel="stylesheet" href="css/intro.css">
   <link rel="stylesheet" href="css/intro-fx.css">
   <link rel="stylesheet" href="css/intro-lite.css">
+  <link rel="stylesheet" href="css/intro-world.css">
   <link rel="stylesheet" href="css/scroll-reveal.css">
   <link rel="stylesheet" href="css/hover-tilt.css">
   <link rel="stylesheet" href="css/team.css">
@@ -85,6 +86,7 @@
       setTimeout(function () { var el = d.getElementById('gc-intro'); if (el && !window.__gcIntro) { d.documentElement.classList.remove('gc-intro-on'); } }, 8000);
     })(document);
   </script>
+  <script src="js/intro-world.js" defer></script>
   <script src="js/intro.js" defer></script>
   <script src="js/title-fx.js" defer></script>
   <script src="js/logo-burst.js" defer></script>
@@ -94,20 +96,25 @@
 <body>
   <div class="gc-intro" id="gc-intro" role="dialog" aria-label="Welcome to Gaming Corner">
     <div class="gc-intro__dust" aria-hidden="true"></div>
-    <div class="gc-intro__cine" aria-hidden="true">
-      <div class="cine-char cine-char--war"><img src="assets/img/intro-war.webp" alt="" width="665" height="1000"></div>
-      <div class="cine-char cine-char--mage"><img src="assets/img/intro-mage.webp" alt="" width="558" height="1000"></div>
-      <div class="cine-char cine-char--girl"><img src="assets/img/intro-girl.webp" alt="" width="666" height="1000"></div>
-    </div>
+    <video class="gc-intro__bg" src="assets/video/intro-bg.mp4" poster="assets/img/intro-bg-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
     <div class="gc-intro__sweep" aria-hidden="true"></div>
     <div class="gc-intro__flash" aria-hidden="true"></div>
     <div class="gc-intro__stage">
-      <div class="gc-intro__logo"><img src="assets/img/logo-512.webp" alt="" width="466" height="512"></div>
+      <div class="gc-brand">
+        <div class="gc-brand__name" aria-label="Gaming Corner"><span>GAMING</span><span>CORNER</span></div>
+      </div>
       <div class="gc-intro__title" aria-hidden="true"></div>
       <div class="gc-intro__tag">Play &middot; Connect &middot; Grow</div>
       <div class="gc-intro__action">
-        <button class="gc-intro__enter" type="button">Enter</button>
-        <div class="gc-intro__hint">Music will play</div>
+        <button class="gc-intro__enter" type="button">Home</button>
+        <button class="gc-intro__enter gc-intro__shopbtn" type="button">Shop</button>
+      </div>
+    </div>
+    <div class="gc-intro__shop" aria-hidden="true">
+      <div class="gc-shop__panel">
+        <div class="gc-shop__title">SHOP</div>
+        <p class="gc-shop__text">Halaman shop sedang dalam proses pembuatan.<br>Tunggu ya, segera hadir!</p>
+        <button class="gc-intro__enter gc-shop__back" type="button">Kembali</button>
       </div>
     </div>
     <div class="gc-intro__beam" aria-hidden="true"></div>
