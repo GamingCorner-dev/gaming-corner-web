@@ -16,9 +16,7 @@
     return ctx;
   }
 
-  function click() {
-    var c = getCtx();
-    if (!c) return;
+  function play(c) {
     var t = c.currentTime;
     var osc = c.createOscillator();
     var gain = c.createGain();
@@ -33,6 +31,24 @@
     osc.start(t);
     osc.stop(t + 0.08);
   }
+
+  function click() {
+    var c = getCtx();
+    if (!c) return;
+    if (c.state === 'running') { play(c); return; }
+    // mesin suara belum menyala: tunggu sampai menyala lalu bunyikan (supaya klik pertama tidak hilang)
+    try { var r = c.resume(); if (r && r.then) r.then(function () { play(c); }); else play(c); } catch (e) {}
+  }
+
+  // Revisi 75 - siapkan mesin suara lebih awal begitu mouse bergerak (belum bunyi), supaya klik pertama sudah siap
+  function warm() {
+    document.removeEventListener('pointermove', warm, true);
+    if (ctx) return;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    try { ctx = new AC(); } catch (e) {}
+  }
+  document.addEventListener('pointermove', function (e) { if (e.pointerType === 'mouse') warm(); }, true);
 
   document.addEventListener('pointerdown', function (e) {
     if (e.pointerType !== 'mouse' || e.button !== 0) return;
