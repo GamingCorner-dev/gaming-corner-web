@@ -39,6 +39,7 @@
     })(document);
   </script>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/nav-fit.css">
   <link rel="stylesheet" href="css/extras.css">
   <link rel="stylesheet" href="css/intro.css">
   <link rel="stylesheet" href="css/intro-fx.css">
@@ -143,10 +144,12 @@
         <ul>
           <li><a href="#about">About</a></li>
           <li><a href="#tournaments">Tournaments</a></li>
-          <li><a href="#shop">Shop</a></li>
+          <li><a href="#roblox-items">Roblox Items</a></li>
+          <li><a href="#official-merch">Official Merch</a></li>
           <li><a href="#games">Games</a></li>
           <li><a href="#support">Support us</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="shop.html">Shop</a></li>
         </ul>
       </nav>
       <div class="header-actions">
@@ -299,14 +302,12 @@
     <!-- 03 SHOP -->
     <section id="shop" class="section">
       <div class="container stack-xl">
-        <div class="stack section-intro">
-          <p class="eyebrow">03 — Shop</p>
-          <h2 class="h2">Wear the corner</h2>
-        </div>
-
-        <div class="stack-md">
+        <div class="stack-md" id="roblox-items">
           <div class="subhead">
-            <h3 class="h3">Roblox items</h3>
+            <div class="stack">
+              <p class="eyebrow">03 — Roblox Items</p>
+              <h2 class="h2">Dress your avatar</h2>
+            </div>
             <span class="subhead__tag">Limited · this week only</span>
           </div>
           <ul class="roblox">
@@ -329,8 +330,11 @@
           </ul>
         </div>
 
-        <div class="stack-md">
-          <h3 class="h3">Official merch</h3>
+        <div class="stack-md" id="official-merch">
+          <div class="stack">
+            <p class="eyebrow">04 — Official Merch</p>
+            <h2 class="h2">Wear the corner</h2>
+          </div>
           <ul class="merch">
             <li class="card merch__item">
               <img src="assets/img/tshirt.jpg" alt="Black Gaming Corner T-shirt with gold logo, front and back" width="900" height="695" loading="lazy" decoding="async">
@@ -360,7 +364,7 @@
       <div class="container stack-lg">
         <div class="section-head">
           <div class="stack">
-            <p class="eyebrow">04 — Games</p>
+            <p class="eyebrow">05 — Games</p>
             <h2 class="h2 games__title">Multiple games. One server.</h2>
           </div>
           <p class="section-head__note">From ranked tactical shooters to laid-back social worlds, there's always a lobby to jump into.</p>
@@ -492,7 +496,7 @@
       <div class="container split split--support">
         <div class="support__main stack-lg">
           <div class="stack">
-            <p class="eyebrow">05 — Support us</p>
+            <p class="eyebrow">06 — Support us</p>
             <h2 class="h2">Hall of supporters</h2>
             <p class="lead">Thank you to everyone who has backed our journey. Your donations keep the server running and the events alive.</p>
           </div>
@@ -525,7 +529,7 @@
           <img src="assets/img/partnership.jpg" alt="Touch Gang Indo artwork with Touch Online avatars" width="1000" height="1000" loading="lazy" decoding="async">
         </div>
         <div class="split__text stack">
-          <p class="eyebrow">06 — Partnership</p>
+          <p class="eyebrow">07 — Partnership</p>
           <h2 class="h2">Touch Gang Indo</h2>
           <p class="lead">Our partner community: a Discord-based group built around Touch 4games, with sub-communities for other titles like Mobile Legends: Bang Bang.</p>
           <p class="muted small">Run a community and want to team up? Reach out through the contact below.</p>
@@ -538,7 +542,7 @@
     <section id="contact" class="section">
       <div class="container split split--center">
         <div class="split__text stack">
-          <p class="eyebrow">07 — Contact</p>
+          <p class="eyebrow">08 — Contact</p>
           <h2 class="h2">Talk to us</h2>
           <p class="lead">Scan to chat with us on WhatsApp for tournament registration, merch orders, partnerships, donations or any other questions.</p>
           <div class="follow">
@@ -591,10 +595,12 @@
       <nav class="footer-nav" aria-label="Footer">
         <a href="#about">About</a>
         <a href="#tournaments">Tournaments</a>
-        <a href="#shop">Shop</a>
+        <a href="#roblox-items">Roblox Items</a>
+        <a href="#official-merch">Official Merch</a>
         <a href="#support">Support us</a>
         <a href="#partners">Partnership</a>
         <a href="#contact">Contact</a>
+        <a href="shop.html">Shop</a>
       </nav>
       <p class="copyright">© 2026 Gaming Corner Community. All rights reserved.</p>
       <p class="gc-visitors" id="gc-visitors" hidden title="Total visits"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg><span class="gc-visitors__num">0</span><span class="gc-visitors__label">visits</span></p>
