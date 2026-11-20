@@ -1,0 +1,159 @@
+/* contoh: gaya pop-up dipakai ulang untuk halaman Shop (selector .gc-modal -> .gc-inline) */
+/* Revisi 52 - isi pop-up Top up & Sponsorship (kerangka pop-up dari css/tournament-modals.css) */
+.gc-modal__dialog--info { width: min(640px, 100%); }
+.gc-inline .info__lead { margin: 0 0 22px; font-size: 17px; line-height: 1.6; color: var(--text-2, #d8d2c6); }
+.gc-inline .info__head { margin: 26px 0 12px; font-family: var(--font-display); font-weight: 800; font-size: 22px; text-transform: uppercase; color: var(--gold); letter-spacing: .02em; }
+.gc-inline .info__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.gc-inline .info__list li { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; padding: 12px 16px; border-radius: 12px; background: rgba(255, 255, 255, .04); border: 1px solid rgba(232, 190, 110, .22); font-size: 16px; color: var(--text); }
+.gc-inline .info__list li span:last-child { color: var(--gold); font-weight: 700; white-space: nowrap; }
+.gc-inline .info__steps { margin: 0; padding: 0 0 0 22px; display: flex; flex-direction: column; gap: 8px; font-size: 16px; line-height: 1.5; color: var(--text-2, #d8d2c6); }
+.gc-inline .info__cta { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 12px; }
+.gc-inline .info__sample { display: inline-block; margin: 0 0 14px; padding: 4px 10px; border-radius: 999px; border: 1px dashed rgba(232, 190, 110, .7); color: var(--gold); font: 600 11px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; }
+@media (max-width: 720px) { .gc-inline .info__list li { font-size: 15px; padding: 10px 12px; } }
+
+/* daftar game di pop-up Top up: tiap baris adalah tombol yang membuka pop-up daftar barang */
+.gc-inline .info__list--games li { padding: 0; display: block; }
+.gc-inline .info__game {
+  width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 16px 18px; margin: 0; border: 0; border-radius: 12px; background: none; cursor: pointer;
+  font: 700 17px/1.2 var(--font-body, inherit); color: var(--text); text-align: left;
+  transition: background .25s ease, box-shadow .25s ease;
+}
+.gc-inline .info__list--games li { transition: border-color .25s ease, transform .25s ease; }
+.gc-inline .info__go { color: var(--gold); font-weight: 600; font-size: 14px; white-space: nowrap; }
+.gc-inline .info__go i { display: inline-block; font-style: normal; transition: transform .25s ease; }
+.gc-inline .info__game:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (hover: hover) {
+  .gc-inline .info__list--games li:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .gc-inline .info__game:hover { background: rgba(232, 190, 110, .1); }
+  .gc-inline .info__game:hover .info__go i { transform: translateX(4px); }
+}
+.gc-inline .info__game:active { transform: scale(.985); }
+
+/* Revisi 52: kartu rekomendasi store di pop-up tiap game */
+.gc-inline .info__list--stores li.store { flex-wrap: wrap; align-items: center; padding: 14px 16px; }
+.gc-inline .store__name { font-weight: 700; font-size: 17px; color: var(--text); }
+.gc-inline .store__links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.gc-inline .info__list--stores li.store .store__links { color: inherit; font-weight: 600; white-space: normal; }
+.gc-inline .store__link {
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; white-space: nowrap;
+  border: 1px solid rgba(232, 190, 110, .6); color: var(--gold); font-size: 14px; text-decoration: none;
+  transition: background .25s ease, border-color .25s ease, transform .25s ease, color .25s ease;
+}
+.gc-inline .store__link:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.gc-modal a.store__link:hover { color: var(--gold); }
+.gc-inline .info__list li .store__soon { color: var(--text-2, #b9b2a4); font-weight: 500; font-size: 14px; font-style: italic; }
+@media (hover: hover) { .gc-modal a.store__link:hover { background: rgba(232, 190, 110, .14); border-color: var(--gold); transform: translateY(-2px); } }
+.gc-inline .store__link:active { transform: scale(.96); }
+@media (max-width: 720px) { .gc-inline .store__links { justify-content: flex-start; } }
+
+/* Revisi 54: tulisan "Sponsorship" tidak terpotong (batas lebar tulisan tombol dilebarkan khusus tombol ini) */
+.gc-dock .team-fab.team-fab--sponsor:hover .team-fab__label,
+.gc-dock .team-fab.team-fab--sponsor:focus-visible .team-fab__label,
+.gc-dock .team-fab.team-fab--sponsor.is-open .team-fab__label { max-width: 140px; }
+
+/* Revisi 54: daftar persyaratan sponsor (titik emas) */
+.gc-inline .info__bullets { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.gc-inline .info__bullets li { position: relative; padding-left: 24px; font-size: 16px; line-height: 1.55; color: var(--text-2, #d8d2c6); }
+.gc-inline .info__bullets li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+@media (max-width: 720px) { .gc-inline .info__bullets li { font-size: 15px; } }
+
+/* Revisi 55: langkah "Cara order" bernomor emas (1, 2, 3) */
+.gc-inline .info__steps--num { list-style: none; padding: 0; counter-reset: gc-step; gap: 12px; }
+.gc-inline .info__steps--num li { counter-increment: gc-step; position: relative; padding-left: 40px; min-height: 28px; display: flex; align-items: center; }
+.gc-inline .info__steps--num li::before {
+  content: counter(gc-step); position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  border: 1.5px solid var(--gold); color: var(--gold); font: 700 14px/1 var(--font-body, inherit);
+}
+
+/* Revisi 56: tombol "Buka store" (tombol, bukan link), tombol Sell RC / Sell Item, label "Dalam proses" */
+.gc-inline button.store__link { background: none; cursor: pointer; font-family: inherit; font-weight: 600; margin: 0; }
+.gc-inline .info__stack { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 24px; margin-top: 8px; }   /* Sell RC di kiri, Sell Item di kanan */   /* bersebelahan; di layar sempit turun ke bawah */
+.gc-inline .store__soon--pill { display: inline-block; padding: 8px 16px; border-radius: 999px; border: 1px dashed rgba(232, 190, 110, .6); color: var(--gold); font: 600 12px/1 "JetBrains Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; font-style: normal; }
+
+/* Revisi 57: tombol "Buka store" (tombol) dapat efek hover & klik seperti tombol link store lainnya */
+.gc-inline .store__link .arr, .gc-inline .store__link > span { display: inline-block; transition: transform .25s ease; }
+@media (hover: hover) {
+  .gc-inline button.store__link:hover { color: var(--gold); background: rgba(232, 190, 110, .14); border-color: var(--gold); transform: translateY(-2px); }
+  .gc-inline .store__link:hover > span { transform: translateX(4px); }
+}
+.gc-inline button.store__link:active { transform: scale(.96); }
+
+/* Revisi 58 - keranjang Revinz Store (Sell RC / Sell Item / Keranjang / Ringkasan / Pembayaran) */
+.gc-inline .rc-list { gap: 10px; }
+.gc-inline .rc-list li.rc-row, .gc-inline .rc-lines li.rc-row {
+  display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 14px;
+}
+.gc-inline .rc-row__name { font-weight: 700; font-size: 17px; color: var(--text); }
+.gc-inline .info__list .rc-row .rc-row__price { color: var(--gold); font-weight: 700; white-space: nowrap; }
+.gc-inline .rc-step { display: inline-flex; align-items: center; gap: 4px; padding: 4px; border-radius: 999px; border: 1px solid rgba(232, 190, 110, .45); }
+.gc-inline .rc-step__btn {
+  width: 32px; height: 32px; border-radius: 50%; border: 0; margin: 0; padding: 0; cursor: pointer;
+  display: grid; place-items: center; font: 700 20px/1 var(--font-body, inherit);
+  background: rgba(232, 190, 110, .16); color: var(--gold);
+  transition: background .2s ease, transform .2s ease, opacity .2s ease;
+}
+.gc-inline .rc-step__btn:disabled { opacity: .35; cursor: default; }
+.gc-inline .rc-step__btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (hover: hover) { .gc-inline .rc-step__btn:not(:disabled):hover { background: var(--gold); color: #1a140a; transform: scale(1.08); } }
+.gc-inline .rc-step__btn:not(:disabled):active { transform: scale(.9); }
+.gc-inline .rc-step__qty { min-width: 28px; text-align: center; font-weight: 700; font-size: 16px; color: var(--text); }
+.gc-inline .rc-ro-qty { font-weight: 700; color: var(--text-2, #d8d2c6); }
+
+/* bar keranjang di bawah daftar */
+.gc-inline .rc-bar {
+  width: 100%; margin: 20px 0 0; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  border-radius: 14px; border: 1px solid var(--gold); background: rgba(232, 190, 110, .12); color: var(--text); cursor: pointer;
+  font: 600 15px/1.3 var(--font-body, inherit); text-align: left;
+  transition: background .25s ease, transform .25s ease;
+}
+.gc-inline .rc-bar[hidden] { display: none; }
+.gc-inline .rc-bar b { color: var(--gold); }
+.gc-inline .rc-bar__go { color: var(--gold); font-weight: 700; }
+.gc-inline .rc-bar:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (hover: hover) { .gc-inline .rc-bar:hover { background: rgba(232, 190, 110, .22); transform: translateY(-2px); } }
+.gc-inline .rc-bar:active { transform: scale(.985); }
+
+/* keranjang / ringkasan / pembayaran */
+.gc-inline .rc-pane[hidden] { display: none; }
+.gc-inline .rc-empty { margin: 0 0 6px; color: var(--text-2, #b9b2a4); font-style: italic; }
+.gc-inline .rc-empty[hidden] { display: none; }
+.gc-inline .rc-sum { margin: 18px 0 0; padding: 14px 4px 0; border-top: 1px solid rgba(232, 190, 110, .35); display: flex; justify-content: space-between; align-items: baseline; font-size: 18px; color: var(--text); }
+.gc-inline .rc-sum b { color: var(--gold); font-size: 24px; }
+.gc-inline .rc-clear { background: none; border: 0; padding: 8px 4px; cursor: pointer; color: var(--text-2, #b9b2a4); font: 500 14px/1 var(--font-body, inherit); text-decoration: underline; }
+.gc-inline .rc-clear[hidden] { display: none; }
+.gc-inline .rc-clear:hover { color: var(--gold); }
+.gc-inline .rc-qr { display: flex; justify-content: center; margin: 6px 0 18px; }
+.gc-inline .rc-qr img { width: min(380px, 100%); height: auto; border-radius: 14px; background: #fff; }
+.gc-inline .rc-note { margin: 0 0 4px; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(232, 190, 110, .4); background: rgba(232, 190, 110, .08); color: var(--text); line-height: 1.55; }
+.gc-inline .signup__btn:disabled { opacity: .45; cursor: default; pointer-events: none; }
+@media (max-width: 720px) {
+  .gc-inline .rc-list li.rc-row, .gc-inline .rc-lines li.rc-row { grid-template-columns: 1fr auto; row-gap: 8px; }
+  .gc-inline .rc-list li.rc-row .rc-step, .gc-inline .rc-lines li.rc-row .rc-step { grid-column: 1 / -1; justify-self: end; }
+}
+
+/* Revisi 59: jarak antar tombol, kolom IGN, tombol "Kosongkan keranjang" berkotak (merah lembut, beda dari tombol emas) */
+.gc-inline .rc-pane .info__cta { gap: 18px 26px; margin-top: 30px; }
+.gc-inline .rc-field { margin-top: 22px; }
+.gc-inline .rc-field label { display: block; margin: 0 0 8px; font-weight: 700; font-size: 15px; color: var(--gold); letter-spacing: .02em; }
+.gc-inline .rc-input {
+  width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(232, 190, 110, .5);
+  background: rgba(255, 255, 255, .05); color: var(--text); font: 600 17px/1.2 var(--font-body, inherit);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.gc-inline .rc-input::placeholder { color: rgba(216, 210, 198, .45); font-weight: 400; }
+.gc-inline .rc-input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(232, 190, 110, .2); }
+.gc-inline .rc-hint { margin: 8px 2px 0; font-size: 14px; line-height: 1.5; color: var(--text-2, #b9b2a4); }
+.gc-inline .rc-ign-show { color: var(--gold); word-break: break-all; }
+
+.gc-inline .rc-clear {
+  display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px; margin: 0;
+  border: 1.5px solid rgba(255, 128, 116, .6); background: rgba(255, 128, 116, .08); color: #ff9d92;
+  font: 600 14px/1 var(--font-body, inherit); text-decoration: none; cursor: pointer;
+  transition: background .25s ease, border-color .25s ease, color .25s ease, transform .25s ease;
+}
+.gc-inline .rc-clear svg { width: 17px; height: 17px; flex: none; }
+.gc-inline .rc-clear:focus-visible { outline: 2px solid #ff9d92; outline-offset: 3px; }
+@media (hover: hover) { .gc-inline .rc-clear:hover { color: #ffb9b0; background: rgba(255, 128, 116, .18); border-color: #ff9d92; transform: translateY(-2px); } }
+.gc-inline .rc-clear:active { transform: scale(.96); }
