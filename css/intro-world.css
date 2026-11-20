@@ -79,7 +79,3 @@
 /* Revisi 66e: tanpa logo; tulisan tetap sama seperti 66d, hanya diletakkan di tengah */
 .gc-brand .gc-intro__logo { display: none; }
 .gc-brand__name { align-items: center; text-align: center; }
-
-/* Revisi 73 - saat menuju Shop, landing page di balik efek pintu disembunyikan (yang terlihat hanya latar gelap) */
-html.gc-to-shop body { background: #07060c; }
-html.gc-to-shop body > *:not(#gc-intro) { visibility: hidden !important; }

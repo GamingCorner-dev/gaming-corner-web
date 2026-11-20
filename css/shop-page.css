@@ -16,4 +16,4 @@
 
 /* Revisi 72 - halaman Shop muncul pelan setelah transisi dari opening */
 @keyframes gc-shop-in { from { opacity: 0; } to { opacity: 1; } }
-body { animation: gc-shop-in .5s ease both; }
+body { animation: gc-shop-in .3s ease both; }
