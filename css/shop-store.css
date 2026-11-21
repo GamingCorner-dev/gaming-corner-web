@@ -1,0 +1,31 @@
+/* Revisi 78 - daftar item Revinz Store (halaman Shop) */
+.gc-inline .st-note { margin: 0 0 18px; color: var(--text-2, #b9b2a4); font-size: 15px; line-height: 1.55; }
+.gc-inline .st-tools { display: grid; gap: 12px; margin: 0 0 6px; }
+.gc-inline .st-search { font-weight: 500; }
+.gc-inline .st-chips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 8px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+.gc-inline .st-chip {
+  flex: 0 0 auto; padding: 9px 14px; border-radius: 999px; border: 1px solid rgba(232, 190, 110, .4); background: #131212;
+  color: var(--text); font: 600 14px/1 var(--font-body, inherit); cursor: pointer; white-space: nowrap;
+  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+}
+@media (hover: hover) { .gc-inline .st-chip:hover { border-color: var(--gold); background: #221c12; } }
+.gc-inline .st-chip:active { transform: scale(.96); }
+.gc-inline .st-chip.is-on { background: var(--gold); color: #1a140a; border-color: var(--gold); }
+.gc-inline .st-chip:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.gc-inline .st-cat[hidden], .gc-inline .st-row[hidden], .gc-inline .st-empty[hidden] { display: none; }
+.gc-inline .st-cat__head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-size: 18px; }
+.gc-inline .st-cat__head span { font: 600 12px/1 var(--font-body, inherit); color: var(--text-2, #b9b2a4); letter-spacing: .04em; text-transform: none; white-space: nowrap; }
+.gc-inline .st-row .rc-row__name { display: grid; gap: 3px; font-size: 16px; }
+.gc-inline .st-stock { font-weight: 500; font-size: 12px; color: var(--text-2, #b9b2a4); }
+.gc-inline .st-row .rc-row__price { display: grid; justify-items: end; gap: 2px; text-align: right; }
+.gc-inline .st-php { font-weight: 500; font-size: 12px; color: var(--text-2, #b9b2a4); }
+.gc-inline .st-empty { margin: 22px 0; color: var(--text-2, #b9b2a4); }
+#v-revin .rc-bar { position: sticky; bottom: 14px; z-index: 5; margin-top: 18px; }
+
+/* Revisi 79 - item habis */
+.gc-inline .st-row.is-out { opacity: .55; }
+.gc-inline .st-row.is-out .rc-row__name { color: var(--text-2, #b9b2a4); }
+.gc-inline .st-stock--out { font-weight: 800; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #ff9d92; }
+
+/* Revisi 79 - baris yang disaring (pencarian/kategori) benar-benar disembunyikan */
+.gc-inline .rc-list li.rc-row.st-row[hidden] { display: none; }
