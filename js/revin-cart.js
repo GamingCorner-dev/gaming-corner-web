@@ -11,13 +11,26 @@
 
   var cartModal = document.getElementById('revin-cart');
   if (!cartModal) return;
-  var rows = document.querySelectorAll('.rc-row');
-  var catalog = {};
-  Array.prototype.forEach.call(rows, function (r) {
-    catalog[r.getAttribute('data-id')] = { name: r.getAttribute('data-name'), price: parseInt(r.getAttribute('data-price'), 10) || 0 };
-  });
-  var qty = {};
-  try { var saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); Object.keys(saved).forEach(function (k) { if (catalog[k] && saved[k] > 0) qty[k] = saved[k]; }); } catch (e) {}
+  var rows = [], catalog = {}, qty = {};
+  /* baca ulang daftar item di halaman (dipanggil juga saat daftar diperbarui dari Google Sheet) */
+  function scan() {
+    rows = document.querySelectorAll('.rc-list .rc-row');
+    catalog = {};
+    Array.prototype.forEach.call(rows, function (r) {
+      var mx = parseInt(r.getAttribute('data-max'), 10);
+      catalog[r.getAttribute('data-id')] = { name: r.getAttribute('data-name'), price: parseInt(r.getAttribute('data-price'), 10) || 0, php: parseInt(r.getAttribute('data-php'), 10) || 0, max: isNaN(mx) ? 99 : mx };
+    });
+  }
+  /* buang dari keranjang item yang sudah tidak ada / habis, dan batasi jumlah sesuai stok */
+  function prune() {
+    Object.keys(qty).forEach(function (k) {
+      if (!catalog[k] || !(qty[k] > 0) || catalog[k].max <= 0) delete qty[k];
+      else qty[k] = Math.min(qty[k], catalog[k].max);
+    });
+  }
+  try { qty = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { qty = {}; }
+  scan(); prune();
+  window.gcCartRescan = function () { scan(); prune(); save(); render(); };
 
   var ign = '';
   try { ign = (localStorage.getItem(IGN_KEY) || '').slice(0, 40); } catch (e) {}
@@ -26,7 +39,7 @@
 
   function rp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
   function ids() { return Object.keys(qty).filter(function (k) { return qty[k] > 0; }); }
-  function totals() { var c = 0, t = 0; ids().forEach(function (k) { c += qty[k]; t += qty[k] * catalog[k].price; }); return { count: c, total: t }; }
+  function totals() { var c = 0, t = 0, p = 0; ids().forEach(function (k) { c += qty[k]; t += qty[k] * catalog[k].price; p += qty[k] * catalog[k].php; }); return { count: c, total: t, php: p }; }
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(qty)); } catch (e) {} }
 
   function stepper(id, ro) {
@@ -39,8 +52,8 @@
   }
 
   function waLink() {
-    var lines = ids().map(function (k) { return '- ' + catalog[k].name + ' x' + qty[k] + ' = ' + rp(catalog[k].price * qty[k]); });
-    var msg = 'Halo Revinz Store, saya sudah melakukan pembayaran.\n\nPesanan:\n' + lines.join('\n') + '\n\nTotal: ' + rp(totals().total) + '\nIGN Touch 4games: ' + ign + '\n\nBukti pembayaran saya kirim di chat ini.';
+    var lines = ids().map(function (k) { return '- ' + catalog[k].name + ' x' + qty[k] + ' = ' + rp(catalog[k].price * qty[k]) + (catalog[k].php ? ' (PHP ' + (catalog[k].php * qty[k]).toLocaleString('en-US') + ')' : ''); });
+    var msg = 'Halo Revinz Store, saya sudah melakukan pembayaran.\n\nPesanan:\n' + lines.join('\n') + '\n\nTotal: ' + rp(totals().total) + (totals().php ? ' (PHP ' + totals().php.toLocaleString('en-US') + ')' : '') + '\nIGN Touch 4games: ' + ign + '\n\nBukti pembayaran saya kirim di chat ini.';
     return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
   }
 
@@ -51,7 +64,9 @@
       var id = r.getAttribute('data-id'), q = qty[id] || 0;
       var o = r.querySelector('.rc-step__qty'); if (o) o.textContent = q;
       var m = r.querySelector('[data-act=minus]'); if (m) m.disabled = q === 0;
-      var pr = r.querySelector('.rc-row__price'); if (pr && !r.closest('[data-lines]')) pr.textContent = rp(catalog[id].price);
+      var pl = r.querySelector('[data-act=plus]'); if (pl) pl.disabled = q >= catalog[id].max;
+      var pr = r.querySelector('.rc-row__price');
+      if (pr && !r.closest('[data-lines]')) pr.innerHTML = rp(catalog[id].price) + (catalog[id].php ? '<small class="st-php">PHP ' + catalog[id].php.toLocaleString('en-US') + '</small>' : '');
     });
     // bar keranjang
     Array.prototype.forEach.call(document.querySelectorAll('.rc-bar'), function (b) { b.hidden = t.count === 0; });
@@ -93,7 +108,7 @@
       var li = btn.closest('.rc-row'); if (!li) return;
       var id = li.getAttribute('data-id'), q = qty[id] || 0;
       q += btn.getAttribute('data-act') === 'plus' ? 1 : -1;
-      if (q <= 0) delete qty[id]; else qty[id] = Math.min(q, 99);
+      if (q <= 0) delete qty[id]; else qty[id] = Math.min(q, catalog[id].max);
       save(); render(); return;
     }
     if (e.target.closest && e.target.closest('[data-clear]')) { qty = {}; save(); render(); return; }
