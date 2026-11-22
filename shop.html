@@ -142,6 +142,7 @@
           <ul class="info__list rc-lines" data-lines></ul>
           <p class="rc-empty" data-empty>Keranjang masih kosong.</p>
           <div class="rc-sum"><span>Total</span><b class="rc-total">Rp 0</b></div>
+          <p class="rc-php-line">Atau bayar dalam PHP: <b class="rc-total-php">PHP 0</b></p>
           <div class="info__cta">
             <button type="button" class="signup__btn signup__btn--ghost" data-go="v-revin">+ Lanjut belanja</button>
             <button type="button" class="signup__btn" data-step="order" data-needs-items>Order <span class="arr" aria-hidden="true">&rarr;</span></button>
@@ -153,6 +154,7 @@
           <p class="info__lead">Periksa pesananmu dulu sebelum membayar.</p>
           <ul class="info__list rc-lines rc-lines--ro" data-lines></ul>
           <div class="rc-sum"><span>Total bayar</span><b class="rc-total">Rp 0</b></div>
+          <p class="rc-php-line">Atau bayar dalam PHP: <b class="rc-total-php">PHP 0</b></p>
           <div class="rc-field">
             <label for="rc-ign">IGN Touch 4games kamu</label>
             <input id="rc-ign" class="rc-input" type="text" maxlength="40" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tulis IGN kamu di sini">
@@ -165,8 +167,20 @@
         </div>
         <div class="rc-pane" data-pane="pay" hidden>
           <h2 class="h2 shop-view__title">Pembayaran</h2>
-          <p class="info__lead">Scan QR Revinz Store di bawah ini untuk membayar <b class="rc-total">Rp 0</b>.<br>IGN Touch 4games: <b class="rc-ign-show" data-ign-show></b></p>
-          <div class="rc-qr"><img src="assets/img/revinz-qr.jpg" alt="QRIS pembayaran Revinz Store" width="1000" height="1408" loading="lazy" decoding="async"></div>
+          <p class="info__lead">Pilih cara bayar yang kamu mau.</p>
+          <div class="rc-methods" role="group" aria-label="Metode pembayaran">
+            <button type="button" class="rc-method is-on" data-method="idr" aria-pressed="true">Rupiah <small>QRIS</small></button>
+            <button type="button" class="rc-method" data-method="php" aria-pressed="false">PHP <small>InstaPay</small></button>
+          </div>
+          <div class="rc-mpane" data-mpane="idr">
+            <p class="info__lead">Scan QR Revinz Store di bawah ini untuk membayar <b class="rc-total">Rp 0</b>.<br>IGN Touch 4games: <b class="rc-ign-show" data-ign-show></b></p>
+            <div class="rc-qr"><img src="assets/img/revinz-qr.jpg" alt="QRIS pembayaran Revinz Store" width="1000" height="1408" loading="lazy" decoding="async"></div>
+          </div>
+          <div class="rc-mpane" data-mpane="php" hidden>
+            <p class="info__lead">Scan QR InstaPay di bawah ini untuk membayar <b class="rc-total-php">PHP 0</b>.<br>IGN Touch 4games: <b class="rc-ign-show" data-ign-show></b></p>
+            <div class="rc-qr"><img src="assets/img/revinz-qr-php.jpg" alt="QR InstaPay pembayaran Revinz Store (PHP)" width="551" height="772" loading="lazy" decoding="async"></div>
+            <p class="rc-hint">Biaya transfer (transfer fees) bisa berlaku, tergantung aplikasi bank atau e-wallet kamu.</p>
+          </div>
           <p class="rc-note"><b>Jika sudah membayar, silakan chat WhatsApp Revinz Store dan kirim bukti pembayaranmu.</b> Pesanan, total, dan IGN kamu sudah terisi otomatis di pesannya, tinggal kirim.</p>
           <div class="info__cta">
             <a class="signup__btn" data-wa href="#" target="_blank" rel="noopener noreferrer">Chat WhatsApp Revinz Store <span class="arr" aria-hidden="true">&rarr;</span></a>
