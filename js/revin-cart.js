@@ -32,12 +32,14 @@
   scan(); prune();
   window.gcCartRescan = function () { scan(); prune(); save(); render(); };
 
+  var method = 'idr';   /* 'idr' = QRIS (Rupiah), 'php' = InstaPay (PHP) */
   var ign = '';
   try { ign = (localStorage.getItem(IGN_KEY) || '').slice(0, 40); } catch (e) {}
   var ignInput = cartModal.querySelector('#rc-ign');
   if (ignInput) ignInput.value = ign;
 
   function rp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
+  function php(n) { return 'PHP ' + n.toLocaleString('en-US'); }
   function ids() { return Object.keys(qty).filter(function (k) { return qty[k] > 0; }); }
   function totals() { var c = 0, t = 0, p = 0; ids().forEach(function (k) { c += qty[k]; t += qty[k] * catalog[k].price; p += qty[k] * catalog[k].php; }); return { count: c, total: t, php: p }; }
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(qty)); } catch (e) {} }
@@ -52,8 +54,15 @@
   }
 
   function waLink() {
-    var lines = ids().map(function (k) { return '- ' + catalog[k].name + ' x' + qty[k] + ' = ' + rp(catalog[k].price * qty[k]) + (catalog[k].php ? ' (PHP ' + (catalog[k].php * qty[k]).toLocaleString('en-US') + ')' : ''); });
-    var msg = 'Halo Revinz Store, saya sudah melakukan pembayaran.\n\nPesanan:\n' + lines.join('\n') + '\n\nTotal: ' + rp(totals().total) + (totals().php ? ' (PHP ' + totals().php.toLocaleString('en-US') + ')' : '') + '\nIGN Touch 4games: ' + ign + '\n\nBukti pembayaran saya kirim di chat ini.';
+    var isPhp = method === 'php', t = totals();
+    var lines = ids().map(function (k) {
+      var it = catalog[k];
+      return '- ' + it.name + ' x' + qty[k] + ' = ' + (isPhp ? php(it.php * qty[k]) : rp(it.price * qty[k]));
+    });
+    var msg = 'Halo Revinz Store, saya sudah melakukan pembayaran.\n\nPesanan:\n' + lines.join('\n') +
+      '\n\nMetode pembayaran: ' + (isPhp ? 'InstaPay (PHP)' : 'QRIS (Rupiah)') +
+      '\nTotal: ' + (isPhp ? php(t.php) : rp(t.total)) +
+      '\nIGN Touch 4games: ' + ign + '\n\nBukti pembayaran saya kirim di chat ini.';
     return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
   }
 
@@ -72,6 +81,9 @@
     Array.prototype.forEach.call(document.querySelectorAll('.rc-bar'), function (b) { b.hidden = t.count === 0; });
     Array.prototype.forEach.call(document.querySelectorAll('.rc-count'), function (e) { e.textContent = t.count; });
     Array.prototype.forEach.call(document.querySelectorAll('.rc-total'), function (e) { e.textContent = rp(t.total); });
+    Array.prototype.forEach.call(document.querySelectorAll('.rc-total-php'), function (e) { e.textContent = php(t.php); });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('.rc-method'), function (b) { var on = b.getAttribute('data-method') === method; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-mpane]'), function (p) { p.hidden = p.getAttribute('data-mpane') !== method; });
     // isi keranjang & ringkasan
     var list = ids();
     Array.prototype.forEach.call(cartModal.querySelectorAll('[data-lines]'), function (ul) {
@@ -112,6 +124,8 @@
       save(); render(); return;
     }
     if (e.target.closest && e.target.closest('[data-clear]')) { qty = {}; save(); render(); return; }
+    var mb = e.target.closest ? e.target.closest('.rc-method') : null;
+    if (mb && cartModal.contains(mb)) { method = mb.getAttribute('data-method') === 'php' ? 'php' : 'idr'; render(); return; }
     var st = e.target.closest ? e.target.closest('[data-step]') : null;
     if (st && cartModal.contains(st) && !st.disabled) { e.preventDefault(); show(st.getAttribute('data-step')); return; }
     if (e.target.closest && e.target.closest('[data-modal="revin-cart"]')) { render(); show('cart'); }
