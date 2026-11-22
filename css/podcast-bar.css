@@ -68,6 +68,9 @@ body { padding-bottom: var(--gc-pod-h, 0px); transition: padding-bottom .4s ease
   .gc-pod { bottom: calc(76px + env(safe-area-inset-bottom)); }
   .gc-pod__panel { width: min(420px, calc(100% - 16px)); border-radius: 10px 10px 0 0; padding: 3px; }
   .gc-dock { bottom: calc(88px + var(--gc-pod-h, 0px)); }
+  /* Revisi 82 - ruang di bawah halaman = bar "Join us on Discord" (sekitar 77px) + bar podcast + sedikit jarak,
+     supaya baris paling bawah footer (hak cipta dan penghitung pengunjung) tidak tertutup. Aturan sebelumnya menimpa ruang 80px bawaan. */
+  body { padding-bottom: calc(80px + env(safe-area-inset-bottom) + var(--gc-pod-h, 0px)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .gc-pod__tab::after { display: none; }
