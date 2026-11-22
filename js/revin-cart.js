@@ -46,7 +46,7 @@
 
   function stepper(id, ro) {
     return ro ? '<span class="rc-ro-qty">x' + qty[id] + '</span>' :
-      '<div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Kurangi">&minus;</button><output class="rc-step__qty">' + qty[id] + '</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Tambah">+</button></div>';
+      '<div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease">&minus;</button><output class="rc-step__qty">' + qty[id] + '</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase">+</button></div>';
   }
   function lineHtml(id, ro) {
     var c = catalog[id];
@@ -59,10 +59,10 @@
       var it = catalog[k];
       return '- ' + it.name + ' x' + qty[k] + ' = ' + (isPhp ? php(it.php * qty[k]) : rp(it.price * qty[k]));
     });
-    var msg = 'Halo Revinz Store, saya sudah melakukan pembayaran.\n\nPesanan:\n' + lines.join('\n') +
-      '\n\nMetode pembayaran: ' + (isPhp ? 'InstaPay (PHP)' : 'QRIS (Rupiah)') +
+    var msg = 'Hello Revinz Store, I have made my payment.\n\nOrder:\n' + lines.join('\n') +
+      '\n\nPayment method: ' + (isPhp ? 'InstaPay (PHP)' : 'QRIS (Rupiah)') +
       '\nTotal: ' + (isPhp ? php(t.php) : rp(t.total)) +
-      '\nIGN Touch 4games: ' + ign + '\n\nBukti pembayaran saya kirim di chat ini.';
+      '\nTouch 4games IGN: ' + ign + '\n\nI will send my proof of payment in this chat.';
     return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
   }
 

@@ -39,7 +39,9 @@
   function fromCSV(text) {
     var rows = parseCSV(text); if (rows.length < 2) return null;
     var head = rows[0].map(function (h) { return h.trim().toLowerCase(); });
-    var iK = head.indexOf('kategori'), iN = head.indexOf('nama item'), iS = head.indexOf('stok'), iP = head.indexOf('harga php'), iR = head.indexOf('harga idr');
+    function col() { for (var a = 0; a < arguments.length; a++) { var x = head.indexOf(arguments[a]); if (x >= 0) return x; } return -1; }
+    /* judul kolom sheet boleh bahasa Indonesia atau Inggris */
+    var iK = col('kategori', 'category'), iN = col('nama item', 'item name', 'item'), iS = col('stok', 'stock'), iP = col('harga php', 'price php', 'php'), iR = col('harga idr', 'price idr', 'idr');
     if (iK < 0 || iN < 0 || iS < 0 || iR < 0) return null;
     var cats = [], map = {};
     for (var r = 1; r < rows.length; r++) {
@@ -59,23 +61,23 @@
 
   function build(data) {
     var used = {}, html = '<div class="st-tools">' +
-      '<input id="st-q" class="rc-input st-search" type="search" placeholder="Cari item..." autocomplete="off" aria-label="Cari item" value="' + esc(term) + '">' +
-      '<div class="st-chips" role="group" aria-label="Kategori"><button type="button" class="st-chip' + (cat === 'all' ? ' is-on' : '') + '" data-cat="all">Semua</button>';
+      '<input id="st-q" class="rc-input st-search" type="search" placeholder="Search items..." autocomplete="off" aria-label="Search items" value="' + esc(term) + '">' +
+      '<div class="st-chips" role="group" aria-label="Category"><button type="button" class="st-chip' + (cat === 'all' ? ' is-on' : '') + '" data-cat="all">All</button>';
     data.forEach(function (c, i) { html += '<button type="button" class="st-chip' + (String(i) === cat ? ' is-on' : '') + '" data-cat="' + i + '">' + esc(c.title) + '</button>'; });
     html += '</div></div><div id="st-list">';
     data.forEach(function (c, ci) {
-      html += '<section class="st-cat" data-cat="' + ci + '"><h3 class="info__head st-cat__head">' + esc(c.title) + ' <span>' + c.items.length + ' item</span></h3><ul class="info__list rc-list">';
+      html += '<section class="st-cat" data-cat="' + ci + '"><h3 class="info__head st-cat__head">' + esc(c.title) + ' <span>' + c.items.length + (c.items.length === 1 ? ' item' : ' items') + '</span></h3><ul class="info__list rc-list">';
       c.items.forEach(function (it) {
         var id = 's-' + slug(c.title + '-' + it.n), k = 1, base = id; while (used[id]) { k++; id = base + '-' + k; } used[id] = 1;
         var out = it.s === 0, max = out ? 0 : (it.s > 0 ? it.s : 99);
         html += '<li class="rc-row st-row' + (out ? ' is-out' : '') + '" data-id="' + id + '" data-name="' + esc(it.n) + '" data-price="' + it.r + '" data-php="' + it.p + '" data-max="' + max + '" data-search="' + esc(it.n.toLowerCase()) + '">' +
-          '<span class="rc-row__name">' + esc(it.n) + (out ? '<small class="st-stock st-stock--out">Habis</small>' : (it.s > 0 ? '<small class="st-stock">Stok ' + it.s + '</small>' : '')) + '</span>' +
+          '<span class="rc-row__name">' + esc(it.n) + (out ? '<small class="st-stock st-stock--out">Sold out</small>' : (it.s > 0 ? '<small class="st-stock">Stock ' + it.s + '</small>' : '')) + '</span>' +
           '<span class="rc-row__price"></span>' +
-          '<div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Kurangi ' + esc(it.n) + '">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Tambah ' + esc(it.n) + '"' + (out ? ' disabled' : '') + '>+</button></div></li>';
+          '<div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease ' + esc(it.n) + '">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase ' + esc(it.n) + '"' + (out ? ' disabled' : '') + '>+</button></div></li>';
       });
       html += '</ul></section>';
     });
-    html += '</div><p class="st-empty" id="st-empty" hidden>Item tidak ditemukan. Coba kata lain.</p>';
+    html += '</div><p class="st-empty" id="st-empty" hidden>No items found. Try another word.</p>';
     root.innerHTML = html;
     if (cat !== 'all' && !data[parseInt(cat, 10)]) cat = 'all';
     apply();
