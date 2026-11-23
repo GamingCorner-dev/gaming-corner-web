@@ -1,4 +1,5 @@
-/* Revisi 79 - daftar item Revinz Store, stok otomatis dari Google Sheet.
+/* Revisi 83 - kartu ala Shopee (gambar inisial, nama, harga, tombol + Add).
+   Revisi 79 - daftar item Revinz Store, stok otomatis dari Google Sheet.
    - Daftar langsung tampil dari data cadangan (js/store-data.js), lalu diperbarui dari Google Sheet yang diterbitkan ke web (CSV).
    - Stok 0 di sheet = item "Habis". Sel stok kosong = stok tidak dibatasi. Baris yang dihapus dari sheet = item hilang dari website.
    - Kalau Google tidak bisa dibuka atau isi sheet tidak sesuai, daftar cadangan tetap dipakai (toko tidak kosong).
@@ -57,6 +58,8 @@
     return total >= 10 ? cats : null;                 // terlalu sedikit = dianggap salah baca, pakai cadangan
   }
 
+  var HUES = [38, 200, 280, 150, 340, 20, 220, 90, 310, 170, 55, 250, 10];
+  function ini(n) { var w = String(n).replace(/[^A-Za-z0-9 ]/g, '').split(' ').filter(Boolean); return (w[0] || '?').slice(0, 1) + (w[1] ? w[1].slice(0, 1) : ''); }
   var cat = 'all', term = '';
 
   function build(data) {
@@ -70,7 +73,9 @@
       c.items.forEach(function (it) {
         var id = 's-' + slug(c.title + '-' + it.n), k = 1, base = id; while (used[id]) { k++; id = base + '-' + k; } used[id] = 1;
         var out = it.s === 0, max = out ? 0 : (it.s > 0 ? it.s : 99);
+        var low = (!out && it.s > 0 && it.s <= 2) ? '<i class="st-low">Only ' + it.s + ' left</i>' : '';
         html += '<li class="rc-row st-row' + (out ? ' is-out' : '') + '" data-id="' + id + '" data-name="' + esc(it.n) + '" data-price="' + it.r + '" data-php="' + it.p + '" data-max="' + max + '" data-search="' + esc(it.n.toLowerCase()) + '">' +
+          '<span class="st-art" style="--h:' + HUES[ci % HUES.length] + '" aria-hidden="true"><b>' + esc(ini(it.n)) + '</b>' + low + '<small>' + esc(c.title.split(' ').slice(0, 3).join(' ')) + '</small></span>' +
           '<span class="rc-row__name">' + esc(it.n) + (out ? '<small class="st-stock st-stock--out">Sold out</small>' : (it.s > 0 ? '<small class="st-stock">Stock ' + it.s + '</small>' : '')) + '</span>' +
           '<span class="rc-row__price"></span>' +
           '<div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease ' + esc(it.n) + '">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase ' + esc(it.n) + '"' + (out ? ' disabled' : '') + '>+</button></div></li>';

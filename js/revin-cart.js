@@ -18,7 +18,8 @@
     catalog = {};
     Array.prototype.forEach.call(rows, function (r) {
       var mx = parseInt(r.getAttribute('data-max'), 10);
-      catalog[r.getAttribute('data-id')] = { name: r.getAttribute('data-name'), price: parseInt(r.getAttribute('data-price'), 10) || 0, php: parseInt(r.getAttribute('data-php'), 10) || 0, max: isNaN(mx) ? 99 : mx };
+      var art = r.querySelector('.st-art'), ab = art && art.querySelector('b');
+      catalog[r.getAttribute('data-id')] = { hue: art ? (parseInt(art.style.getPropertyValue('--h'), 10) || 38) : 38, ini: ab ? ab.textContent : '', name: r.getAttribute('data-name'), price: parseInt(r.getAttribute('data-price'), 10) || 0, php: parseInt(r.getAttribute('data-php'), 10) || 0, max: isNaN(mx) ? 99 : mx };
     });
   }
   /* buang dari keranjang item yang sudah tidak ada / habis, dan batasi jumlah sesuai stok */
@@ -49,8 +50,12 @@
       '<div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease">&minus;</button><output class="rc-step__qty">' + qty[id] + '</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase">+</button></div>';
   }
   function lineHtml(id, ro) {
-    var c = catalog[id];
-    return '<li class="rc-row" data-id="' + id + '"><span class="rc-row__name">' + c.name + '</span><span class="rc-row__price">' + rp(c.price * qty[id]) + '</span>' + stepper(id, ro) + '</li>';
+    var c = catalog[id], q = qty[id], pl = c.php ? '<small class="rc-line__php">PHP ' + (c.php * q).toLocaleString('en-US') + '</small>' : '';
+    var ctl = ro ? '<span class="rc-ro-qty">x' + q + '</span>' :
+      stepper(id, false) + '<button type="button" class="rc-remove" data-remove aria-label="Remove ' + c.name + '"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4.5h6V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10 11v5M14 11v5"/></svg></button>';
+    var warn = (c.max < 99) ? '<small class="rc-line__warn' + (q >= c.max && c.max > 1 ? ' is-max' : '') + '">' + (q >= c.max && c.max > 1 ? 'Max stock reached' : 'Stock ' + c.max) + '</small>' : '';
+    return '<li class="rc-row" data-id="' + id + '"><span class="rc-thumb" style="--h:' + c.hue + '" aria-hidden="true"><b>' + c.ini + '</b></span>' +
+      '<span class="rc-row__name">' + c.name + warn + '</span><span class="rc-row__price">' + rp(c.price * q) + pl + '</span><span class="rc-line__ctl">' + ctl + '</span></li>';
   }
 
   function waLink() {
@@ -73,12 +78,15 @@
       var id = r.getAttribute('data-id'), q = qty[id] || 0;
       var o = r.querySelector('.rc-step__qty'); if (o) o.textContent = q;
       var m = r.querySelector('[data-act=minus]'); if (m) m.disabled = q === 0;
+      r.classList.toggle('has-q', q > 0);
       var pl = r.querySelector('[data-act=plus]'); if (pl) pl.disabled = q >= catalog[id].max;
       var pr = r.querySelector('.rc-row__price');
       if (pr && !r.closest('[data-lines]')) pr.innerHTML = rp(catalog[id].price) + (catalog[id].php ? '<small class="st-php">PHP ' + catalog[id].php.toLocaleString('en-US') + '</small>' : '');
     });
     // bar keranjang
-    Array.prototype.forEach.call(document.querySelectorAll('.rc-bar'), function (b) { b.hidden = t.count === 0; });
+    Array.prototype.forEach.call(document.querySelectorAll('.rc-bar'), function (b) { b.hidden = false; });
+    Array.prototype.forEach.call(document.querySelectorAll('.rc-badge'), function (e) { e.textContent = t.count > 99 ? '99+' : t.count; e.hidden = t.count === 0; });
+    Array.prototype.forEach.call(document.querySelectorAll('.rc-bar__total'), function (e) { e.textContent = rp(t.total); e.hidden = t.count === 0; });
     Array.prototype.forEach.call(document.querySelectorAll('.rc-count'), function (e) { e.textContent = t.count; });
     Array.prototype.forEach.call(document.querySelectorAll('.rc-total'), function (e) { e.textContent = rp(t.total); });
     Array.prototype.forEach.call(document.querySelectorAll('.rc-total-php'), function (e) { e.textContent = php(t.php); });
@@ -90,6 +98,7 @@
       var ro = ul.classList.contains('rc-lines--ro');
       ul.innerHTML = list.map(function (k) { return lineHtml(k, ro); }).join('');
     });
+    cartModal.classList.toggle('is-empty', list.length === 0);
     var empty = cartModal.querySelector('[data-empty]'); if (empty) empty.hidden = list.length > 0;
     Array.prototype.forEach.call(cartModal.querySelectorAll('[data-needs-items]'), function (b) { b.disabled = list.length === 0; });
     var wa = cartModal.querySelector('[data-wa]'); if (wa) wa.href = waLink();
@@ -123,6 +132,8 @@
       if (q <= 0) delete qty[id]; else qty[id] = Math.min(q, catalog[id].max);
       save(); render(); return;
     }
+    var rm = e.target.closest ? e.target.closest('[data-remove]') : null;
+    if (rm) { var rl = rm.closest('.rc-row'); if (rl) { delete qty[rl.getAttribute('data-id')]; save(); render(); } return; }
     if (e.target.closest && e.target.closest('[data-clear]')) { qty = {}; save(); render(); return; }
     var mb = e.target.closest ? e.target.closest('.rc-method') : null;
     if (mb && cartModal.contains(mb)) { method = mb.getAttribute('data-method') === 'php' ? 'php' : 'idr'; render(); return; }
