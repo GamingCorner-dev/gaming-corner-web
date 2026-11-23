@@ -190,3 +190,15 @@
 @media (min-width: 701px) {
   .site-header .header-inner { max-width: none; width: min(1360px, 96vw); padding-left: 0; padding-right: 0; }
 }
+
+/* Revisi 84 - tombol Back kecil di pojok kiri atas, selalu terlihat saat scroll */
+.gc-inline .sv-back {
+  position: fixed; top: 88px; left: 16px; z-index: 40; width: auto; min-height: 0; margin: 0;
+  display: inline-flex; align-items: center; gap: 6px; padding: 11px 16px; border-radius: 999px;
+  background: #221c12; border: 1px solid var(--gold); color: var(--gold); box-shadow: 0 6px 20px rgba(0, 0, 0, .55);
+  font: 700 13px/1 var(--font-body, inherit); letter-spacing: .04em; text-transform: uppercase; cursor: pointer;
+}
+@media (hover: hover) { .gc-inline .sv-back:hover { background: #382e1c; } }
+.gc-inline .sv-back:active { transform: scale(.96); }
+.gc-inline .info__cta:has(> .sv-back:only-child) { height: 0; margin: 0; padding: 0; min-height: 0; }
+@media (max-width: 700px) { .gc-inline .sv-back { top: 80px; left: 12px; padding: 10px 14px; font-size: 12px; } }
