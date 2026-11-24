@@ -206,3 +206,9 @@
 /* Revisi 85 - ruang di atas judul supaya tombol Back tidak menimpa tulisan */
 .gc-inline .sv:has(.sv-back) { padding-top: 46px; }
 @media (max-width: 700px) { .gc-inline .sv:has(.sv-back) { padding-top: 44px; } }
+
+/* Revisi 93 - Shop dan menu atas diposisikan sama seperti halaman 1 (lebar & margin yang sama) */
+@media (min-width: 701px) {
+  .shop-wrap { width: 100%; max-width: 1240px; padding-left: var(--gutter); padding-right: var(--gutter); }
+  .site-header .header-inner { width: 100%; max-width: 1240px; padding-left: var(--gutter); padding-right: var(--gutter); }
+}
