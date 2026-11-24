@@ -10,7 +10,7 @@
   var ASK = function (t) { return '#ask:' + t; };
   var FAQ = [
     { cat: 'Top Up', items: [
-      { q: 'How do I top up?', a: 'Pick your game on this page (Roblox, Touch 4games or Mobile Legends), then choose one of our recommended stores and pay there. For Touch 4games, Revinz Store sells RC and items right here on the website.' },
+      { q: 'How do I top up?', a: 'Open the Shop page > Top Up and pick your game (Roblox, Touch 4games or Mobile Legends), then choose one of our recommended stores and pay there. For Touch 4games, Revinz Store sells RC and items right here on the website.' },
       { q: 'Which games can I top up?', a: 'Right now we list Roblox, Touch 4games and Mobile Legends. Tap a game on the Top Up page to see the stores we recommend for it.' },
       { q: 'Which store do you recommend for Roblox?', a: 'For Roblox we recommend Golrox.', links: [['Open Golrox', 'https://golrox.com/']] },
       { q: 'Which stores do you recommend for Mobile Legends?', a: 'For Mobile Legends we recommend Vexagame, Juliesean Rekber and Taka Pedia. Pick the one you prefer and pay inside that store.', links: [['Vexagame', 'https://vexagame.com/'], ['Juliesean Rekber', 'https://julieseanrekber.com/'], ['Taka Pedia', 'https://www.instagram.com/taka_pedia/']] },
