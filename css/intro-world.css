@@ -79,3 +79,29 @@
 /* Revisi 66e: tanpa logo; tulisan tetap sama seperti 66d, hanya diletakkan di tengah */
 .gc-brand .gc-intro__logo { display: none; }
 .gc-brand__name { align-items: center; text-align: center; }
+
+/* Revisi 90: tombol Home & Shop selalu punya bingkai coklat (tidak berubah-ubah saat hover/klik/animasi) */
+html body .gc-intro.is-ready .gc-intro__action .gc-intro__enter,
+html body .gc-intro.is-ready .gc-intro__action .gc-intro__enter:hover,
+html body .gc-intro.is-ready .gc-intro__action .gc-intro__enter:active {
+  animation: none !important; filter: none !important; scale: 1; border-radius: 0 !important;
+}
+html body .gc-intro .gc-intro__action .gc-intro__enter {
+  box-shadow: inset -4px -4px 0 #b9812a, inset 4px 4px 0 #ffe9a8, 0 0 0 4px #2a1b0b, 0 7px 0 4px #2a1b0b !important;
+}
+html body .gc-intro .gc-intro__action .gc-intro__shopbtn {
+  box-shadow: inset -4px -4px 0 #3f8f2e, inset 4px 4px 0 #b9f08e, 0 0 0 4px #2a1b0b, 0 7px 0 4px #2a1b0b !important;
+}
+html body .gc-intro.is-ready .gc-intro__action .gc-intro__enter:hover { transform: translateY(-3px) !important; }
+html body .gc-intro.is-ready .gc-intro__action .gc-intro__enter:active { transform: translateY(5px) !important; background: #D9AE62; }
+html body .gc-intro.is-ready .gc-intro__action .gc-intro__shopbtn:active { background: #6bbd49; }
+html body .gc-intro .gc-intro__action .gc-intro__enter:active {
+  box-shadow: inset 4px 4px 0 #b9812a, inset -4px -4px 0 #ffe9a8, 0 0 0 4px #2a1b0b, 0 2px 0 4px #2a1b0b !important;
+}
+html body .gc-intro .gc-intro__action .gc-intro__shopbtn:active {
+  box-shadow: inset 4px 4px 0 #3f8f2e, inset -4px -4px 0 #b9f08e, 0 0 0 4px #2a1b0b, 0 2px 0 4px #2a1b0b !important;
+}
+/* Revisi 90b: tombol Home yang otomatis ter-fokus tidak boleh punya garis terang; samakan dengan Shop */
+html body .gc-intro .gc-intro__action .gc-intro__enter,
+html body .gc-intro .gc-intro__action .gc-intro__enter:focus,
+html body .gc-intro .gc-intro__action .gc-intro__enter:focus-visible { outline: none !important; border: 0 !important; }
