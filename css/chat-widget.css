@@ -64,3 +64,6 @@
 /* Revisi 91: beri jarak bawah halaman supaya tombol customer service tidak menempel di kotak paling bawah */
 .shop-wrap { padding-bottom: 110px; }
 @media (max-width: 700px) { .shop-wrap { padding-bottom: 100px; } }
+
+/* Revisi 92: di halaman 1 (HP) ada bar bawah "Join Discord"; angkat ikon chat supaya tidak menimpanya */
+@media (max-width: 700px) { body:has(.bottom-bar) .gcw { bottom: calc(86px + env(safe-area-inset-bottom)); } }
