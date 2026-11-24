@@ -60,3 +60,7 @@
 .gcw__typing i { width: 7px; height: 7px; border-radius: 50%; background: #b9ae96; animation: gcw-dot 1s infinite ease-in-out; }
 .gcw__typing i:nth-child(2) { animation-delay: .15s; } .gcw__typing i:nth-child(3) { animation-delay: .3s; }
 @keyframes gcw-dot { 0%, 60%, 100% { opacity: .3; transform: none; } 30% { opacity: 1; transform: translateY(-3px); } }
+
+/* Revisi 91: beri jarak bawah halaman supaya tombol customer service tidak menempel di kotak paling bawah */
+.shop-wrap { padding-bottom: 110px; }
+@media (max-width: 700px) { .shop-wrap { padding-bottom: 100px; } }
