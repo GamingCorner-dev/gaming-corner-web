@@ -94,8 +94,12 @@
     best(['TOTAL'], '?start=' + today + '&end=' + today).then(set('today'));
     best(['TOTAL'], '?start=week').then(set('week'));
     best(['TOTAL'], '?start=month').then(set('month'));
-    best([enc(dir), enc(dir.replace(/\/$/, '') || '/'), enc(dir + 'index.html')], '').then(set('home'));
-    best([enc(dir + 'shop.html'), enc(dir + 'shop')], '').then(set('shop'));
+    // halaman yang belum pernah dikunjungi tidak ada di GoatCounter (jawabannya error), jadi dianggap 0 selama total berhasil diambil
+    var zero = function (k) { return function (n) { set(k)(n === null && total !== null ? 0 : n); }; };
+    var total = null;
+    best(['TOTAL'], '').then(function (n) { total = n; return Promise.all([
+      best([enc(dir), enc(dir.replace(/\/$/, '') || '/'), enc(dir + 'index.html')], '').then(zero('home')),
+      best([enc(dir + 'shop.html'), enc(dir + 'shop')], '').then(zero('shop'))]); });
   }
 
   function openPop() {
