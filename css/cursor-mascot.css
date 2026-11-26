@@ -1,0 +1,16 @@
+/* Revisi 94 - Cursor maskot Gaming Corner di halaman 2 (Shop), sama persis dengan halaman 1.
+   Hanya aktif di perangkat dengan mouse (laptop/komputer). Di HP tidak berpengaruh.
+   Gambar cursor memakai file yang sama dengan halaman 1 (assets/img/cursor*.png). */
+@media (hover: hover) and (pointer: fine) {
+  html, body {
+    cursor: url("../assets/img/cursor.png") 10 24, auto;
+    cursor: -webkit-image-set(url("../assets/img/cursor.png") 1x, url("../assets/img/cursor@2x.png") 2x) 10 24, auto;
+    cursor: image-set(url("../assets/img/cursor.png") 1x, url("../assets/img/cursor@2x.png") 2x) 10 24, auto;
+  }
+  /* Di atas tombol / link / kotak yang bisa diklik: maskot kecil */
+  html body :is(a[href], button, [role="button"], summary, .btn, label[for], [data-go], [data-step], .rc-row, .rc-step__btn, .rc-remove):not(:disabled) {
+    cursor: url("../assets/img/cursor-small.png") 7 16, pointer !important;
+    cursor: -webkit-image-set(url("../assets/img/cursor-small.png") 1x, url("../assets/img/cursor-small@2x.png") 2x) 7 16, pointer !important;
+    cursor: image-set(url("../assets/img/cursor-small.png") 1x, url("../assets/img/cursor-small@2x.png") 2x) 7 16, pointer !important;
+  }
+}
