@@ -6,7 +6,7 @@
 
   function open(id, trigger) {
     var m = document.getElementById(id);
-    if (!m) return;
+    if (!m || !m.classList.contains('gc-modal')) return;   /* hanya pop-up asli; elemen lain (mis. keranjang Shop) diabaikan agar scroll tidak terkunci */
     if (active) close();
     active = m; lastFocus = trigger || document.activeElement;
     m.hidden = false;
@@ -28,7 +28,11 @@
 
   document.addEventListener('click', function (e) {
     var opener = e.target.closest('[data-modal]');
-    if (opener) { e.preventDefault(); open(opener.getAttribute('data-modal'), opener); return; }
+    if (opener) {
+      var target = document.getElementById(opener.getAttribute('data-modal'));
+      if (target && target.classList.contains('gc-modal')) { e.preventDefault(); open(opener.getAttribute('data-modal'), opener); }
+      return;
+    }
     if (active && e.target.closest('[data-close]')) { e.preventDefault(); close(); }
   });
 
