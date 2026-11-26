@@ -20,7 +20,7 @@
 .gc-inline .st-row .rc-row__price { display: grid; justify-items: end; gap: 2px; text-align: right; }
 .gc-inline .st-php { font-weight: 500; font-size: 12px; color: var(--text-2, #b9b2a4); }
 .gc-inline .st-empty { margin: 22px 0; color: var(--text-2, #b9b2a4); }
-#v-revin .rc-bar { position: sticky; bottom: 14px; z-index: 5; margin-top: 18px; }
+:is(#v-revin, #v-svc-rc, #v-svc-topup) .rc-bar { position: sticky; bottom: 14px; z-index: 5; margin-top: 18px; }
 
 /* Revisi 79 - item habis */
 .gc-inline .st-row.is-out { opacity: .55; }
@@ -85,15 +85,15 @@
 }
 
 /* ikon keranjang: selalu tampil di pojok kanan atas; angka muncul setelah ada item */
-#v-revin .rc-bar {
+:is(#v-revin, #v-svc-rc, #v-svc-topup) .rc-bar {
   position: fixed; top: 88px; right: 16px; bottom: auto; left: auto; width: auto; margin: 0; z-index: 40;
   display: inline-flex; align-items: center; gap: 8px; flex-wrap: nowrap; padding: 11px 14px; border-radius: 999px;
   background: #221c12; border: 1px solid var(--gold); color: var(--gold); box-shadow: 0 6px 20px rgba(0, 0, 0, .55);
 }
-#v-revin .rc-badge { position: absolute; top: -7px; right: -5px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: #e8433a; color: #fff; font: 800 11px/20px var(--font-body, inherit); text-align: center; }
-#v-revin .rc-badge[hidden], #v-revin .rc-bar__total[hidden] { display: none; }
-#v-revin .rc-bar__total { color: #fff; font: 700 14px/1 var(--font-body, inherit); margin-right: 4px; }
-@media (max-width: 700px) { #v-revin .rc-bar__total { display: none; } #v-revin .rc-bar { top: 80px; right: 12px; } }
+:is(#v-revin, #v-svc-rc, #v-svc-topup) .rc-badge { position: absolute; top: -7px; right: -5px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: #e8433a; color: #fff; font: 800 11px/20px var(--font-body, inherit); text-align: center; }
+:is(#v-revin, #v-svc-rc, #v-svc-topup) .rc-badge[hidden], :is(#v-revin, #v-svc-rc, #v-svc-topup) .rc-bar__total[hidden] { display: none; }
+:is(#v-revin, #v-svc-rc, #v-svc-topup) .rc-bar__total { color: #fff; font: 700 14px/1 var(--font-body, inherit); margin-right: 4px; }
+@media (max-width: 700px) { :is(#v-revin, #v-svc-rc, #v-svc-topup) .rc-bar__total { display: none; } :is(#v-revin, #v-svc-rc, #v-svc-topup) .rc-bar { top: 80px; right: 12px; } }
 
 /* Revisi 83b - lebih banyak kotak per baris */
 @media (min-width: 701px) {
@@ -238,3 +238,28 @@
 .rs-opt:active:not(.is-soon) { transform: scale(.99); }
 .rs-opt:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 @media (max-width: 600px) { .rs-opt { padding: 16px 18px; gap: 12px; } .rs-opt__t { font-size: 1.02rem; } }
+
+/* Revisi 99 - Sell RC & Direct Top Up: daftar paket (memakai keranjang yang sama dengan item) */
+.svc-list { list-style: none; margin: 18px 0 8px; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
+.svc-list li.rc-row.svc-row {
+  display: grid; grid-template-columns: 64px 1fr auto; grid-template-areas: "art name step" "art price step";
+  align-items: center; column-gap: 14px; row-gap: 2px; padding: 14px 16px; margin: 0;
+  background: #111; border: 1px solid rgba(255, 220, 160, .22); border-radius: 16px; transition: border-color .2s ease, box-shadow .2s ease;
+}
+.svc-list li.rc-row.svc-row.has-q { border-color: var(--gold); box-shadow: 0 0 16px rgba(232, 190, 110, .14); }
+.svc-art { grid-area: art; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 12px; background: radial-gradient(circle at 50% 38%, hsl(var(--h) 70% 38%), hsl(var(--h) 60% 12%)); color: #fff4d2; }
+.svc-art b { font: 800 19px/1 var(--font-body, inherit); letter-spacing: .02em; }
+.svc-row .rc-row__name { grid-area: name; display: grid; gap: 3px; font-weight: 700; font-size: 1.02rem; align-self: end; }
+.svc-row .svc-sub { font-weight: 500; font-size: .8rem; color: var(--muted); }
+.svc-row .rc-row__price { grid-area: price; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; font-weight: 700; color: var(--gold); align-self: start; }
+.svc-row .st-php { color: var(--text-2, #b9b2a4); font-size: .8rem; font-weight: 600; }
+.svc-row .rc-step { grid-area: step; display: inline-flex; align-items: center; gap: 4px; padding: 3px; border: 1px solid rgba(232, 190, 110, .4); border-radius: 999px; background: #181510; }
+.svc-row .rc-step__btn { width: 32px; height: 32px; border: 0; border-radius: 50%; background: transparent; color: var(--gold); font: 700 18px/1 var(--font-body, inherit); cursor: pointer; }
+.svc-row .rc-step__btn:disabled { opacity: .35; cursor: default; }
+.svc-row .rc-step__qty { min-width: 26px; text-align: center; font-weight: 800; color: var(--text); }
+.svc-row:not(.has-q) .rc-step { padding: 0; border-radius: 10px; }
+.svc-row:not(.has-q) [data-act="minus"], .svc-row:not(.has-q) .rc-step__qty { display: none; }
+.svc-row:not(.has-q) [data-act="plus"] { width: auto; height: 36px; padding: 0 16px; border-radius: 10px; font-size: 0; display: flex; align-items: center; justify-content: center; }
+.svc-row:not(.has-q) [data-act="plus"]::before { content: "+ Add"; font: 700 14px/1 var(--font-body, inherit); }
+@media (hover: hover) { .svc-row:not(.has-q) [data-act="plus"]:not(:disabled):hover { background: var(--gold); color: #1a140a; } }
+@media (max-width: 480px) { .svc-list li.rc-row.svc-row { grid-template-columns: 52px 1fr auto; column-gap: 10px; padding: 12px; } .svc-art { width: 52px; height: 52px; } }
