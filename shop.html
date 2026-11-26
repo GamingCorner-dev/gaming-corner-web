@@ -139,14 +139,56 @@
         <h3 class="info__head">Choose a service</h3>
         <ul class="rs-menu">
           <li><button type="button" class="rs-opt" data-go="v-revin"><span class="rs-opt__body"><span class="rs-opt__t">Sell Items</span><span class="rs-opt__d">View All Available Items</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
-          <li><a class="rs-opt" href="https://wa.me/6281255424543?text=Hi%20Revinz%20Store%21%20I%27m%20interested%20in%3A%20Sell%20RC" target="_blank" rel="noopener noreferrer"><span class="rs-opt__body"><span class="rs-opt__t">Sell RC</span><span class="rs-opt__d">Rp 75.000 / 10K RC<br>Retail price: 1K RC = Rp 8.000</span></span><span class="rs-opt__go">WhatsApp <i aria-hidden="true">&nearr;</i></span></a></li>
+          <li><button type="button" class="rs-opt" data-go="v-svc-rc"><span class="rs-opt__body"><span class="rs-opt__t">Sell RC</span><span class="rs-opt__d">Rp 75.000 / 10K RC<br>Retail price: 1K RC = Rp 8.000</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
           <li><div class="rs-opt is-soon" aria-disabled="true"><span class="rs-opt__body"><span class="rs-opt__t">Push VIP Service</span><span class="rs-opt__d">Coming soon</span></span><span class="rs-opt__tag">Coming soon</span></div></li>
-          <li><a class="rs-opt" href="https://wa.me/6281255424543?text=Hi%20Revinz%20Store%21%20I%27m%20interested%20in%3A%20Direct%20Top%20Up%20Service" target="_blank" rel="noopener noreferrer"><span class="rs-opt__body"><span class="rs-opt__t">Direct Top Up Service</span><span class="rs-opt__d">10K RCs = 400 PHP / Rp 120.000</span></span><span class="rs-opt__go">WhatsApp <i aria-hidden="true">&nearr;</i></span></a></li>
+          <li><button type="button" class="rs-opt" data-go="v-svc-topup"><span class="rs-opt__body"><span class="rs-opt__t">Direct Top Up Service</span><span class="rs-opt__d">10K RCs = 400 PHP / Rp 120.000</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
           <li><a class="rs-opt" href="https://wa.me/6281255424543?text=Hi%20Revinz%20Store%21%20I%27m%20interested%20in%3A%20Sell%20Account%20Service" target="_blank" rel="noopener noreferrer"><span class="rs-opt__body"><span class="rs-opt__t">Sell Account Service</span><span class="rs-opt__d">Service fee: Rp 35.000</span></span><span class="rs-opt__go">WhatsApp <i aria-hidden="true">&nearr;</i></span></a></li>
           <li><a class="rs-opt" href="https://wa.me/6281255424543?text=Hi%20Revinz%20Store%21%20I%27m%20interested%20in%3A%20Currency%20Exchange%20Service" target="_blank" rel="noopener noreferrer"><span class="rs-opt__body"><span class="rs-opt__t">Currency Exchange Service</span><span class="rs-opt__d">Converting rates<br>IDR to PHP = 315<br>PHP to IDR = 270</span></span><span class="rs-opt__go">WhatsApp <i aria-hidden="true">&nearr;</i></span></a></li>
         </ul>
         <div class="info__cta">
           <button type="button" class="signup__btn signup__btn--ghost sv-back" data-go="v-t4g" aria-label="Back">&larr; Back</button>
+        </div>
+      </section>
+      <section class="sv" id="v-svc-rc" hidden>
+        <p class="eyebrow eyebrow--sm">Revinz Store</p>
+        <h2 class="h2 shop-view__title">Sell RC</h2>
+        <p class="info__lead">Buy RC at Rp 75.000 per 10K RC. Retail price: 1K RC = Rp 8.000. Payment in Rupiah (QRIS).</p>
+        <p class="st-note">Tap + to add to your cart, then open the cart (top right) to order and pay. Prices may change, so the admin will double-check when you chat on WhatsApp after paying.</p>
+        <ul class="rc-list svc-list">
+          <li class="rc-row svc-row" data-id="svc-rc-10k" data-name="RC 10K" data-price="75000" data-php="0" data-max="99">
+            <span class="st-art svc-art" style="--h:38" aria-hidden="true"><b>10K</b></span>
+            <span class="rc-row__name">RC 10K<small class="svc-sub">10,000 RC</small></span>
+            <span class="rc-row__price"></span>
+            <div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease RC 10K">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase RC 10K">+</button></div>
+          </li>
+          <li class="rc-row svc-row" data-id="svc-rc-1k" data-name="RC 1K (retail)" data-price="8000" data-php="0" data-max="99">
+            <span class="st-art svc-art" style="--h:30" aria-hidden="true"><b>1K</b></span>
+            <span class="rc-row__name">RC 1K (retail)<small class="svc-sub">1,000 RC</small></span>
+            <span class="rc-row__price"></span>
+            <div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease RC 1K (retail)">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase RC 1K (retail)">+</button></div>
+          </li>
+        </ul>
+        <button type="button" class="rc-bar" data-modal="revin-cart" data-go="v-cart" aria-label="View cart"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h3l2.6 12.2a1.6 1.6 0 0 0 1.6 1.3h8.1a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2"/></svg><b class="rc-badge" hidden>0</b><span class="rc-bar__total" hidden>Rp 0</span></button>
+        <div class="info__cta">
+          <button type="button" class="signup__btn signup__btn--ghost sv-back" data-go="v-revin-menu" aria-label="Back">&larr; Back</button>
+        </div>
+      </section>
+      <section class="sv" id="v-svc-topup" hidden>
+        <p class="eyebrow eyebrow--sm">Revinz Store</p>
+        <h2 class="h2 shop-view__title">Direct Top Up Service</h2>
+        <p class="info__lead">10K RCs = 400 PHP / Rp 120.000. Each step is 10K RC. Pay in Rupiah (QRIS) or PHP (InstaPay).</p>
+        <p class="st-note">Tap + to add to your cart, then open the cart (top right) to order and pay. Prices may change, so the admin will double-check when you chat on WhatsApp after paying.</p>
+        <ul class="rc-list svc-list">
+          <li class="rc-row svc-row" data-id="svc-topup-10k" data-name="Direct Top Up 10K RC" data-price="120000" data-php="400" data-max="99">
+            <span class="st-art svc-art" style="--h:150" aria-hidden="true"><b>10K</b></span>
+            <span class="rc-row__name">Direct Top Up 10K RC<small class="svc-sub">10,000 RC sent directly to your IGN</small></span>
+            <span class="rc-row__price"></span>
+            <div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease Direct Top Up 10K RC">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase Direct Top Up 10K RC">+</button></div>
+          </li>
+        </ul>
+        <button type="button" class="rc-bar" data-modal="revin-cart" data-go="v-cart" aria-label="View cart"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h3l2.6 12.2a1.6 1.6 0 0 0 1.6 1.3h8.1a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2"/></svg><b class="rc-badge" hidden>0</b><span class="rc-bar__total" hidden>Rp 0</span></button>
+        <div class="info__cta">
+          <button type="button" class="signup__btn signup__btn--ghost sv-back" data-go="v-revin-menu" aria-label="Back">&larr; Back</button>
         </div>
       </section>
       <section class="sv" id="v-revin" hidden>
@@ -164,7 +206,7 @@
         <div id="revin-cart">
         <p class="eyebrow eyebrow--sm">Revinz Store</p>
         <div class="rc-pane" data-pane="cart">
-          <button type="button" class="signup__btn signup__btn--ghost sv-back" data-go="v-revin" aria-label="Back">&larr; Back</button>
+          <button type="button" class="signup__btn signup__btn--ghost sv-back" data-go="v-revin-menu" aria-label="Back">&larr; Back</button>
           <h2 class="h2 shop-view__title">Cart <span class="rc-title-count">(<b class="rc-count">0</b> items)</span></h2>
           <div class="rc-cartgrid">
             <div class="rc-cartmain">
@@ -210,6 +252,7 @@
             <button type="button" class="rc-method is-on" data-method="idr" aria-pressed="true">Rupiah <small>QRIS</small></button>
             <button type="button" class="rc-method" data-method="php" aria-pressed="false">PHP <small>InstaPay</small></button>
           </div>
+          <p class="rc-hint" data-php-note hidden>PHP InstaPay is not available for Sell RC. Please pay with Rupiah (QRIS).</p>
           <div class="rc-mpane" data-mpane="idr">
             <p class="info__lead">Scan the Revinz Store QR below to pay <b class="rc-total">Rp 0</b>.<br>Touch 4games IGN: <b class="rc-ign-show" data-ign-show></b></p>
             <div class="rc-qr"><img src="assets/img/revinz-qr.jpg" alt="QRIS payment for Revinz Store" width="1000" height="1408" loading="lazy" decoding="async"></div>
