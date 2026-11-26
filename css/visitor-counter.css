@@ -37,3 +37,28 @@
 @media (prefers-reduced-motion: reduce) {
   .gc-visitors { transition: none; transform: none; }
 }
+
+/* Revisi 96 - badge bisa diklik + pop-up rincian kunjungan */
+.gc-visitors { position: relative; cursor: pointer; user-select: none; }
+.gc-visitors:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.gc-visitors.is-open { border-color: var(--gold); box-shadow: 0 0 14px rgba(255, 210, 120, .28); }
+.gc-visitors__pop {
+  position: absolute; left: 0; bottom: calc(100% + 12px); z-index: 70;
+  width: 250px; padding: 14px 16px 12px; cursor: default; text-align: left; white-space: normal;
+  border: 1px solid rgba(232, 190, 110, .55); border-radius: 16px;
+  background: #121009; color: var(--text);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .6), 0 0 24px rgba(232, 190, 110, .18);
+}
+.gc-visitors__pop[hidden] { display: none; }
+.gc-visitors__pop::after {
+  content: ""; position: absolute; left: 28px; bottom: -6px; width: 10px; height: 10px;
+  background: #121009; border-right: 1px solid rgba(232, 190, 110, .55); border-bottom: 1px solid rgba(232, 190, 110, .55);
+  transform: rotate(45deg);
+}
+.gcv__eyebrow { margin: 0 0 6px; font: 600 .68rem/1 var(--font-mono, monospace); letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+.gcv__eyebrow--sub { margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255, 220, 160, .14); }
+.gcv__list { list-style: none; margin: 0; padding: 0; }
+.gcv__list li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 5px 0; font-size: .86rem; font-weight: 500; }
+.gcv__list span { color: var(--muted); }
+.gcv__list b { color: var(--text); font-weight: 700; font-variant-numeric: tabular-nums; }
+@media (max-width: 600px) { .gc-visitors__pop { width: min(250px, calc(100vw - 48px)); } }
