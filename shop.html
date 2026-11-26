@@ -27,6 +27,13 @@
   <link rel="stylesheet" href="css/join-fx.css">
   <link rel="stylesheet" href="css/chat-widget.css">
   <link rel="stylesheet" href="css/cursor-mascot.css">
+  <link rel="stylesheet" href="css/team.css">
+  <link rel="stylesheet" href="css/dock.css">
+  <link rel="stylesheet" href="css/dock-modals.css">
+  <link rel="stylesheet" href="css/music-btn.css">
+  <link rel="stylesheet" href="css/music-volume.css">
+  <link rel="stylesheet" href="css/podcast-bar.css">
+  <link rel="stylesheet" href="css/visitor-counter.css">
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -206,11 +213,92 @@
   </main>
 </div>
 
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/img/logo-256.webp" alt="" width="36" height="40" loading="lazy">
+        <div>
+          <p class="footer-brand__name">Gaming Corner</p>
+          <p class="footer-brand__tag">Your ultimate hangout spot to play, chill, and connect.</p>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html#about">About</a>
+        <a href="index.html#tournaments">Tournaments</a>
+        <a href="index.html#roblox-items">Roblox Items</a>
+        <a href="index.html#official-merch">Official Merch</a>
+        <a href="index.html#support">Support us</a>
+        <a href="index.html#partners">Partnership</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="shop.html">Shop</a>
+      </nav>
+      <p class="copyright">© 2026 Gaming Corner Community. All rights reserved.</p>
+      <p class="gc-visitors" id="gc-visitors" hidden title="Total visits"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg><span class="gc-visitors__num">0</span><span class="gc-visitors__label">visits</span></p>
+    </div>
+  </footer>
+
+  <!-- Pop-up Our Team (revisi 12) -->
+  <div id="team-modal" class="team-modal" hidden role="dialog" aria-modal="true" aria-labelledby="team-title">
+    <div class="team-modal__panel">
+      <button type="button" class="team-modal__close" aria-label="Close">&times;</button>
+      <div class="team-modal__head">
+        <p class="eyebrow">Our team</p>
+        <h2 id="team-title" class="team-modal__title">Meet the people behind the corner</h2>
+      </div>
+      <div class="team">
+          <div class="team__group"><p class="team__grouptitle">Owner</p><ul class="team__row team__row--one"><li class="card team__card team__card--owner"><span class="team__avatar" style="--a1:#4a6a98;--a2:#1b2a41"><img class="team__avatar-base" src="assets/img/avatar-01.svg" alt="Avatar Ara" width="256" height="256" loading="lazy" decoding="async"><span class="team__pop" aria-hidden="true"><img src="assets/img/avatar-01-pop.svg" alt="" width="256" height="307" loading="lazy" decoding="async"></span></span><span class="team__info"><span class="team__role">Owner</span><h4 class="team__name">Ara</h4><p class="team__desc">Manages and oversees everything related to the community.</p><a class="team__link" href="https://sociabuzz.com/arahyra" target="_blank" rel="noopener noreferrer" aria-label="SociaBuzz: Ara (tab baru)">Support me &#8599;</a></span></li></ul></div>
+          <div class="team__group"><p class="team__grouptitle">Admin</p><ul class="team__row "><li class="card team__card "><span class="team__avatar" style="--a1:#2f7f84;--a2:#143a3d"><img class="team__avatar-base" src="assets/img/avatar-02.svg" alt="Avatar Olaf" width="256" height="256" loading="lazy" decoding="async"><span class="team__pop" aria-hidden="true"><img src="assets/img/avatar-02-pop.svg" alt="" width="256" height="307" loading="lazy" decoding="async"></span></span><span class="team__info"><h4 class="team__name">Olaf</h4><p class="team__desc">Helps the owner manage the community.</p><a class="team__link" href="https://saweria.co/olafyangsama" target="_blank" rel="noopener noreferrer" aria-label="Saweria: Olaf (tab baru)">Support me &#8599;</a></span></li><li class="card team__card "><span class="team__avatar" style="--a1:#6b4a2a;--a2:#2e1f10"><img class="team__avatar-base" src="assets/img/avatar-03.svg" alt="Avatar Doot" width="256" height="256" loading="lazy" decoding="async"><span class="team__pop" aria-hidden="true"><img src="assets/img/avatar-03-pop.svg" alt="" width="256" height="307" loading="lazy" decoding="async"></span></span><span class="team__info"><h4 class="team__name">Doot</h4><p class="team__desc">Helps the owner manage the community.</p><a class="team__link" href="https://saweria.co/D00T" target="_blank" rel="noopener noreferrer" aria-label="Saweria: Doot (tab baru)">Support me &#8599;</a></span></li><li class="card team__card "><span class="team__avatar" style="--a1:#8a3f6a;--a2:#3a1830"><img class="team__avatar-base" src="assets/img/avatar-04.svg" alt="Avatar Nein" width="256" height="256" loading="lazy" decoding="async"><span class="team__pop" aria-hidden="true"><img src="assets/img/avatar-04-pop.svg" alt="" width="256" height="307" loading="lazy" decoding="async"></span></span><span class="team__info"><h4 class="team__name">Nein</h4><p class="team__desc">Helps the owner manage the community.</p><a class="team__link" href="https://saweria.co/NeinVa" target="_blank" rel="noopener noreferrer" aria-label="Saweria: Nein (tab baru)">Support me &#8599;</a></span></li></ul></div>
+          <div class="team__group"><p class="team__grouptitle">Admin Pishing</p><ul class="team__row "><li class="card team__card "><span class="team__avatar" style="--a1:#3f64a0;--a2:#142340"><img class="team__avatar-base" src="assets/img/avatar-05.svg" alt="Avatar Mubaz" width="256" height="256" loading="lazy" decoding="async"><span class="team__pop" aria-hidden="true"><img src="assets/img/avatar-05-pop.svg" alt="" width="256" height="307" loading="lazy" decoding="async"></span></span><span class="team__info"><h4 class="team__name">Mubaz</h4><p class="team__desc">Removes spam/scam content and bans spammers/scammers.</p></span></li><li class="card team__card "><span class="team__avatar" style="--a1:#4a3a7a;--a2:#1a1230"><img class="team__avatar-base" src="assets/img/avatar-06.svg" alt="Avatar Fiercesun" width="256" height="256" loading="lazy" decoding="async"><span class="team__pop" aria-hidden="true"><img src="assets/img/avatar-06-pop.svg" alt="" width="256" height="307" loading="lazy" decoding="async"></span></span><span class="team__info"><h4 class="team__name">Fiercesun</h4><p class="team__desc">Removes spam/scam content and bans spammers/scammers.</p><a class="team__link" href="https://tako.id/firsan" target="_blank" rel="noopener noreferrer" aria-label="Tako: Fiercesun (tab baru)">Support me &#8599;</a></span></li><li class="card team__card "><span class="team__avatar" style="--a1:#5e5e6c;--a2:#2a2a33"><img class="team__avatar-base" src="assets/img/avatar-07.svg" alt="Avatar Spade" width="256" height="256" loading="lazy" decoding="async"><span class="team__pop" aria-hidden="true"><img src="assets/img/avatar-07-pop.svg" alt="" width="256" height="307" loading="lazy" decoding="async"></span></span><span class="team__info"><h4 class="team__name">Spade</h4><p class="team__desc">Removes spam/scam content and bans spammers/scammers.</p><a class="team__link" href="https://saweria.co/5pade" target="_blank" rel="noopener noreferrer" aria-label="Saweria: Spade (tab baru)">Support me &#8599;</a></span></li></ul></div>
+          <div class="team__group"><p class="team__grouptitle">Moderator</p><ul class="team__row "><li class="card team__card "><span class="team__avatar" style="--a1:#8a5a34;--a2:#3a2112"><img class="team__avatar-base" src="assets/img/avatar-08.svg" alt="Avatar Jakabay" width="256" height="256" loading="lazy" decoding="async"><span class="team__pop" aria-hidden="true"><img src="assets/img/avatar-08-pop.svg" alt="" width="256" height="307" loading="lazy" decoding="async"></span></span><span class="team__info"><span class="team__role">Moderator Touch</span><h4 class="team__name">Jakabay</h4><p class="team__desc">Provides information about scammers in the Touch 4Games game.</p><a class="team__link" href="https://saweria.co/jakabay" target="_blank" rel="noopener noreferrer" aria-label="Saweria: Jakabay (tab baru)">Support me &#8599;</a></span></li><li class="card team__card "><span class="team__avatar" style="--a1:#2f7a52;--a2:#133524"><img class="team__avatar-base" src="assets/img/avatar-09.svg" alt="Avatar Krixie" width="256" height="256" loading="lazy" decoding="async"><span class="team__pop" aria-hidden="true"><img src="assets/img/avatar-09-pop.svg" alt="" width="256" height="307" loading="lazy" decoding="async"></span></span><span class="team__info"><span class="team__role">Moderator Touch</span><h4 class="team__name">Krixie</h4><p class="team__desc">Provides important information about all updates in the Touch 4Games game.</p><a class="team__link" href="https://saweria.co/Krixiee" target="_blank" rel="noopener noreferrer" aria-label="Saweria: Krixie (tab baru)">Support me &#8599;</a></span></li><li class="card team__card "><span class="team__avatar" style="--a1:#74448a;--a2:#2e1636"><img class="team__avatar-base" src="assets/img/avatar-10.svg" alt="Avatar Ipori" width="256" height="256" loading="lazy" decoding="async"><span class="team__pop" aria-hidden="true"><img src="assets/img/avatar-10-pop.svg" alt="" width="256" height="307" loading="lazy" decoding="async"></span></span><span class="team__info"><span class="team__role">Moderator Roblox</span><h4 class="team__name">Ipori</h4><p class="team__desc">In charge of the Roblox game category.</p><a class="team__link" href="https://saweria.co/ipoorii" target="_blank" rel="noopener noreferrer" aria-label="Saweria: Ipori (tab baru)">Support me &#8599;</a></span></li><li class="card team__card "><span class="team__avatar" style="--a1:#2f7a66;--a2:#143a2c"><img class="team__avatar-base" src="assets/img/avatar-11.svg" alt="Avatar Masking" width="256" height="256" loading="lazy" decoding="async"><span class="team__pop" aria-hidden="true"><img src="assets/img/avatar-11-pop.svg" alt="" width="256" height="307" loading="lazy" decoding="async"></span></span><span class="team__info"><span class="team__role">Moderator Moba</span><h4 class="team__name">Masking</h4><p class="team__desc">In charge of the MOBA game category.</p><a class="team__link" href="https://saweria.co/Masking07" target="_blank" rel="noopener noreferrer" aria-label="Saweria: Masking (tab baru)">Support me &#8599;</a></span></li><li class="card team__card "><span class="team__avatar" style="--a1:#3f68b0;--a2:#1a2a58"><img class="team__avatar-base" src="assets/img/avatar-12.svg" alt="Avatar LilChoco" width="256" height="256" loading="lazy" decoding="async"><span class="team__pop" aria-hidden="true"><img src="assets/img/avatar-12-pop.svg" alt="" width="256" height="307" loading="lazy" decoding="async"></span></span><span class="team__info"><span class="team__role">Moderator Heartopia</span><h4 class="team__name">LilChoco</h4><p class="team__desc">In charge of the Heartopia game category.</p><a class="team__link" href="https://saweria.co/lilchoco" target="_blank" rel="noopener noreferrer" aria-label="Saweria: LilChoco (tab baru)">Support me &#8599;</a></span></li><li class="card team__card "><span class="team__avatar" style="--a1:#8a3030;--a2:#3a1212"><img class="team__avatar-base" src="assets/img/avatar-13.svg" alt="Avatar Hashkazu" width="256" height="256" loading="lazy" decoding="async"><span class="team__pop" aria-hidden="true"><img src="assets/img/avatar-13-pop.svg" alt="" width="256" height="307" loading="lazy" decoding="async"></span></span><span class="team__info"><span class="team__role">Moderator Other Games</span><h4 class="team__name">Hashkazu</h4><p class="team__desc">In charge of the other games category.</p><a class="team__link" href="https://saweria.co/hashkazu" target="_blank" rel="noopener noreferrer" aria-label="Saweria: Hashkazu (tab baru)">Support me &#8599;</a></span></li></ul></div>
+        </div>
+    </div>
+  </div>
+  <!-- Pop-up Sponsorship -->
+  <div class="gc-modal" id="sponsor-modal" role="dialog" aria-modal="true" aria-labelledby="sponsor-title" hidden>
+    <div class="gc-modal__backdrop" data-close></div>
+    <div class="gc-modal__dialog gc-modal__dialog--info" tabindex="-1">
+      <button type="button" class="gc-modal__close" data-close aria-label="Close">&times;</button>
+      <div class="gc-modal__scroll">
+        <p class="eyebrow eyebrow--sm">We&rsquo;re looking for sponsors</p>
+        <h3 class="gc-modal__title" id="sponsor-title">Sponsorship</h3>
+        <p class="info__lead">Gaming Corner sedang mencari sponsor untuk mendukung tournament dan event. Jika brand kamu tertarik menjadi sponsor, berikut persyaratannya:</p>
+        <ul class="info__bullets">
+          <li>Brand, produk, atau jasa yang disponsori harus legal dan sesuai dengan komunitas gaming (tidak mengandung unsur SARA, judi, konten dewasa, atau hal yang melanggar aturan).</li>
+          <li>Proposal singkat terkait profil brand, bentuk kerja sama yang diinginkan, dan target yang ingin dicapai.</li>
+          <li>Bentuk dukungan berupa dana, hadiah tournament, atau produk / jasa yang disepakati bersama kedua belah pihak.</li>
+          <li>Durasi, hak publikasi, dan kewajiban masing-masing pihak dibicarakan dan disepakati sebelum kerja sama dimulai.</li>
+          <li>Kedua belah pihak berhak menolak kerja sama yang tidak sesuai dengan nilai komunitas / perusahaan yang terkait.</li>
+        </ul>
+        <div class="info__cta"><a class="signup__btn" href="index.html#contact">Hubungi kami <span class="arr" aria-hidden="true">&rarr;</span></a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Revisi 42/44: bar podcast Spotify di bawah layar. Episode (urut dari Episode 1) ada pada atribut data-episodes: ID episode Spotify dipisah koma. Episode baru: tambahkan ID-nya di belakang. -->
+  <aside class="gc-pod" id="gc-pod" aria-label="Gaming Corner Podcast" data-episodes="1a6fxQGSN3nDEpwNnSlqoZ,2lIk37YDMabIVHpnhI6S24,1ZpuF0056NEhJ4Ae9ubwTS,3ZA4z0RJ8pOw3swNxAgxYK" hidden>
+    <button type="button" class="gc-pod__tab" aria-expanded="false" aria-controls="gc-pod-panel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4M8 22h8"/></svg><span>Podcast</span><svg class="gc-pod__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+    <div class="gc-pod__panel" id="gc-pod-panel">
+      <div class="gc-pod__nav">
+        <button type="button" class="gc-pod__prev" aria-label="Previous episode"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 5v14L7 12z"/></svg></button>
+        <span class="gc-pod__count" aria-live="polite">Episode 1 / 1</span>
+        <button type="button" class="gc-pod__next" aria-label="Next episode"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5v14l10-7z"/></svg></button>
+      </div>
+      <div class="gc-pod__frame"></div>
+    </div>
+  </aside>
+
   <script src="js/main.js" defer></script>
   <script src="js/snow.js" defer></script>
   <script src="js/store-data.js" defer></script>
   <script src="js/shop-store.js" defer></script>
   <script src="js/revin-cart.js" defer></script>
+  <script src="js/music.js" defer></script>
+  <script src="js/team-popup.js" defer></script>
+  <script src="js/tournament-modals.js" defer></script>
+  <script src="js/dock-extras.js" defer></script>
+  <script src="js/dock.js" defer></script>
+  <script src="js/podcast-bar.js" defer></script>
+  <script src="js/visitor-counter.js" defer></script>
   <script src="js/chat-widget.js" defer></script>
   <script src="js/shop-page.js" defer></script>
 </body>
