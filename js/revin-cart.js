@@ -42,7 +42,7 @@
   function rp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
   function php(n) { return 'PHP ' + n.toLocaleString('en-US'); }
   function ids() { return Object.keys(qty).filter(function (k) { return qty[k] > 0; }); }
-  function totals() { var c = 0, t = 0, p = 0; ids().forEach(function (k) { c += qty[k]; t += qty[k] * catalog[k].price; p += qty[k] * catalog[k].php; }); return { count: c, total: t, php: p }; }
+  function totals() { var c = 0, t = 0, p = 0, ok = true; ids().forEach(function (k) { c += qty[k]; t += qty[k] * catalog[k].price; p += qty[k] * catalog[k].php; if (!(catalog[k].php > 0)) ok = false; }); return { count: c, total: t, php: p, phpOk: ok }; }
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(qty)); } catch (e) {} }
 
   function stepper(id, ro) {
@@ -73,6 +73,7 @@
 
   function render() {
     var t = totals();
+    if (!t.phpOk && method === 'php') method = 'idr';   /* paket tanpa harga PHP (mis. Sell RC): hanya bisa bayar Rupiah */
     // baris produk di pop-up Sell RC / Sell Item
     Array.prototype.forEach.call(rows, function (r) {
       var id = r.getAttribute('data-id'), q = qty[id] || 0;
@@ -92,6 +93,10 @@
     Array.prototype.forEach.call(document.querySelectorAll('.rc-total-php'), function (e) { e.textContent = php(t.php); });
     Array.prototype.forEach.call(cartModal.querySelectorAll('.rc-method'), function (b) { var on = b.getAttribute('data-method') === method; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
     Array.prototype.forEach.call(cartModal.querySelectorAll('[data-mpane]'), function (p) { p.hidden = p.getAttribute('data-mpane') !== method; });
+    // pembayaran PHP hanya bila semua isi keranjang punya harga PHP
+    var phpBtn = cartModal.querySelector('.rc-method[data-method="php"]'); if (phpBtn) phpBtn.disabled = !t.phpOk && t.count > 0;
+    var phpNote = cartModal.querySelector('[data-php-note]'); if (phpNote) phpNote.hidden = t.phpOk || t.count === 0;
+    Array.prototype.forEach.call(cartModal.querySelectorAll('.rc-php-line, .rc-summary__row--php'), function (e) { e.hidden = !t.phpOk && t.count > 0; });
     // isi keranjang & ringkasan
     var list = ids();
     Array.prototype.forEach.call(cartModal.querySelectorAll('[data-lines]'), function (ul) {
