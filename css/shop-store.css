@@ -212,3 +212,6 @@
   .shop-wrap { width: 100%; max-width: 1240px; padding-left: var(--gutter); padding-right: var(--gutter); }
   .site-header .header-inner { width: 100%; max-width: 1240px; padding-left: var(--gutter); padding-right: var(--gutter); }
 }
+
+/* Revisi 97 - cahaya oranye latar di Shop diredupkan sedikit (halaman Shop lebih pendek, jadi 8 cahaya menumpuk dan terlihat lebih terang dari page 1) */
+.page > .glows { opacity: .55; }
