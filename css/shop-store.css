@@ -20,7 +20,7 @@
 .gc-inline .st-row .rc-row__price { display: grid; justify-items: end; gap: 2px; text-align: right; }
 .gc-inline .st-php { font-weight: 500; font-size: 12px; color: var(--text-2, #b9b2a4); }
 .gc-inline .st-empty { margin: 22px 0; color: var(--text-2, #b9b2a4); }
-:is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account) .rc-bar { position: sticky; bottom: 14px; z-index: 5; margin-top: 18px; }
+:is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account, #v-svc-exchange) .rc-bar { position: sticky; bottom: 14px; z-index: 5; margin-top: 18px; }
 
 /* Revisi 79 - item habis */
 .gc-inline .st-row.is-out { opacity: .55; }
@@ -85,15 +85,15 @@
 }
 
 /* ikon keranjang: selalu tampil di pojok kanan atas; angka muncul setelah ada item */
-:is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account) .rc-bar {
+:is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account, #v-svc-exchange) .rc-bar {
   position: fixed; top: 88px; right: 16px; bottom: auto; left: auto; width: auto; margin: 0; z-index: 40;
   display: inline-flex; align-items: center; gap: 8px; flex-wrap: nowrap; padding: 11px 14px; border-radius: 999px;
   background: #221c12; border: 1px solid var(--gold); color: var(--gold); box-shadow: 0 6px 20px rgba(0, 0, 0, .55);
 }
-:is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account) .rc-badge { position: absolute; top: -7px; right: -5px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: #e8433a; color: #fff; font: 800 11px/20px var(--font-body, inherit); text-align: center; }
-:is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account) .rc-badge[hidden], :is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account) .rc-bar__total[hidden] { display: none; }
-:is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account) .rc-bar__total { color: #fff; font: 700 14px/1 var(--font-body, inherit); margin-right: 4px; }
-@media (max-width: 700px) { :is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account) .rc-bar__total { display: none; } :is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account) .rc-bar { top: 80px; right: 12px; } }
+:is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account, #v-svc-exchange) .rc-badge { position: absolute; top: -7px; right: -5px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: #e8433a; color: #fff; font: 800 11px/20px var(--font-body, inherit); text-align: center; }
+:is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account, #v-svc-exchange) .rc-badge[hidden], :is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account, #v-svc-exchange) .rc-bar__total[hidden] { display: none; }
+:is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account, #v-svc-exchange) .rc-bar__total { color: #fff; font: 700 14px/1 var(--font-body, inherit); margin-right: 4px; }
+@media (max-width: 700px) { :is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account, #v-svc-exchange) .rc-bar__total { display: none; } :is(#v-revin, #v-svc-rc, #v-svc-topup, #v-svc-account, #v-svc-exchange) .rc-bar { top: 80px; right: 12px; } }
 
 /* Revisi 83b - lebih banyak kotak per baris */
 @media (min-width: 701px) {
@@ -307,3 +307,11 @@ html body .page { padding-bottom: var(--gc-pod-h, 0px); }
   .site-header .btn--header { padding: 0 8px; font-size: 10.5px; min-height: 36px; }
   .site-header .menu-btn { width: 40px; height: 40px; }
 }
+
+/* Revisi 105 - Currency Exchange */
+.gc-inline .xch-field { max-width: 460px; }
+.gc-inline [data-xinfo] { margin: 10px 0 0; display: grid; gap: 6px; }
+.gc-inline [data-xinfo][hidden], .gc-inline [data-xfield][hidden], .gc-inline [data-ignfield][hidden], .gc-inline .rc-xline[hidden], .gc-inline .rc-ignline[hidden], .gc-inline .rc-methods[hidden] { display: none; }
+.gc-inline .rc-sum[hidden] { display: none; }
+.gc-inline [data-xinfo] .rc-summary__row b { color: var(--gold); }
+#v-svc-exchange .rc-methods { margin-bottom: 10px; }
