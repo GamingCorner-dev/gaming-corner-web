@@ -67,3 +67,9 @@
 
 /* Revisi 92: di halaman 1 (HP) ada bar bawah "Join Discord"; angkat ikon chat supaya tidak menimpanya */
 @media (max-width: 700px) { body:has(.bottom-bar) .gcw { bottom: calc(86px + env(safe-area-inset-bottom)); } }
+
+/* Revisi 102: di HP, saat panel Podcast dibuka, ikon chat naik ke atas panel supaya tidak menutupi pemutar */
+@media (max-width: 700px) {
+  body:has(.gc-pod:not(.is-collapsed)) .gcw { bottom: calc(86px + var(--gc-pod-h, 0px) + env(safe-area-inset-bottom)); }
+  .gcw { transition: bottom .4s ease; }
+}
