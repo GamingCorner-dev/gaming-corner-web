@@ -19,7 +19,7 @@
     Array.prototype.forEach.call(rows, function (r) {
       var mx = parseInt(r.getAttribute('data-max'), 10);
       var art = r.querySelector('.st-art'), ab = art && art.querySelector('b');
-      catalog[r.getAttribute('data-id')] = { hue: art ? (parseInt(art.style.getPropertyValue('--h'), 10) || 38) : 38, ini: ab ? ab.textContent : '', name: r.getAttribute('data-name'), price: parseInt(r.getAttribute('data-price'), 10) || 0, php: parseInt(r.getAttribute('data-php'), 10) || 0, max: isNaN(mx) ? 99 : mx };
+      catalog[r.getAttribute('data-id')] = { hue: art ? (parseInt(art.style.getPropertyValue('--h'), 10) || 38) : 38, ini: ab ? ab.textContent : '', name: r.getAttribute('data-name'), price: parseInt(r.getAttribute('data-price'), 10) || 0, php: parseInt(r.getAttribute('data-php'), 10) || 0, max: isNaN(mx) ? 99 : mx, kind: r.getAttribute('data-kind') || '' };
     });
   }
   /* buang dari keranjang item yang sudah tidak ada / habis, dan batasi jumlah sesuai stok */
@@ -43,6 +43,10 @@
   function php(n) { return 'PHP ' + n.toLocaleString('en-US'); }
   function ids() { return Object.keys(qty).filter(function (k) { return qty[k] > 0; }); }
   function totals() { var c = 0, t = 0, p = 0, ok = true; ids().forEach(function (k) { c += qty[k]; t += qty[k] * catalog[k].price; p += qty[k] * catalog[k].php; if (!(catalog[k].php > 0)) ok = false; }); return { count: c, total: t, php: p, phpOk: ok }; }
+  /* Currency Exchange: kind 'xbuy' (bayar Rupiah, terima PHP) atau 'xsell' (kirim PHP, terima Rupiah). Jumlah = PHP. */
+  var xacct = '';   /* tujuan transfer: hanya di memori, tidak disimpan di browser */
+  function xmode() { var m = ''; ids().forEach(function (k) { if (catalog[k].kind) m = catalog[k].kind; }); return m; }
+  function xid() { var r = ''; ids().forEach(function (k) { if (catalog[k].kind) r = k; }); return r; }
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(qty)); } catch (e) {} }
 
   function stepper(id, ro) {
@@ -50,7 +54,9 @@
       '<div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease">&minus;</button><output class="rc-step__qty">' + qty[id] + '</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase">+</button></div>';
   }
   function lineHtml(id, ro) {
-    var c = catalog[id], q = qty[id], pl = c.php ? '<small class="rc-line__php">PHP ' + (c.php * q).toLocaleString('en-US') + '</small>' : '';
+    var c = catalog[id], q = qty[id];
+    if (c.kind) return '<li class="rc-row" data-id="' + id + '"><span class="rc-thumb" style="--h:38" aria-hidden="true"><b>FX</b></span><span class="rc-row__name">' + c.name + ' ' + q.toLocaleString('en-US') + '<small class="rc-line__warn">' + (c.kind === 'xbuy' ? 'Rp ' + c.price + ' per PHP 1 (you pay)' : 'Rp ' + c.price + ' per PHP 1 (you receive)') + '</small></span><span class="rc-row__price">' + rp(c.price * q) + '<small class="rc-line__php">' + (c.kind === 'xbuy' ? 'you pay' : 'you receive') + '</small></span><span class="rc-line__ctl">' + (ro ? '' : '<button type="button" class="rc-remove" data-remove aria-label="Remove ' + c.name + '"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4.5h6V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10 11v5M14 11v5"/></svg></button>') + '</span></li>';
+    var pl = c.php ? '<small class="rc-line__php">PHP ' + (c.php * q).toLocaleString('en-US') + '</small>' : '';
     var ctl = ro ? '<span class="rc-ro-qty">x' + q + '</span>' :
       stepper(id, false) + '<button type="button" class="rc-remove" data-remove aria-label="Remove ' + c.name + '"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4.5h6V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10 11v5M14 11v5"/></svg></button>';
     var warn = (c.max < 99) ? '<small class="rc-line__warn' + (q >= c.max && c.max > 1 ? ' is-max' : '') + '">' + (q >= c.max && c.max > 1 ? 'Max stock reached' : 'Stock ' + c.max) + '</small>' : '';
@@ -59,6 +65,14 @@
   }
 
   function waLink() {
+    var xm = xmode();
+    if (xm) {
+      var xt = totals(), xk = xid(), amt = qty[xk] || 0;
+      var xmsg = xm === 'xbuy'
+        ? 'Hello Revinz Store, I have made my payment.\n\nCurrency Exchange: Buy PHP\nAmount: ' + php(amt) + '\nI paid: ' + rp(xt.total) + ' (QRIS)\nPlease send the PHP to: ' + xacct + '\n\nI will send my proof of payment in this chat.'
+        : 'Hello Revinz Store, I have made my payment.\n\nCurrency Exchange: Sell PHP\nI sent: ' + php(amt) + ' (InstaPay)\nI will receive: ' + rp(xt.total) + '\nPlease send the Rupiah to: ' + xacct + '\n\nI will send my proof of payment in this chat.';
+      return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(xmsg);
+    }
     var isPhp = method === 'php', t = totals();
     var lines = ids().map(function (k) {
       var it = catalog[k];
@@ -73,6 +87,9 @@
 
   function render() {
     var t = totals();
+    var xm = xmode();
+    if (xm === 'xbuy') method = 'idr'; else if (xm === 'xsell') method = 'php';
+    cartModal.setAttribute('data-xmode', xm);
     if (!t.phpOk && method === 'php') method = 'idr';   /* paket tanpa harga PHP (mis. Sell RC): hanya bisa bayar Rupiah */
     // baris produk di pop-up Sell RC / Sell Item
     Array.prototype.forEach.call(rows, function (r) {
@@ -107,8 +124,28 @@
     var empty = cartModal.querySelector('[data-empty]'); if (empty) empty.hidden = list.length > 0;
     Array.prototype.forEach.call(cartModal.querySelectorAll('[data-needs-items]'), function (b) { b.disabled = list.length === 0; });
     var wa = cartModal.querySelector('[data-wa]'); if (wa) wa.href = waLink();
+    // Currency Exchange: ringkasan, kolom tujuan transfer
+    var xk = xid(), xa = xk ? qty[xk] : 0;
+    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-xinfo]'), function (e) {
+      e.hidden = !xm;
+      if (xm) e.innerHTML = xm === 'xbuy'
+        ? '<div class="rc-summary__row"><span>You pay</span><b>' + rp(t.total) + '</b></div><div class="rc-summary__row"><span>You receive</span><b>' + php(xa) + '</b></div>'
+        : '<div class="rc-summary__row"><span>You send</span><b>' + php(xa) + '</b></div><div class="rc-summary__row"><span>You receive</span><b>' + rp(t.total) + '</b></div>';
+    });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-ignfield]'), function (e) { e.hidden = !!xm; });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-xfield]'), function (e) { e.hidden = !xm; });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-xlabel]'), function (e) { e.textContent = xm === 'xbuy' ? 'Where should we send your PHP? (e-wallet or bank name + account number)' : 'Where should we send your Rupiah? (bank or e-wallet name + account number)'; });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-xlabel-short]'), function (e) { e.textContent = xm === 'xbuy' ? 'Send PHP to' : 'Send Rupiah to'; });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-xacct-show]'), function (e) { e.textContent = xacct; });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('.rc-xline'), function (e) { e.hidden = !xm; });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('.rc-ignline'), function (e) { e.hidden = !!xm; });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('.rc-methods'), function (e) { e.hidden = !!xm; });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('.rc-sum'), function (e) { e.hidden = !!xm; });
+    if (xm) { Array.prototype.forEach.call(cartModal.querySelectorAll('.rc-sum, .rc-php-line, .rc-summary__row--php, [data-php-note]'), function (e) { e.hidden = true; }); }
+    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-paylead]'), function (e) { e.textContent = xm === 'xbuy' ? 'Pay with Rupiah (QRIS).' : xm === 'xsell' ? 'Pay with PHP (InstaPay).' : 'Choose how you want to pay.'; });
+    var xin = cartModal.querySelector('#rc-xacct'); if (xin && xin.value !== xacct) xin.value = xacct;
     Array.prototype.forEach.call(cartModal.querySelectorAll('[data-ign-show]'), function (e) { e.textContent = ign; });
-    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-needs-ign]'), function (b) { b.disabled = ign.length === 0 || list.length === 0; });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-needs-ign]'), function (b) { b.disabled = (xm ? xacct.length < 4 : ign.length === 0) || list.length === 0; });
     var clr = cartModal.querySelector('[data-clear]'); if (clr) clr.hidden = list.length === 0;
   }
 
@@ -128,11 +165,49 @@
     });
   }
 
+  var xin0 = cartModal.querySelector('#rc-xacct');
+  if (xin0) {
+    xin0.addEventListener('input', function () { xacct = xin0.value.replace(/\s+/g, ' ').trim().slice(0, 80); render(); });
+    xin0.addEventListener('keydown', function (e) { if (e.key === 'Enter' && xacct.length >= 4) { e.preventDefault(); show('pay'); } });
+  }
+
+  /* ----- halaman Currency Exchange: pilih arah, ketik jumlah PHP ----- */
+  var xv = document.getElementById('v-svc-exchange'), xdir = 'xbuy';
+  var xamt = xv && xv.querySelector('#xch-amt'), xadd = xv && xv.querySelector('[data-xadd]'), xcalc = xv && xv.querySelector('[data-xcalc]');
+  function xval() { var n = parseInt((xamt.value || '').replace(/\D/g, ''), 10); return (n > 0 && n <= 100000) ? n : 0; }
+  function xrefresh() {
+    var n = xval(), c = catalog[xdir === 'xbuy' ? 'xch-buy' : 'xch-sell'];
+    if (xadd) xadd.disabled = !n;
+    if (!xcalc || !c) return;
+    xcalc.textContent = !n ? 'Type the amount of PHP you want to exchange (1 - 100,000).'
+      : (xdir === 'xbuy' ? 'You get ' + php(n) + ' and pay ' + rp(n * c.price) + ' (Rp ' + c.price + ' per PHP 1).'
+                         : 'You send ' + php(n) + ' and receive ' + rp(n * c.price) + ' (Rp ' + c.price + ' per PHP 1).');
+  }
+  if (xv && xamt && xadd) {
+    xamt.addEventListener('input', function () { xamt.value = xamt.value.replace(/\D/g, '').slice(0, 6); xrefresh(); });
+    xv.addEventListener('click', function (e) {
+      var d = e.target.closest ? e.target.closest('[data-xdir]') : null;
+      if (d) { xdir = d.getAttribute('data-xdir'); Array.prototype.forEach.call(xv.querySelectorAll('[data-xdir]'), function (b) { var on = b === d; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }); xrefresh(); }
+    });
+    xadd.addEventListener('click', function () {
+      var n = xval(); if (!n) return;
+      var others = ids().filter(function (k) { return !catalog[k].kind; });
+      if (others.length && !window.confirm('Your cart has other items. Starting an exchange will replace them. Continue?')) return;
+      qty = {}; qty[xdir === 'xbuy' ? 'xch-buy' : 'xch-sell'] = n; save(); render();
+      var bar = xv.querySelector('.rc-bar'); if (bar) bar.click();
+    });
+    xrefresh();
+  }
+
   document.addEventListener('click', function (e) {
     var btn = e.target.closest ? e.target.closest('.rc-step__btn') : null;
     if (btn) {
       var li = btn.closest('.rc-row'); if (!li) return;
       var id = li.getAttribute('data-id'), q = qty[id] || 0;
+      if (btn.getAttribute('data-act') === 'plus' && xmode() && !catalog[id].kind) {
+        if (!window.confirm('Your cart has a Currency Exchange order. Adding an item will replace it. Continue?')) return;
+        qty = {}; q = 0;
+      }
       q += btn.getAttribute('data-act') === 'plus' ? 1 : -1;
       if (q <= 0) delete qty[id]; else qty[id] = Math.min(q, catalog[id].max);
       save(); render(); return;
