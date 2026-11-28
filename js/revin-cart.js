@@ -45,7 +45,7 @@
   function totals() { var c = 0, t = 0, p = 0, ok = true; ids().forEach(function (k) { c += qty[k]; t += qty[k] * catalog[k].price; p += qty[k] * catalog[k].php; if (!(catalog[k].php > 0)) ok = false; }); return { count: c, total: t, php: p, phpOk: ok }; }
   /* Currency Exchange: kind 'xbuy' (bayar Rupiah, terima PHP) atau 'xsell' (kirim PHP, terima Rupiah). Jumlah = PHP. */
   /* Sell Account Service: data login akun. Hanya di memori halaman ini, tidak disimpan di browser. */
-  var acc = { pass: '', has: '', email: '', epass: '', phone: '' };
+  var acc = { pass: '', has: '', email: '', epass: '', phone: '', video: false };
   function hasAcct() { return ids().some(function (k) { return catalog[k].need === 'account'; }); }
   function accOk() { return acc.pass.length > 0 && (acc.has === 'no' || (acc.has === 'yes' && acc.email.indexOf('@') > 0 && acc.epass.length > 0 && acc.phone.replace(/\D/g, '').length >= 8)); }
   function orderOk() { var xm0 = xmode(); if (xm0) return xacct.length >= 4; return ign.length > 0 && (!hasAcct() || accOk()); }
@@ -71,7 +71,7 @@
 
   function accLines() {
     if (!hasAcct()) return '';
-    return '\nPassword IGN: ' + acc.pass + '\nActive email: ' + (acc.has === 'yes' ? 'Yes' : 'No') +
+    return '\nBag video: ' + (acc.video ? 'I already have a video and will send it on WhatsApp (please still make a new one)' : 'Please make the bag video') + '\nPassword IGN: ' + acc.pass + '\nActive email: ' + (acc.has === 'yes' ? 'Yes' : 'No') +
       (acc.has === 'yes' ? '\nActive email address: ' + acc.email + '\nActive email password: ' + acc.epass + '\nPhone number linked to the email: ' + acc.phone : '');
   }
   function waLink() {
@@ -196,6 +196,8 @@
     var el = cartModal.querySelector(d[0]); if (!el) return;
     el.addEventListener('input', function () { acc[d[1]] = el.value.trim().slice(0, d[2]); render(); });
   });
+  var accVideo = cartModal.querySelector('#rc-accvideo');
+  if (accVideo) accVideo.addEventListener('change', function () { acc.video = accVideo.checked; render(); });
   var accShow = cartModal.querySelector('#rc-accshow');
   if (accShow) accShow.addEventListener('change', function () { ['#rc-accpass', '#rc-accepass'].forEach(function (q) { var el = cartModal.querySelector(q); if (el) el.type = accShow.checked ? 'text' : 'password'; }); });
   cartModal.addEventListener('click', function (e) {
