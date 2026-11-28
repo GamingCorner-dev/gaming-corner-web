@@ -141,7 +141,7 @@
           <li><button type="button" class="rs-opt" data-go="v-revin"><span class="rs-opt__body"><span class="rs-opt__t">Sell Items</span><span class="rs-opt__d">View All Available Items</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
           <li><button type="button" class="rs-opt" data-go="v-svc-rc"><span class="rs-opt__body"><span class="rs-opt__t">Sell RC</span><span class="rs-opt__d">Rp 75.000 / 10K RC<br>Retail price: 1K RC = Rp 8.000</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
           <li><button type="button" class="rs-opt" data-go="v-svc-vip"><span class="rs-opt__body"><span class="rs-opt__t">Push VIP Service</span><span class="rs-opt__d">Much cheaper than direct top up</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
-          <li><button type="button" class="rs-opt" data-go="v-svc-topup"><span class="rs-opt__body"><span class="rs-opt__t">Direct Top Up Service</span><span class="rs-opt__d">10K RCs = 400 PHP / Rp 120.000</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
+          <li><button type="button" class="rs-opt" data-go="v-svc-topup"><span class="rs-opt__body"><span class="rs-opt__t">Direct Top Up Service</span><span class="rs-opt__d">2,000 RC = Rp 40.000<br>10,000 RC = Rp 195.000</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
           <li><button type="button" class="rs-opt" data-go="v-svc-account"><span class="rs-opt__body"><span class="rs-opt__t">Sell Account Service</span><span class="rs-opt__d">Service fee: Rp 35.000</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
           <li><button type="button" class="rs-opt" data-go="v-svc-exchange"><span class="rs-opt__body"><span class="rs-opt__t">Currency Exchange Service</span><span class="rs-opt__d">Converting rates<br>IDR to PHP = 315<br>PHP to IDR = 270</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
         </ul>
@@ -217,16 +217,33 @@
       <section class="sv" id="v-svc-topup" hidden>
         <p class="eyebrow eyebrow--sm">Revinz Store</p>
         <h2 class="h2 shop-view__title">Direct Top Up Service</h2>
-        <p class="info__lead">10K RCs = 400 PHP / Rp 120.000. Each step is 10K RC. Pay in Rupiah (QRIS) or PHP (InstaPay).</p>
-        <p class="st-note">Tap + to add to your cart, then open the cart (top right) to order and pay. Prices may change, so the admin will double-check when you chat on WhatsApp after paying.</p>
+        <p class="info__lead">Direct Top Up is a top-up process to get RC and raise your Exp VIP, at a relatively higher price than Push VIP. Pay in Rupiah (QRIS) or PHP (InstaPay).</p>
+        <p class="st-note">Tap + to add to your cart, then open the cart (top right) to order and pay. Multiples are available: add more than one to top up several times.</p>
         <ul class="rc-list svc-list">
-          <li class="rc-row svc-row" data-id="svc-topup-10k" data-name="Direct Top Up 10K RC" data-price="120000" data-php="400" data-max="99">
-            <span class="st-art svc-art" style="--h:150" aria-hidden="true"><b>10K</b></span>
-            <span class="rc-row__name">Direct Top Up 10K RC<small class="svc-sub">10,000 RC sent directly to your IGN</small></span>
+          <li class="rc-row svc-row" data-id="svc-topup-2k" data-name="Direct Top Up 2,000 RC" data-price="40000" data-php="133" data-max="99">
+            <span class="st-art svc-art" style="--h:150" aria-hidden="true"><b>2K</b></span>
+            <span class="rc-row__name">Direct Top Up 2,000 RC<small class="svc-sub">2,000 RC &middot; multiples available</small></span>
             <span class="rc-row__price"></span>
-            <div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease Direct Top Up 10K RC">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase Direct Top Up 10K RC">+</button></div>
+            <div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease Direct Top Up 2,000 RC">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase Direct Top Up 2,000 RC">+</button></div>
+          </li>
+          <li class="rc-row svc-row" data-id="svc-topup-10k" data-name="Direct Top Up 10,000 RC" data-price="195000" data-php="650" data-max="99">
+            <span class="st-art svc-art" style="--h:150" aria-hidden="true"><b>10K</b></span>
+            <span class="rc-row__name">Direct Top Up 10,000 RC<small class="svc-sub">10,000 RC &middot; multiples available</small></span>
+            <span class="rc-row__price"></span>
+            <div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease Direct Top Up 10,000 RC">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase Direct Top Up 10,000 RC">+</button></div>
           </li>
         </ul>
+        <div class="vip-info">
+          <article class="vip-card">
+            <h3>What do you get when you order Direct Top Up / DTU?</h3>
+            <ul class="vip-get">
+              <li class="is-yes"><span>RC</span><i aria-hidden="true">&#10003;</i></li>
+              <li class="is-yes"><span>Exp VIP</span><i aria-hidden="true">&#10003;</i></li>
+              <li class="is-yes"><span>Reward VIP</span><i aria-hidden="true">&#10003;</i></li>
+              <li class="is-yes"><span>Reward Weekend <small>(only available on weekends)</small></span><i aria-hidden="true">&#10003;</i></li>
+            </ul>
+          </article>
+        </div>
         <button type="button" class="rc-bar" data-modal="revin-cart" data-go="v-cart" aria-label="View cart"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h3l2.6 12.2a1.6 1.6 0 0 0 1.6 1.3h8.1a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2"/></svg><b class="rc-badge" hidden>0</b><span class="rc-bar__total" hidden>Rp 0</span></button>
         <div class="info__cta">
           <button type="button" class="signup__btn signup__btn--ghost sv-back" data-go="v-revin-menu" aria-label="Back">&larr; Back</button>
