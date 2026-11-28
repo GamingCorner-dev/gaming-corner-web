@@ -140,7 +140,7 @@
         <ul class="rs-menu">
           <li><button type="button" class="rs-opt" data-go="v-revin"><span class="rs-opt__body"><span class="rs-opt__t">Sell Items</span><span class="rs-opt__d">View All Available Items</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
           <li><button type="button" class="rs-opt" data-go="v-svc-rc"><span class="rs-opt__body"><span class="rs-opt__t">Sell RC</span><span class="rs-opt__d">Rp 75.000 / 10K RC<br>Retail price: 1K RC = Rp 8.000</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
-          <li><div class="rs-opt is-soon" aria-disabled="true"><span class="rs-opt__body"><span class="rs-opt__t">Push VIP Service</span><span class="rs-opt__d">Coming soon</span></span><span class="rs-opt__tag">Coming soon</span></div></li>
+          <li><button type="button" class="rs-opt" data-go="v-svc-vip"><span class="rs-opt__body"><span class="rs-opt__t">Push VIP Service</span><span class="rs-opt__d">Much cheaper than direct top up</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
           <li><button type="button" class="rs-opt" data-go="v-svc-topup"><span class="rs-opt__body"><span class="rs-opt__t">Direct Top Up Service</span><span class="rs-opt__d">10K RCs = 400 PHP / Rp 120.000</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
           <li><button type="button" class="rs-opt" data-go="v-svc-account"><span class="rs-opt__body"><span class="rs-opt__t">Sell Account Service</span><span class="rs-opt__d">Service fee: Rp 35.000</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
           <li><button type="button" class="rs-opt" data-go="v-svc-exchange"><span class="rs-opt__body"><span class="rs-opt__t">Currency Exchange Service</span><span class="rs-opt__d">Converting rates<br>IDR to PHP = 315<br>PHP to IDR = 270</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
@@ -168,6 +168,47 @@
             <div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease RC 1K (retail)">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase RC 1K (retail)">+</button></div>
           </li>
         </ul>
+        <button type="button" class="rc-bar" data-modal="revin-cart" data-go="v-cart" aria-label="View cart"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h3l2.6 12.2a1.6 1.6 0 0 0 1.6 1.3h8.1a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2"/></svg><b class="rc-badge" hidden>0</b><span class="rc-bar__total" hidden>Rp 0</span></button>
+        <div class="info__cta">
+          <button type="button" class="signup__btn signup__btn--ghost sv-back" data-go="v-revin-menu" aria-label="Back">&larr; Back</button>
+        </div>
+      </section>
+      <section class="sv" id="v-svc-vip" hidden>
+        <p class="eyebrow eyebrow--sm">Revinz Store</p>
+        <h2 class="h2 shop-view__title">Push VIP</h2>
+        <p class="info__lead">Push VIP is a top-up process at a much lower price than direct top up. Pay in Rupiah (QRIS) or PHP (InstaPay).</p>
+        <p class="st-note">Tap + to add to your cart, then open the cart (top right) to order and pay.</p>
+        <ul class="rc-list svc-list">
+          <li class="rc-row svc-row" data-id="vip-2k" data-name="Push VIP 2,000 RC" data-price="20000" data-php="67" data-max="99">
+            <span class="st-art svc-art" style="--h:38" aria-hidden="true"><b>2K</b></span>
+            <span class="rc-row__name">Push VIP 2,000 RC<small class="svc-sub">2,000 RC</small></span>
+            <span class="rc-row__price"></span>
+            <div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease Push VIP 2,000 RC">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase Push VIP 2,000 RC">+</button></div>
+          </li>
+          <li class="rc-row svc-row" data-id="vip-10k" data-name="Push VIP 10,000 RC (without item)" data-price="70000" data-php="233" data-max="99">
+            <span class="st-art svc-art" style="--h:34" aria-hidden="true"><b>10K</b></span>
+            <span class="rc-row__name">Push VIP 10,000 RC (without item)<small class="svc-sub">10,000 RC &middot; without item</small></span>
+            <span class="rc-row__price"></span>
+            <div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease Push VIP 10,000 RC (without item)">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase Push VIP 10,000 RC (without item)">+</button></div>
+          </li>
+          <li class="rc-row svc-row" data-id="vip-10k-item" data-name="Push VIP 10,000 RC (with item)" data-price="125000" data-php="417" data-max="99">
+            <span class="st-art svc-art" style="--h:44" aria-hidden="true"><b>10K</b></span>
+            <span class="rc-row__name">Push VIP 10,000 RC (with item)<small class="svc-sub">10,000 RC &middot; with item</small></span>
+            <span class="rc-row__price"></span>
+            <div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease Push VIP 10,000 RC (with item)">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase Push VIP 10,000 RC (with item)">+</button></div>
+          </li>
+        </ul>
+        <div class="vip-info">
+          <article class="vip-card">
+            <h3>What do you get when you order Push VIP?</h3>
+            <ul class="vip-get">
+              <li class="is-yes"><span>Exp VIP</span><i aria-hidden="true">&#10003;</i></li>
+              <li class="is-yes"><span>Reward VIP</span><i aria-hidden="true">&#10003;</i></li>
+              <li class="is-no"><span>RC</span><i aria-hidden="true">&#10005;</i></li>
+            </ul>
+          </article>
+          <p class="vip-gift">With-item orders usually get a Serial of Gift on weekends.</p>
+        </div>
         <button type="button" class="rc-bar" data-modal="revin-cart" data-go="v-cart" aria-label="View cart"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h3l2.6 12.2a1.6 1.6 0 0 0 1.6 1.3h8.1a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2"/></svg><b class="rc-badge" hidden>0</b><span class="rc-bar__total" hidden>Rp 0</span></button>
         <div class="info__cta">
           <button type="button" class="signup__btn signup__btn--ghost sv-back" data-go="v-revin-menu" aria-label="Back">&larr; Back</button>
