@@ -253,9 +253,10 @@
         <p class="eyebrow eyebrow--sm">Revinz Store</p>
         <h2 class="h2 shop-view__title">Sell Account Service</h2>
         <p class="info__lead">Service fee: Rp 35.000 per account. Pay in Rupiah (QRIS) or PHP (InstaPay).</p>
+        <p class="info__lead">How it works: you hand your Touch 4games account over to Revinz Store, and we help sell it so it sells faster. The Rp 35.000 service fee is for us logging in to your account and making a video of everything in your character's bag, which is used to show buyers what the account has. For this we need your login details when you order.</p>
         <p class="st-note">Tap + to add to your cart, then open the cart (top right) to order and pay. Prices may change, so the admin will double-check when you chat on WhatsApp after paying.</p>
         <ul class="rc-list svc-list">
-          <li class="rc-row svc-row" data-id="svc-account" data-name="Sell Account Service" data-price="35000" data-php="117" data-max="99">
+          <li class="rc-row svc-row" data-id="svc-account" data-need="account" data-name="Sell Account Service" data-price="35000" data-php="117" data-max="99">
             <span class="st-art svc-art" style="--h:60" aria-hidden="true"><b>FEE</b></span>
             <span class="rc-row__name">Sell Account Service<small class="svc-sub">Service fee per account</small></span>
             <span class="rc-row__price"></span>
@@ -367,6 +368,35 @@
             <label for="rc-ign">Your Touch 4games IGN</label>
             <input id="rc-ign" class="rc-input" type="text" maxlength="40" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type your IGN here">
             <p class="rc-hint" data-ign-hint>Enter your IGN before paying. Items will be sent to this IGN, so please make sure it is correct.</p>
+          </div>
+          <div class="rc-acc" data-accfields hidden>
+            <div class="rc-field">
+              <label for="rc-accpass">Password IGN</label>
+              <input id="rc-accpass" class="rc-input" type="password" maxlength="60" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Your Touch 4games account password">
+            </div>
+            <div class="rc-field">
+              <span class="rc-acc__q" id="rc-accq">Do you have an active email on this account?</span>
+              <div class="rc-yn" role="group" aria-labelledby="rc-accq">
+                <button type="button" class="rc-yn__btn" data-accyn="yes" aria-pressed="false">Yes, active</button>
+                <button type="button" class="rc-yn__btn" data-accyn="no" aria-pressed="false">No</button>
+              </div>
+            </div>
+            <div data-accmail hidden>
+              <div class="rc-field">
+                <label for="rc-accemail">Active Email</label>
+                <input id="rc-accemail" class="rc-input" type="email" maxlength="80" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="name@example.com">
+              </div>
+              <div class="rc-field">
+                <label for="rc-accepass">Active Email Password</label>
+                <input id="rc-accepass" class="rc-input" type="password" maxlength="60" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Password of that email">
+              </div>
+              <div class="rc-field">
+                <label for="rc-accphone">Active Phone Number linked to that email</label>
+                <input id="rc-accphone" class="rc-input" type="tel" inputmode="tel" maxlength="20" autocomplete="off" spellcheck="false" placeholder="e.g. 0812xxxxxxxx">
+              </div>
+            </div>
+            <label class="rc-acc__show"><input type="checkbox" id="rc-accshow"> Show passwords</label>
+            <p class="rc-hint">Revinz Store will use these details to log in and make the bag video. If the account is sold, the email, its password and the linked phone number are for the new owner. Your details are not saved on this website. They are only included in the WhatsApp message to Revinz Store after you pay.</p>
           </div>
           <div class="rc-field" data-xfield hidden>
             <label for="rc-xacct" data-xlabel>Where should we send your money?</label>
