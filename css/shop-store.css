@@ -398,3 +398,7 @@ body.cart-open .gc-inline .sv:not(#v-cart) .sv-back { visibility: hidden; }
 .gc-inline .neg-form select.rc-input { appearance: none; -webkit-appearance: none; cursor: pointer; padding-right: 40px; background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%), linear-gradient(135deg, var(--gold) 50%, transparent 50%); background-position: calc(100% - 20px) 55%, calc(100% - 14px) 55%; background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; }
 .gc-inline .neg-form select.rc-input option { background: #1a1710; color: var(--text); }
 .gc-inline .signup__btn.is-disabled { opacity: .45; cursor: not-allowed; pointer-events: auto; filter: saturate(.6); }
+
+/* Revisi 116 - pilihan video isi bag milik pembeli */
+.gc-inline .rc-acc__video { display: flex; align-items: flex-start; gap: 10px; margin: 14px 0 6px; padding: 12px 14px; border: 1px dashed rgba(232, 190, 110, .5); border-radius: 12px; color: var(--text); font-weight: 600; font-size: 15px; line-height: 1.4; cursor: pointer; }
+.gc-inline .rc-acc__video input { margin-top: 3px; flex: none; }
