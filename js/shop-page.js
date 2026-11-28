@@ -4,7 +4,7 @@
   var views = document.querySelectorAll('.sv');
   function go(id) {
     Array.prototype.forEach.call(views, function (v) { v.hidden = v.id !== id; });
-    document.documentElement.style.overflow = '';   /* pindah tampilan selalu membebaskan scroll */
+    document.documentElement.style.overflow = ''; document.body.classList.remove('cart-open');   /* pindah tampilan selalu membebaskan scroll */
     var t = document.getElementById(id); if (t) { var y = t.getBoundingClientRect().top + window.pageYOffset - 100; window.scrollTo({ top: Math.max(0, Math.min(y, window.pageYOffset)), behavior: 'smooth' }); }
   }
   document.addEventListener('click', function (e) {

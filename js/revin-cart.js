@@ -149,6 +149,19 @@
     var clr = cartModal.querySelector('[data-clear]'); if (clr) clr.hidden = list.length === 0;
   }
 
+  /* Keranjang tampil sebagai pop-up hampir layar penuh, ditutup dengan tombol silang, klik area gelap, atau Esc */
+  var cartView = document.getElementById('v-cart');
+  function openCart() {
+    if (!cartView) return;
+    show('cart'); cartView.hidden = false; cartModal.scrollTop = 0;
+    document.documentElement.style.overflow = 'hidden'; document.body.classList.add('cart-open');
+    var cb = cartView.querySelector('.rc-close'); if (cb) cb.focus({ preventScroll: true });
+  }
+  function closeCart() {
+    if (!cartView) return;
+    cartView.hidden = true; document.documentElement.style.overflow = ''; document.body.classList.remove('cart-open');
+  }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && cartView && !cartView.hidden) closeCart(); });
   function show(step) {
     Array.prototype.forEach.call(cartModal.querySelectorAll('.rc-pane'), function (p) { p.hidden = p.getAttribute('data-pane') !== step; });
     var sc = cartModal.querySelector('.gc-modal__scroll'); if (sc) sc.scrollTop = 0;
@@ -219,7 +232,9 @@
     if (mb && cartModal.contains(mb)) { method = mb.getAttribute('data-method') === 'php' ? 'php' : 'idr'; render(); return; }
     var st = e.target.closest ? e.target.closest('[data-step]') : null;
     if (st && cartModal.contains(st) && !st.disabled) { e.preventDefault(); show(st.getAttribute('data-step')); return; }
-    if (e.target.closest && e.target.closest('[data-modal="revin-cart"]')) { render(); show('cart'); }
+    if (e.target.closest && e.target.closest('[data-cart-open]')) { render(); openCart(); return; }
+    if (e.target.closest && e.target.closest('[data-cart-close]')) { closeCart(); return; }
+    if (cartView && e.target === cartView) { closeCart(); return; }
   });
 
   render();
