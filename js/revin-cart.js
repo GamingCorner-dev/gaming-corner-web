@@ -19,7 +19,7 @@
     Array.prototype.forEach.call(rows, function (r) {
       var mx = parseInt(r.getAttribute('data-max'), 10);
       var art = r.querySelector('.st-art'), ab = art && art.querySelector('b');
-      catalog[r.getAttribute('data-id')] = { hue: art ? (parseInt(art.style.getPropertyValue('--h'), 10) || 38) : 38, ini: ab ? ab.textContent : '', name: r.getAttribute('data-name'), price: parseInt(r.getAttribute('data-price'), 10) || 0, php: parseInt(r.getAttribute('data-php'), 10) || 0, max: isNaN(mx) ? 99 : mx, kind: r.getAttribute('data-kind') || '' };
+      catalog[r.getAttribute('data-id')] = { hue: art ? (parseInt(art.style.getPropertyValue('--h'), 10) || 38) : 38, ini: ab ? ab.textContent : '', name: r.getAttribute('data-name'), price: parseInt(r.getAttribute('data-price'), 10) || 0, php: parseInt(r.getAttribute('data-php'), 10) || 0, max: isNaN(mx) ? 99 : mx, kind: r.getAttribute('data-kind') || '', need: r.getAttribute('data-need') || '' };
     });
   }
   /* buang dari keranjang item yang sudah tidak ada / habis, dan batasi jumlah sesuai stok */
@@ -44,6 +44,11 @@
   function ids() { return Object.keys(qty).filter(function (k) { return qty[k] > 0; }); }
   function totals() { var c = 0, t = 0, p = 0, ok = true; ids().forEach(function (k) { c += qty[k]; t += qty[k] * catalog[k].price; p += qty[k] * catalog[k].php; if (!(catalog[k].php > 0)) ok = false; }); return { count: c, total: t, php: p, phpOk: ok }; }
   /* Currency Exchange: kind 'xbuy' (bayar Rupiah, terima PHP) atau 'xsell' (kirim PHP, terima Rupiah). Jumlah = PHP. */
+  /* Sell Account Service: data login akun. Hanya di memori halaman ini, tidak disimpan di browser. */
+  var acc = { pass: '', has: '', email: '', epass: '', phone: '' };
+  function hasAcct() { return ids().some(function (k) { return catalog[k].need === 'account'; }); }
+  function accOk() { return acc.pass.length > 0 && (acc.has === 'no' || (acc.has === 'yes' && acc.email.indexOf('@') > 0 && acc.epass.length > 0 && acc.phone.replace(/\D/g, '').length >= 8)); }
+  function orderOk() { var xm0 = xmode(); if (xm0) return xacct.length >= 4; return ign.length > 0 && (!hasAcct() || accOk()); }
   var xacct = '';   /* tujuan transfer: hanya di memori, tidak disimpan di browser */
   function xmode() { var m = ''; ids().forEach(function (k) { if (catalog[k].kind) m = catalog[k].kind; }); return m; }
   function xid() { var r = ''; ids().forEach(function (k) { if (catalog[k].kind) r = k; }); return r; }
@@ -64,6 +69,11 @@
       '<span class="rc-row__name">' + c.name + warn + '</span><span class="rc-row__price">' + rp(c.price * q) + pl + '</span><span class="rc-line__ctl">' + ctl + '</span></li>';
   }
 
+  function accLines() {
+    if (!hasAcct()) return '';
+    return '\nPassword IGN: ' + acc.pass + '\nActive email: ' + (acc.has === 'yes' ? 'Yes' : 'No') +
+      (acc.has === 'yes' ? '\nActive email address: ' + acc.email + '\nActive email password: ' + acc.epass + '\nPhone number linked to the email: ' + acc.phone : '');
+  }
   function waLink() {
     var xm = xmode();
     if (xm) {
@@ -81,7 +91,7 @@
     var msg = 'Hello Revinz Store, I have made my payment.\n\nOrder:\n' + lines.join('\n') +
       '\n\nPayment method: ' + (isPhp ? 'InstaPay (PHP)' : 'QRIS (Rupiah)') +
       '\nTotal: ' + (isPhp ? php(t.php) : rp(t.total)) +
-      '\nTouch 4games IGN: ' + ign + '\n\nI will send my proof of payment in this chat.';
+      '\nTouch 4games IGN: ' + ign + accLines() + '\n\nI will send my proof of payment in this chat.';
     return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
   }
 
@@ -143,9 +153,13 @@
     Array.prototype.forEach.call(cartModal.querySelectorAll('.rc-sum'), function (e) { e.hidden = !!xm; });
     if (xm) { Array.prototype.forEach.call(cartModal.querySelectorAll('.rc-sum, .rc-php-line, .rc-summary__row--php, [data-php-note]'), function (e) { e.hidden = true; }); }
     Array.prototype.forEach.call(cartModal.querySelectorAll('[data-paylead]'), function (e) { e.textContent = xm === 'xbuy' ? 'Pay with Rupiah (QRIS).' : xm === 'xsell' ? 'Pay with PHP (InstaPay).' : 'Choose how you want to pay.'; });
+    var needAcc = hasAcct() && !xm;
+    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-accfields]'), function (e) { e.hidden = !needAcc; });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-accmail]'), function (e) { e.hidden = acc.has !== 'yes'; });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-accyn]'), function (b) { var on = b.getAttribute('data-accyn') === acc.has; b.classList.toggle('is-on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
     var xin = cartModal.querySelector('#rc-xacct'); if (xin && xin.value !== xacct) xin.value = xacct;
     Array.prototype.forEach.call(cartModal.querySelectorAll('[data-ign-show]'), function (e) { e.textContent = ign; });
-    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-needs-ign]'), function (b) { b.disabled = (xm ? xacct.length < 4 : ign.length === 0) || list.length === 0; });
+    Array.prototype.forEach.call(cartModal.querySelectorAll('[data-needs-ign]'), function (b) { b.disabled = !orderOk() || list.length === 0; });
     var clr = cartModal.querySelector('[data-clear]'); if (clr) clr.hidden = list.length === 0;
   }
 
@@ -174,10 +188,20 @@
       render();
     });
     ignInput.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' && ign) { e.preventDefault(); show('pay'); }
+      if (e.key === 'Enter' && orderOk()) { e.preventDefault(); show('pay'); }
     });
   }
 
+  [['#rc-accpass', 'pass', 60], ['#rc-accemail', 'email', 80], ['#rc-accepass', 'epass', 60], ['#rc-accphone', 'phone', 20]].forEach(function (d) {
+    var el = cartModal.querySelector(d[0]); if (!el) return;
+    el.addEventListener('input', function () { acc[d[1]] = el.value.trim().slice(0, d[2]); render(); });
+  });
+  var accShow = cartModal.querySelector('#rc-accshow');
+  if (accShow) accShow.addEventListener('change', function () { ['#rc-accpass', '#rc-accepass'].forEach(function (q) { var el = cartModal.querySelector(q); if (el) el.type = accShow.checked ? 'text' : 'password'; }); });
+  cartModal.addEventListener('click', function (e) {
+    var yb = e.target.closest ? e.target.closest('[data-accyn]') : null;
+    if (yb) { acc.has = yb.getAttribute('data-accyn'); render(); }
+  });
   var xin0 = cartModal.querySelector('#rc-xacct');
   if (xin0) {
     xin0.addEventListener('input', function () { xacct = xin0.value.replace(/\s+/g, ' ').trim().slice(0, 80); render(); });
