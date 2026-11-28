@@ -364,8 +364,9 @@ html body .page { padding-bottom: var(--gc-pod-h, 0px); }
 @media (max-width: 720px) { #v-cart { padding: 0; } #v-cart #revin-cart { border-radius: 0; border-width: 0; padding: 20px 16px 28px; } #v-cart .rc-close { transform: translate(0, 0); margin-top: 0; } }
 /* main punya lapisan sendiri (z-index 1), jadi saat keranjang terbuka main dinaikkan di atas header */
 body.cart-open main { z-index: 9000; }
-/* tombol Back di dalam pop-up keranjang ikut mengalir di dalam kotak, tidak menempel di pojok layar */
-.gc-inline #v-cart .sv-back, .gc-inline #v-cart .sv-back:active { position: static; top: auto; left: auto; transform: none; z-index: auto; margin: 0 0 16px; }
-@media (max-width: 700px) { .gc-inline #v-cart .sv-back { top: auto; left: auto; padding: 10px 14px; } .gc-inline #v-cart .rc-closebar + .eyebrow { padding-right: 52px; } }
+/* tombol Back di dalam pop-up: tampilan sama seperti tombol Back halaman, menempel di kiri atas kotak dan ikut tetap terlihat saat di-scroll */
+.gc-inline #v-cart .sv-back { position: sticky; top: 0; left: auto; z-index: 6; margin: 0 0 14px; }
+.gc-inline #v-cart .rc-pane .eyebrow { margin-top: 0; }
+@media (max-width: 700px) { .gc-inline #v-cart .sv-back { top: 0; left: auto; } .gc-inline #v-cart .rc-closebar + .rc-pane .eyebrow { padding-right: 52px; } }
 /* saat keranjang terbuka, tombol Back halaman di belakangnya disembunyikan */
 body.cart-open .gc-inline .sv:not(#v-cart) .sv-back { visibility: hidden; }
