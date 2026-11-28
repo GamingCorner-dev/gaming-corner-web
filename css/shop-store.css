@@ -353,3 +353,19 @@ html body .page { padding-bottom: var(--gc-pod-h, 0px); }
 
 /* Revisi 109 - Direct Top Up */
 .gc-inline .vip-get li small { display: block; font-weight: 500; font-size: 13px; opacity: .75; margin-top: 2px; }
+
+/* Revisi 110 - keranjang jadi pop-up hampir layar penuh */
+#v-cart { position: fixed; inset: 0; z-index: 9000; display: flex; justify-content: center; align-items: stretch; padding: 3vh 3vw; background: rgba(5, 4, 3, .8); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+#v-cart[hidden] { display: none; }
+#v-cart #revin-cart { position: relative; width: 100%; max-width: 1240px; height: 100%; overflow-y: auto; overscroll-behavior: contain; background: #0f0e0c; border: 1px solid rgba(232, 190, 110, .5); border-radius: 22px; padding: 28px 32px 36px; box-shadow: 0 30px 90px rgba(0, 0, 0, .65); }
+#v-cart .rc-closebar { position: sticky; top: 0; height: 0; z-index: 5; text-align: right; }
+#v-cart .rc-close { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--gold); background: #1a1710; color: var(--gold); cursor: pointer; transform: translate(10px, -14px); transition: background .2s ease, color .2s ease; }
+#v-cart .rc-close:hover, #v-cart .rc-close:focus-visible { background: var(--gold); color: #1a140a; outline: none; }
+@media (max-width: 720px) { #v-cart { padding: 0; } #v-cart #revin-cart { border-radius: 0; border-width: 0; padding: 20px 16px 28px; } #v-cart .rc-close { transform: translate(0, 0); margin-top: 0; } }
+/* main punya lapisan sendiri (z-index 1), jadi saat keranjang terbuka main dinaikkan di atas header */
+body.cart-open main { z-index: 9000; }
+/* tombol Back di dalam pop-up keranjang ikut mengalir di dalam kotak, tidak menempel di pojok layar */
+.gc-inline #v-cart .sv-back, .gc-inline #v-cart .sv-back:active { position: static; top: auto; left: auto; transform: none; z-index: auto; margin: 0 0 16px; }
+@media (max-width: 700px) { .gc-inline #v-cart .sv-back { top: auto; left: auto; padding: 10px 14px; } .gc-inline #v-cart .rc-closebar + .eyebrow { padding-right: 52px; } }
+/* saat keranjang terbuka, tombol Back halaman di belakangnya disembunyikan */
+body.cart-open .gc-inline .sv:not(#v-cart) .sv-back { visibility: hidden; }
