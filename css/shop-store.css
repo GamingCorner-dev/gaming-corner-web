@@ -390,6 +390,11 @@ body.cart-open .gc-inline .sv:not(#v-cart) .sv-back { visibility: hidden; }
 
 /* Revisi 114 - Price Negotiation */
 .gc-inline .neg-form { display: grid; gap: 4px; max-width: 560px; margin-top: 16px; }
+.gc-inline .neg-form select.rc-input, .gc-inline .neg-form .neg-other { }
+.gc-inline .neg-form .neg-other { margin-top: 10px; }
+.gc-inline .neg-form .neg-other[hidden] { display: none; }
+.gc-inline .neg-form select.rc-input:disabled { opacity: .55; cursor: not-allowed; }
+.gc-inline .neg-form select.rc-input optgroup { background: #120f0a; color: var(--gold); font-style: normal; }
 .gc-inline .neg-form select.rc-input { appearance: none; -webkit-appearance: none; cursor: pointer; padding-right: 40px; background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%), linear-gradient(135deg, var(--gold) 50%, transparent 50%); background-position: calc(100% - 20px) 55%, calc(100% - 14px) 55%; background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; }
 .gc-inline .neg-form select.rc-input option { background: #1a1710; color: var(--text); }
 .gc-inline .signup__btn.is-disabled { opacity: .45; cursor: not-allowed; pointer-events: auto; filter: saturate(.6); }
