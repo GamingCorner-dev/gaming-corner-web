@@ -55,7 +55,7 @@
   }
   function lineHtml(id, ro) {
     var c = catalog[id], q = qty[id];
-    if (c.kind) return '<li class="rc-row" data-id="' + id + '"><span class="rc-thumb" style="--h:38" aria-hidden="true"><b>FX</b></span><span class="rc-row__name">' + c.name + ' ' + q.toLocaleString('en-US') + '<small class="rc-line__warn">' + (c.kind === 'xbuy' ? 'Rp ' + c.price + ' per PHP 1 (you pay)' : 'Rp ' + c.price + ' per PHP 1 (you receive)') + '</small></span><span class="rc-row__price">' + rp(c.price * q) + '<small class="rc-line__php">' + (c.kind === 'xbuy' ? 'you pay' : 'you receive') + '</small></span><span class="rc-line__ctl">' + (ro ? '' : '<button type="button" class="rc-remove" data-remove aria-label="Remove ' + c.name + '"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4.5h6V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10 11v5M14 11v5"/></svg></button>') + '</span></li>';
+    if (c.kind) return '<li class="rc-row" data-id="' + id + '"><span class="rc-thumb" style="--h:38" aria-hidden="true"><b>FX</b></span><span class="rc-row__name">' + c.name + ' (PHP ' + q.toLocaleString('en-US') + ')<small class="rc-line__warn">' + (c.kind === 'xbuy' ? 'Rp ' + c.price + ' per PHP 1 (you pay)' : 'Rp ' + c.price + ' per PHP 1 (you receive)') + '</small></span><span class="rc-row__price">' + rp(c.price * q) + '<small class="rc-line__php">' + (c.kind === 'xbuy' ? 'you pay' : 'you receive') + '</small></span><span class="rc-line__ctl">' + (ro ? '' : '<button type="button" class="rc-remove" data-remove aria-label="Remove ' + c.name + '"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4.5h6V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10 11v5M14 11v5"/></svg></button>') + '</span></li>';
     var pl = c.php ? '<small class="rc-line__php">PHP ' + (c.php * q).toLocaleString('en-US') + '</small>' : '';
     var ctl = ro ? '<span class="rc-ro-qty">x' + q + '</span>' :
       stepper(id, false) + '<button type="button" class="rc-remove" data-remove aria-label="Remove ' + c.name + '"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4.5h6V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10 11v5M14 11v5"/></svg></button>';
@@ -69,8 +69,8 @@
     if (xm) {
       var xt = totals(), xk = xid(), amt = qty[xk] || 0;
       var xmsg = xm === 'xbuy'
-        ? 'Hello Revinz Store, I have made my payment.\n\nCurrency Exchange: Buy PHP\nAmount: ' + php(amt) + '\nI paid: ' + rp(xt.total) + ' (QRIS)\nPlease send the PHP to: ' + xacct + '\n\nI will send my proof of payment in this chat.'
-        : 'Hello Revinz Store, I have made my payment.\n\nCurrency Exchange: Sell PHP\nI sent: ' + php(amt) + ' (InstaPay)\nI will receive: ' + rp(xt.total) + '\nPlease send the Rupiah to: ' + xacct + '\n\nI will send my proof of payment in this chat.';
+        ? 'Hello Revinz Store, I have made my payment.\n\nCurrency Exchange: IDR to PHP\nAmount: ' + php(amt) + '\nI paid: ' + rp(xt.total) + ' (QRIS)\nPlease send the PHP to: ' + xacct + '\n\nI will send my proof of payment in this chat.'
+        : 'Hello Revinz Store, I have made my payment.\n\nCurrency Exchange: PHP to IDR\nI sent: ' + php(amt) + ' (InstaPay)\nI will receive: ' + rp(xt.total) + '\nPlease send the Rupiah to: ' + xacct + '\n\nI will send my proof of payment in this chat.';
       return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(xmsg);
     }
     var isPhp = method === 'php', t = totals();
