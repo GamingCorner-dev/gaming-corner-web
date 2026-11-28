@@ -35,6 +35,12 @@
     if (f !== '' || row.length) { row.push(f); rows.push(row); }
     return rows;
   }
+  /* kolom Foto: link Google Drive (dibagikan "Anyone with the link") diubah jadi alamat gambar; link gambar biasa dipakai apa adanya */
+  function photoUrl(v) {
+    v = String(v || '').trim(); if (!/^https?:\/\//i.test(v)) return '';
+    var m = v.match(/drive\.google\.com\/file\/d\/([\w-]+)/) || v.match(/drive\.google\.com\/(?:open|uc|thumbnail)\?[^#]*\bid=([\w-]+)/) || v.match(/docs\.google\.com\/uc\?[^#]*\bid=([\w-]+)/);
+    return m ? 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w500' : v;
+  }
   function digits(s) { var d = String(s || '').replace(/[^0-9]/g, ''); return d === '' ? null : parseInt(d, 10); }
 
   function fromCSV(text) {
@@ -42,7 +48,7 @@
     var head = rows[0].map(function (h) { return h.trim().toLowerCase(); });
     function col() { for (var a = 0; a < arguments.length; a++) { var x = head.indexOf(arguments[a]); if (x >= 0) return x; } return -1; }
     /* judul kolom sheet boleh bahasa Indonesia atau Inggris */
-    var iK = col('kategori', 'category'), iN = col('nama item', 'item name', 'item'), iS = col('stok', 'stock'), iP = col('harga php', 'price php', 'php'), iR = col('harga idr', 'price idr', 'idr');
+    var iK = col('kategori', 'category'), iN = col('nama item', 'item name', 'item'), iS = col('stok', 'stock'), iP = col('harga php', 'price php', 'php'), iR = col('harga idr', 'price idr', 'idr'), iF = col('foto', 'photo', 'gambar', 'image', 'picture');
     if (iK < 0 || iN < 0 || iS < 0 || iR < 0) return null;
     var cats = [], map = {};
     for (var r = 1; r < rows.length; r++) {
@@ -52,7 +58,7 @@
       var st = (row[iS] || '').trim().toLowerCase(), s;
       if (st === '') s = null; else if (/^habis|^sold|^kosong/.test(st)) s = 0; else { s = digits(st); if (s === null) s = null; }
       if (!map[title]) { map[title] = { title: title, items: [] }; cats.push(map[title]); }
-      map[title].items.push({ n: name, s: s, p: iP >= 0 ? (digits(row[iP]) || 0) : 0, r: idr });
+      map[title].items.push({ n: name, s: s, p: iP >= 0 ? (digits(row[iP]) || 0) : 0, r: idr, f: iF >= 0 ? photoUrl(row[iF]) : '' });
     }
     var total = cats.reduce(function (a, c) { return a + c.items.length; }, 0);
     return total >= 10 ? cats : null;                 // terlalu sedikit = dianggap salah baca, pakai cadangan
@@ -74,8 +80,8 @@
         var id = 's-' + slug(c.title + '-' + it.n), k = 1, base = id; while (used[id]) { k++; id = base + '-' + k; } used[id] = 1;
         var out = it.s === 0, max = out ? 0 : (it.s > 0 ? it.s : 99);
         var low = (!out && it.s > 0 && it.s <= 2) ? '<i class="st-low">Only ' + it.s + ' left</i>' : '';
-        html += '<li class="rc-row st-row' + (out ? ' is-out' : '') + '" data-id="' + id + '" data-name="' + esc(it.n) + '" data-price="' + it.r + '" data-php="' + it.p + '" data-max="' + max + '" data-search="' + esc(it.n.toLowerCase()) + '">' +
-          '<span class="st-art" style="--h:' + HUES[ci % HUES.length] + '" aria-hidden="true"><b>' + esc(ini(it.n)) + '</b>' + low + '<small>' + esc(c.title.split(' ').slice(0, 3).join(' ')) + '</small></span>' +
+        html += '<li class="rc-row st-row' + (out ? ' is-out' : '') + '" data-id="' + id + '" data-name="' + esc(it.n) + '" data-price="' + it.r + '" data-php="' + it.p + '" data-max="' + max + '" data-search="' + esc(it.n.toLowerCase()) + '"' + (it.f ? ' data-img="' + esc(it.f) + '"' : '') + '>' +
+          '<span class="st-art" style="--h:' + HUES[ci % HUES.length] + '" aria-hidden="true">' + (it.f ? '<img class="st-img" src="' + esc(it.f) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">' : '') + '<b>' + esc(ini(it.n)) + '</b>' + low + '<small>' + esc(c.title.split(' ').slice(0, 3).join(' ')) + '</small></span>' +
           '<span class="rc-row__name">' + esc(it.n) + (out ? '<small class="st-stock st-stock--out">Sold out</small>' : (it.s > 0 ? '<small class="st-stock">Stock ' + it.s + '</small>' : '')) + '</span>' +
           '<span class="rc-row__price"></span>' +
           '<div class="rc-step"><button type="button" class="rc-step__btn" data-act="minus" aria-label="Decrease ' + esc(it.n) + '">&minus;</button><output class="rc-step__qty">0</output><button type="button" class="rc-step__btn" data-act="plus" aria-label="Increase ' + esc(it.n) + '"' + (out ? ' disabled' : '') + '>+</button></div></li>';
@@ -109,6 +115,10 @@
     Array.prototype.forEach.call(root.querySelectorAll('.st-chip'), function (c) { c.classList.toggle('is-on', c === b); });
     apply();
   });
+
+  /* gambar yang berhasil dimuat menutupi huruf inisial; kalau gagal, gambar dibuang dan huruf tetap tampil */
+  root.addEventListener('load', function (e) { var t = e.target; if (t && t.classList && t.classList.contains('st-img') && t.parentNode) { t.parentNode.classList.add('has-img'); if (window.gcCartRescan) window.gcCartRescan(); } }, true);
+  root.addEventListener('error', function (e) { var t = e.target; if (t && t.classList && t.classList.contains('st-img') && t.parentNode) t.parentNode.removeChild(t); }, true);
 
   build(fromBackup());                                  // langsung tampil
 

@@ -19,7 +19,7 @@
     Array.prototype.forEach.call(rows, function (r) {
       var mx = parseInt(r.getAttribute('data-max'), 10);
       var art = r.querySelector('.st-art'), ab = art && art.querySelector('b');
-      catalog[r.getAttribute('data-id')] = { hue: art ? (parseInt(art.style.getPropertyValue('--h'), 10) || 38) : 38, ini: ab ? ab.textContent : '', name: r.getAttribute('data-name'), price: parseInt(r.getAttribute('data-price'), 10) || 0, php: parseInt(r.getAttribute('data-php'), 10) || 0, max: isNaN(mx) ? 99 : mx, kind: r.getAttribute('data-kind') || '', need: r.getAttribute('data-need') || '' };
+      catalog[r.getAttribute('data-id')] = { hue: art ? (parseInt(art.style.getPropertyValue('--h'), 10) || 38) : 38, ini: ab ? ab.textContent : '', img: (art && art.classList.contains('has-img')) ? (r.getAttribute('data-img') || '') : '', name: r.getAttribute('data-name'), price: parseInt(r.getAttribute('data-price'), 10) || 0, php: parseInt(r.getAttribute('data-php'), 10) || 0, max: isNaN(mx) ? 99 : mx, kind: r.getAttribute('data-kind') || '', need: r.getAttribute('data-need') || '' };
     });
   }
   /* buang dari keranjang item yang sudah tidak ada / habis, dan batasi jumlah sesuai stok */
@@ -65,7 +65,7 @@
     var ctl = ro ? '<span class="rc-ro-qty">x' + q + '</span>' :
       stepper(id, false) + '<button type="button" class="rc-remove" data-remove aria-label="Remove ' + c.name + '"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4.5h6V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10 11v5M14 11v5"/></svg></button>';
     var warn = (c.max < 99) ? '<small class="rc-line__warn' + (q >= c.max && c.max > 1 ? ' is-max' : '') + '">' + (q >= c.max && c.max > 1 ? 'Max stock reached' : 'Stock ' + c.max) + '</small>' : '';
-    return '<li class="rc-row" data-id="' + id + '"><span class="rc-thumb" style="--h:' + c.hue + '" aria-hidden="true"><b>' + c.ini + '</b></span>' +
+    return '<li class="rc-row" data-id="' + id + '"><span class="rc-thumb" style="--h:' + c.hue + '" aria-hidden="true"><b>' + c.ini + '</b>' + (c.img ? '<img class="rc-thumb__img" src="' + c.img.replace(/"/g, '&quot;') + '" alt="" referrerpolicy="no-referrer">' : '') + '</span>' +
       '<span class="rc-row__name">' + c.name + warn + '</span><span class="rc-row__price">' + rp(c.price * q) + pl + '</span><span class="rc-line__ctl">' + ctl + '</span></li>';
   }
 
