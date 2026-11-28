@@ -214,8 +214,8 @@
         <h2 class="h2 shop-view__title">Currency Exchange Service</h2>
         <p class="info__lead">Converting rates: IDR to PHP = 315, PHP to IDR = 270. Choose a direction, type the amount in PHP, then pay on the website.</p>
         <div class="rc-methods" role="group" aria-label="Exchange direction">
-          <button type="button" class="rc-method is-on" data-xdir="xbuy" aria-pressed="true">Buy PHP <small>pay Rupiah</small></button>
-          <button type="button" class="rc-method" data-xdir="xsell" aria-pressed="false">Sell PHP <small>receive Rupiah</small></button>
+          <button type="button" class="rc-method is-on" data-xdir="xbuy" aria-pressed="true">IDR to PHP <small>pay Rupiah</small></button>
+          <button type="button" class="rc-method" data-xdir="xsell" aria-pressed="false">PHP to IDR <small>pay PHP</small></button>
         </div>
         <div class="rc-field xch-field">
           <label for="xch-amt">Amount in PHP</label>
@@ -223,8 +223,8 @@
           <p class="rc-hint" data-xcalc>Type the amount of PHP you want to exchange.</p>
         </div>
         <ul class="rc-list" hidden>
-          <li class="rc-row" data-id="xch-buy" data-kind="xbuy" data-name="Buy PHP" data-price="315" data-php="0" data-max="100000"></li>
-          <li class="rc-row" data-id="xch-sell" data-kind="xsell" data-name="Sell PHP" data-price="270" data-php="1" data-max="100000"></li>
+          <li class="rc-row" data-id="xch-buy" data-kind="xbuy" data-name="IDR to PHP" data-price="315" data-php="0" data-max="100000"></li>
+          <li class="rc-row" data-id="xch-sell" data-kind="xsell" data-name="PHP to IDR" data-price="270" data-php="1" data-max="100000"></li>
         </ul>
         <div class="info__cta"><button type="button" class="signup__btn" data-xadd disabled>Add to cart <span class="arr" aria-hidden="true">&rarr;</span></button></div>
         <button type="button" class="rc-bar" data-modal="revin-cart" data-go="v-cart" aria-label="View cart"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h3l2.6 12.2a1.6 1.6 0 0 0 1.6 1.3h8.1a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2"/></svg><b class="rc-badge" hidden>0</b><span class="rc-bar__total" hidden>Rp 0</span></button>
