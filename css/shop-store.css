@@ -315,3 +315,27 @@ html body .page { padding-bottom: var(--gc-pod-h, 0px); }
 .gc-inline .rc-sum[hidden] { display: none; }
 .gc-inline [data-xinfo] .rc-summary__row b { color: var(--gold); }
 #v-svc-exchange .rc-methods { margin-bottom: 10px; }
+
+/* Revisi 107 - keterangan Currency Exchange (dari poster) */
+.gc-inline .xch-how { margin: 18px 0 12px; color: var(--text); font-size: 16px; line-height: 1.5; }
+.gc-inline .xch-how b { color: var(--gold); }
+.gc-inline .xch-how--go { margin-top: 22px; }
+.gc-inline .xch-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.gc-inline .xch-card { border: 1px solid rgba(232, 190, 110, .35); border-radius: 18px; background: #131212; padding: 18px; }
+.gc-inline .xch-card__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.gc-inline .xch-card__head h3 { margin: 0; font-size: 24px; line-height: 1.1; color: var(--text); }
+.gc-inline .xch-card__head h3 i { font-weight: 500; color: var(--gold); }
+.gc-inline .xch-rate { display: inline-flex; flex-direction: column; align-items: center; padding: 8px 16px; border-radius: 12px; background: rgba(232, 190, 110, .14); border: 1px solid rgba(232, 190, 110, .45); color: var(--gold); font: 800 28px/1 var(--font-body, inherit); }
+.gc-inline .xch-rate small { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .85; margin-bottom: 2px; }
+.gc-inline .xch-formula { margin: 14px 0; padding: 10px 14px; border-radius: 12px; border: 1px dashed rgba(232, 190, 110, .4); text-align: center; font-size: 18px; color: var(--text); }
+.gc-inline .xch-formula b { color: var(--gold); }
+.gc-inline .xch-ex { font-size: 15px; line-height: 1.5; color: var(--muted, #c9c2b3); }
+.gc-inline .xch-ex p { margin: 0 0 8px; }
+.gc-inline .xch-ex__t { color: var(--gold); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: 12px; }
+.gc-inline .xch-ex__calc { color: var(--text); font-weight: 600; }
+.gc-inline .xch-ex__calc b { color: var(--gold); }
+.gc-inline .xch-ex__ok { margin: 0; padding: 10px 12px; border-radius: 10px; background: rgba(232, 190, 110, .12); color: var(--text); font-weight: 600; }
+.gc-inline .xch-trust { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 0; padding: 0; list-style: none; }
+.gc-inline .xch-trust li { padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(232, 190, 110, .35); color: var(--gold); font-weight: 700; font-size: 14px; }
+.gc-inline .xch-trust li::before { content: "\2713"; margin-right: 8px; }
+@media (max-width: 720px) { .gc-inline .xch-cards { grid-template-columns: 1fr; } .gc-inline .xch-card__head h3 { font-size: 21px; } }
