@@ -144,6 +144,7 @@
           <li><button type="button" class="rs-opt" data-go="v-svc-topup"><span class="rs-opt__body"><span class="rs-opt__t">Direct Top Up Service</span><span class="rs-opt__d">2,000 RC = Rp 40.000<br>10,000 RC = Rp 195.000</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
           <li><button type="button" class="rs-opt" data-go="v-svc-account"><span class="rs-opt__body"><span class="rs-opt__t">Sell Account Service</span><span class="rs-opt__d">Service fee: Rp 35.000</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
           <li><button type="button" class="rs-opt" data-go="v-svc-exchange"><span class="rs-opt__body"><span class="rs-opt__t">Currency Exchange Service</span><span class="rs-opt__d">Converting rates<br>IDR to PHP = 315<br>PHP to IDR = 270</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
+          <li><button type="button" class="rs-opt" data-go="v-negotiate"><span class="rs-opt__body"><span class="rs-opt__t">Price Negotiation</span><span class="rs-opt__d">Want a better price? Send your offer to Revinz Store</span></span><span class="rs-opt__go">Open <i aria-hidden="true">&rarr;</i></span></button></li>
         </ul>
         <div class="info__cta">
           <button type="button" class="signup__btn signup__btn--ghost sv-back" data-go="v-t4g" aria-label="Back">&larr; Back</button>
@@ -314,6 +315,47 @@
         </ul>
         <div class="info__cta"><button type="button" class="signup__btn" data-xadd disabled>Add to cart <span class="arr" aria-hidden="true">&rarr;</span></button></div>
         <button type="button" class="rc-bar" data-cart-open data-modal="revin-cart" aria-label="View cart"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3.5h3l2.6 12.2a1.6 1.6 0 0 0 1.6 1.3h8.1a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2"/></svg><b class="rc-badge" hidden>0</b><span class="rc-bar__total" hidden>Rp 0</span></button>
+        <div class="info__cta">
+          <button type="button" class="signup__btn signup__btn--ghost sv-back" data-go="v-revin-menu" aria-label="Back">&larr; Back</button>
+        </div>
+      </section>
+      <section class="sv" id="v-negotiate" hidden>
+        <p class="eyebrow eyebrow--sm">Revinz Store</p>
+        <h2 class="h2 shop-view__title">Price Negotiation</h2>
+        <p class="info__lead">Want a better price? Tell us what you would like to buy and the price you have in mind. Revinz Store will reply on WhatsApp.</p>
+        <p class="st-note">Your offer is not a final price. The admin will confirm or counter-offer on WhatsApp, and you only pay once you both agree.</p>
+        <form class="neg-form" data-neg novalidate>
+          <div class="rc-field">
+            <label for="neg-cat">What is this for?</label>
+            <select id="neg-cat" class="rc-input" data-neg-cat>
+              <option value="">Choose one</option>
+              <option>Sell Items</option>
+              <option>Sell RC</option>
+              <option>Push VIP Service</option>
+              <option>Direct Top Up Service</option>
+            </select>
+          </div>
+          <div class="rc-field">
+            <label for="neg-item">Item or package</label>
+            <input id="neg-item" class="rc-input" type="text" maxlength="120" autocomplete="off" placeholder="e.g. item name, or 10,000 RC" data-neg-item>
+          </div>
+          <div class="rc-field">
+            <label for="neg-offer">Your offer (price)</label>
+            <input id="neg-offer" class="rc-input" type="text" maxlength="40" autocomplete="off" placeholder="e.g. Rp 60.000 or PHP 200" data-neg-offer>
+          </div>
+          <div class="rc-field">
+            <label for="neg-ign">Your Touch 4games IGN</label>
+            <input id="neg-ign" class="rc-input" type="text" maxlength="40" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type your IGN here" data-neg-ign>
+          </div>
+          <div class="rc-field">
+            <label for="neg-note">Note (optional)</label>
+            <input id="neg-note" class="rc-input" type="text" maxlength="160" autocomplete="off" placeholder="Anything else the admin should know" data-neg-note>
+          </div>
+          <div class="info__cta">
+            <a class="signup__btn is-disabled" data-neg-send href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Send offer on WhatsApp <span class="arr" aria-hidden="true">&rarr;</span></a>
+          </div>
+          <p class="rc-hint">Choose what it is for, then fill in the item, your offer and your IGN. The WhatsApp message is filled in for you.</p>
+        </form>
         <div class="info__cta">
           <button type="button" class="signup__btn signup__btn--ghost sv-back" data-go="v-revin-menu" aria-label="Back">&larr; Back</button>
         </div>
@@ -523,6 +565,7 @@
   <script src="js/store-data.js" defer></script>
   <script src="js/shop-store.js" defer></script>
   <script src="js/revin-cart.js" defer></script>
+  <script src="js/negotiate.js" defer></script>
   <script src="js/music.js" defer></script>
   <script src="js/team-popup.js" defer></script>
   <script src="js/tournament-modals.js" defer></script>
